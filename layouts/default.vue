@@ -1,55 +1,62 @@
 <template>
-  <div>
-    <Nuxt />
+  <div class="container">
+    <div class="sidenav">
+      <h1>Fumihiko Sato</h1>
+      <h2>Designer / Frontend Developer</h2>
+      <nav class="sidenav-li">
+        <ul>
+          <li><nuxt-link to="/">About</nuxt-link></li>
+          <li><nuxt-link to="/">Contact</nuxt-link></li>
+        </ul>
+      </nav>
+    </div>
+    <div>
+      <ul>
+        <li>
+          <dl class="article">
+            <dt></dt>
+            <dd>
+              <h3>タイトルが入ります</h3>
+              <p>
+                なんか説明がはいります。なんか説明がはいります。なんか説明がはいります。
+              </p>
+            </dd>
+          </dl>
+        </li>
+      </ul>
+    </div>
+    <div>
+      <Nuxt />
+    </div>
   </div>
 </template>
 
-<style>
-html {
-  font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    Roboto, 'Helvetica Neue', Arial, sans-serif;
-  font-size: 16px;
-  word-spacing: 1px;
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  box-sizing: border-box;
+<style scoped lang="scss">
+.container {
+  display: flex;
+  > * {
+    padding: 24px;
+  }
 }
+.sidenav {
+  h1 {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 8px;
+  }
+  h2 {
+    font-size: 12px;
+    font-weight: normal;
+  }
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-}
-
-.button--green {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #3b8070;
-  color: #3b8070;
-  text-decoration: none;
-  padding: 10px 30px;
-}
-
-.button--green:hover {
-  color: #fff;
-  background-color: #3b8070;
-}
-
-.button--grey {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #35495e;
-  color: #35495e;
-  text-decoration: none;
-  padding: 10px 30px;
-  margin-left: 15px;
-}
-
-.button--grey:hover {
-  color: #fff;
-  background-color: #35495e;
+  .sidenav-li {
+    margin-top: 40px;
+    li {
+      color: $color-black;
+      font-size: 14px;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+  }
 }
 </style>
