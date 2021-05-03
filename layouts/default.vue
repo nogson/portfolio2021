@@ -1,44 +1,35 @@
 <template>
-  <div class="container">
-    <div class="sidenav">
+  <section class="container">
+    <div class="side-nav">
       <h1>Fumihiko Sato</h1>
-      <h2>Designer / Frontend Developer</h2>
-      <nav class="sidenav-li">
+      <h2>Designer /<br>Frontend Developer</h2>
+      <nav class="side-nav-li">
         <ul>
           <li><nuxt-link to="/">About</nuxt-link></li>
           <li><nuxt-link to="/">Contact</nuxt-link></li>
         </ul>
       </nav>
     </div>
-    <div>
-      <ul>
-        <li>
-          <dl class="article">
-            <dt></dt>
-            <dd>
-              <h3>タイトルが入ります</h3>
-              <p>
-                なんか説明がはいります。なんか説明がはいります。なんか説明がはいります。
-              </p>
-            </dd>
-          </dl>
-        </li>
-      </ul>
-    </div>
-    <div>
+    <div class="main">
       <Nuxt />
     </div>
-  </div>
+    <div class="sub-nav"></div>
+  </section>
 </template>
 
 <style scoped lang="scss">
 .container {
   display: flex;
-  > * {
-    padding: 24px;
-  }
+  max-width: 1152px;
+  margin: 0 auto;
+  padding: 48px 0;
+  height: 100vh;
 }
-.sidenav {
+.side-nav {
+  flex: 1;
+  max-width: 164px;
+  padding-left: 16px;
+
   h1 {
     font-size: 16px;
     font-weight: bold;
@@ -49,7 +40,7 @@
     font-weight: normal;
   }
 
-  .sidenav-li {
+  .side-nav-li {
     margin-top: 40px;
     li {
       color: $color-black;
@@ -58,5 +49,13 @@
       font-weight: bold;
     }
   }
+}
+.main {
+  flex: 4;
+  padding: 0 24px;
+}
+.sub-nav {
+  flex: 1;
+  max-width: 164px;
 }
 </style>
