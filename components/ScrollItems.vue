@@ -1,8 +1,9 @@
 <template>
   <div ref="articlesWrap" class="articles-wrap" @scroll="scroll">
+    <span class="center"></span>
     <ul ref="articleSpinner" class="article-spinner">
       <li v-for="(item, index) in items" :key="item.title">
-        <dl ref="article" class="article" :style="articleStyle(index)">
+        <dl ref="article" class="article">
           <dt></dt>
           <dd>
             <h3>タイトルが入ります{{ item.title }}</h3>
@@ -19,7 +20,7 @@
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
 
-const articleHight = 255
+const articleHeight = 255
 
 @Component({
   async asyncData({ $content, params }) {},
@@ -46,6 +47,7 @@ export default class ScrollItems extends Vue {
   ]
 
   articleElms: Element[] = []
+  articleElemPos: any[] = []
 
   mounted() {
     this.articlesWrapHeight = this.refs.articlesWrap.clientHeight
@@ -53,35 +55,29 @@ export default class ScrollItems extends Vue {
     this.articleElms = this.refs.article
     // 中央にスクロール
     this.refs.articlesWrap.scrollTop = this.articleSpinnerHeight / 2
+    this.scroll()
   }
 
   scroll() {
     const center = this.articleSpinnerHeight / 2
     const scrollTop = this.refs.articlesWrap.scrollTop - center
-    if (scrollTop >= articleHight) {
+    if (scrollTop >= articleHeight) {
       const items = JSON.parse(JSON.stringify(this.items))
       const startItem = items[0]
       items.shift()
       items.push(startItem)
       this.items = items
-      this.refs.articlesWrap.scrollTop = center + articleHight
+      this.refs.articlesWrap.scrollTop = center + articleHeight
       this.articleElms = this.refs.article
-    } else if (scrollTop <= -articleHight) {
+    } else if (scrollTop <= -articleHeight) {
       const items = JSON.parse(JSON.stringify(this.items))
       const endItem = items[items.length - 1]
       items.pop()
       items.unshift(endItem)
       this.items = items
-      this.refs.articlesWrap.scrollTop = center - articleHight
+      this.refs.articlesWrap.scrollTop = center - articleHeight
       this.articleElms = this.refs.article
     }
-
-    const scale = this.articleElms.map((d, i) => {
-      const top = Math.pow(d.getBoundingClientRect().top, 2) / 2 - 48
-      return top
-    })
-    console.log(scale)
-    // console.log(this.refs.article.getBoundingClientRect().top)
   }
 
   get refs(): any {
@@ -93,15 +89,10 @@ export default class ScrollItems extends Vue {
     // const scrollTop = this.refs.articlesWrap.scrollTop - center
     // const articlesWrapTop = this.refs.articlesWrap.getBoundingClientRect().top
     return (n: number) => {
-      const scale = this.articleElms[n]
-      // if (scale) {
-      //   console.log(
-      //     scale.getBoundingClientRect().top - articlesWrapTop,
-      //     scrollTop
-      //   )
-      // }
+      console.log(this.articleElemPos[n])
+
       return {
-        transform: `scale(1, 1)`,
+        transform: `scale(${this.articleElemPos[n]}, (${this.articleElemPos[n]})`,
       }
     }
   }
