@@ -60,7 +60,7 @@ export default class Index extends Vue {}
 }
 
 .side-text-2 {
-  top: 80px;
+  top: 100px;
   right: -130px;
   transform: rotate(90deg);
 }

@@ -1,5 +1,15 @@
 <template>
-  <section><nuxt-content :document="post" /></section>
+  <section>
+    <div class="top-image">
+      <img
+        :src="require(`~/content/posts/images/${post.top_image}`)"
+        :alt="post.title"
+      />
+    </div>
+    <h1 class="title">{{ post.title }}</h1>
+    <p>{{ post.created_at }}</p>
+    <nuxt-content :document="post" />
+  </section>
 </template>
 
 <script lang="ts">
@@ -23,4 +33,11 @@ export default class Slug extends Vue {
 }
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.top-image {
+  margin-bottom: 24px;
+}
+.title {
+  font-size: 24px;
+}
+</style>

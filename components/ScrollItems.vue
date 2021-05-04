@@ -54,13 +54,15 @@ export default class ScrollItems extends Vue {
     this.articleSpinnerHeight = this.refs.articleSpinner.clientHeight
     this.articleElms = this.refs.article
     // 中央にスクロール
-    this.refs.articlesWrap.scrollTop = this.articleSpinnerHeight / 2
-    this.scroll()
+    this.refs.articlesWrap.scrollTop =
+      this.articleSpinnerHeight / 2 - this.articlesWrapHeight / 2
+    // this.scroll()
   }
 
   scroll() {
     const center = this.articleSpinnerHeight / 2
     const scrollTop = this.refs.articlesWrap.scrollTop - center
+
     if (scrollTop >= articleHeight) {
       const items = JSON.parse(JSON.stringify(this.items))
       const startItem = items[0]
@@ -110,6 +112,7 @@ export default class ScrollItems extends Vue {
     display: none;
   }
 }
+
 .article {
   height: 223px + 32px;
   dt {
