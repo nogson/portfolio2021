@@ -9,7 +9,8 @@
     </div>
     <div style="position: relative">
       <scroll-items />
-      <span class="side-text-2">NOTE</span>
+      <span class="side-text-2">NOTE<span class="side-text-line"></span
+      ></span>
     </div>
   </div>
 </template>
@@ -53,14 +54,14 @@ export default class Index extends Vue {}
 }
 
 .side-text-1 {
-  bottom: 170px;
-  left: 0px;
+  bottom: 130px;
+  left: -190px;
   transform: rotate(-90deg);
 }
 
 .side-text-2 {
-  top: 170px;
-  right: 0px;
+  top: 80px;
+  right: -130px;
   transform: rotate(90deg);
 }
 .center {
