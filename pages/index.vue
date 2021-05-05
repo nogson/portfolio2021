@@ -24,7 +24,7 @@ import ScrollItems from '~/components/ScrollItems.vue'
 })
 export default class Index extends Vue {
   created() {
-    console.log(this.$content('posts').fetch())
+    console.log(this.$content('note').fetch())
   }
 }
 </script>

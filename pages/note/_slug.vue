@@ -4,15 +4,15 @@
       <div class="top-image">
         <img
           width="100%"
-          :src="require(`~/content/posts/images/${post.top_image}`)"
-          :alt="post.title"
+          :src="require(`~/content/note/images/${note.top_image}`)"
+          :alt="note.title"
         />
       </div>
-      <h1 class="title">{{ post.title }}</h1>
-      <p class="create-at">{{ formatDateToString(post.created_at) }}</p>
+      <h1 class="title-main">{{ note.title }}</h1>
+      <p class="create-at">{{ formatDateToString(note.created_at) }}</p>
     </div>
 
-    <nuxt-content :document="post" />
+    <nuxt-content :document="note" />
   </section>
 </template>
 
@@ -23,11 +23,11 @@ import * as moment from 'moment'
 @Component({
   components: {},
   async asyncData({ $content, params }) {
-    // URIから変数を取得 /posts/{_slug}
+    // URIから変数を取得 /note/{_slug}
     const slug = params.slug
     return {
-      // content/posts/{_slug}.mdのマークダウンを取得
-      post: await $content('posts/' + slug).fetch(),
+      // content/note/{_slug}.mdのマークダウンを取得
+      note: await $content('note/' + slug).fetch(),
     }
   },
 })
@@ -35,8 +35,8 @@ export default class Slug extends Vue {
   post: any = null
   head() {
     return {
-      title: this.post.title,
-      titleTemplate: '% | Fumihiko Sato Portfolio',
+      title: this.note.title,
+      titleTemplate: '%s | Satofaction.net',
     }
   }
 
@@ -59,9 +59,6 @@ export default class Slug extends Vue {
 }
 .top-image {
   margin-bottom: 24px;
-}
-.title {
-  font-size: 24px;
 }
 .create-at {
   color: $color-gray-dark2;
