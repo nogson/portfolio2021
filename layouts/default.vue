@@ -1,7 +1,7 @@
 <template>
   <section class="container">
     <div class="side-nav">
-      <h1>Fumihiko Sato</h1>
+      <h1><nuxt-link to="/">Fumihiko Sato</nuxt-link></h1>
       <h2>Designer /<br>Frontend Developer</h2>
       <nav class="side-nav-li">
         <ul>
@@ -34,6 +34,9 @@
     font-size: 16px;
     font-weight: bold;
     margin-bottom: 8px;
+    a{
+     text-decoration: none;
+    }
   }
   h2 {
     font-size: 12px;

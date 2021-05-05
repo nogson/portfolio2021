@@ -9,8 +9,7 @@
     </div>
     <div style="position: relative">
       <scroll-items />
-      <span class="side-text-2">NOTE<span class="side-text-line"></span
-      ></span>
+      <span class="side-text-2">NOTE<span class="side-text-line"></span></span>
     </div>
   </div>
 </template>
@@ -23,7 +22,11 @@ import ScrollItems from '~/components/ScrollItems.vue'
   components: { ScrollItems },
   async asyncData({ $content, params }) {},
 })
-export default class Index extends Vue {}
+export default class Index extends Vue {
+  created() {
+    console.log(this.$content('posts').fetch())
+  }
+}
 </script>
 
 <style scoped lang="scss">
@@ -40,7 +43,7 @@ export default class Index extends Vue {}
 .side-text-2 {
   position: absolute;
   font-weight: bold;
-  color: $color-gray-thin1;
+  color: $color-gray-light1;
   font-size: 30px;
   display: flex;
   align-items: center;
@@ -49,7 +52,7 @@ export default class Index extends Vue {}
     width: 100px;
     height: 1px;
     display: block;
-    background: $color-gray-thin1;
+    background: $color-gray-light1;
   }
 }
 
@@ -60,7 +63,7 @@ export default class Index extends Vue {}
 }
 
 .side-text-2 {
-  top: 100px;
+  top: 80px;
   right: -130px;
   transform: rotate(90deg);
 }

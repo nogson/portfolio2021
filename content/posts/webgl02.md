@@ -1,7 +1,7 @@
 ---
-id: 20210504
-title: ポートフォリオサイトリニューアル
-description: ポートフォリオサイトリニューアルしました。
+id: webgl02
+title: WebGLの習作
+description: WebGLの習作です。
 created_at: 2021-05-04
 top_image: 20210504.png
 ---

@@ -116,7 +116,7 @@ export default class ScrollItems extends Vue {
 .article {
   height: 223px + 32px;
   dt {
-    border: 1px solid $color-gray-thin1;
+    border: 1px solid $color-gray-light1;
     width: 100%;
     height: 150px;
     margin-bottom: 8px;
