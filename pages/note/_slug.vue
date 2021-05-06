@@ -32,7 +32,7 @@ import * as moment from 'moment'
   },
 })
 export default class Slug extends Vue {
-  post: any = null
+  note: any = null
   head() {
     return {
       title: this.note.title,
@@ -45,7 +45,8 @@ export default class Slug extends Vue {
   }
 
   formatDateToString(date: string): string {
-    return moment(date).format('YYYY/MM/DD')
+    // return moment(date).format('YYYY/MM/DD')
+    return date
   }
 }
 </script>
