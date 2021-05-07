@@ -18,7 +18,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
-import * as moment from 'moment'
+import moment from 'moment'
 
 @Component({
   components: {},
@@ -45,8 +45,7 @@ export default class Slug extends Vue {
   }
 
   formatDateToString(date: string): string {
-    // return moment(date).format('YYYY/MM/DD')
-    return date
+    return moment(date).format('YYYY/MM/DD')
   }
 }
 </script>

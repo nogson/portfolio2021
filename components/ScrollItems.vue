@@ -3,7 +3,11 @@
     <span class="center"></span>
     <ul ref="articleSpinner" class="article-spinner">
       <li v-for="(item, index) in items" :key="item.title">
-        <dl ref="article" class="article">
+        <dl
+          :ref="`article${index}`"
+          class="article"
+          :style="articleStyle($refs[`article${index}`])"
+        >
           <dt></dt>
           <dd>
             <h3>タイトルが入ります{{ item.title }}</h3>
@@ -54,14 +58,14 @@ export default class ScrollItems extends Vue {
     this.articleSpinnerHeight = this.refs.articleSpinner.clientHeight
     this.articleElms = this.refs.article
     // 中央にスクロール
-    this.refs.articlesWrap.scrollTop =
-      this.articleSpinnerHeight / 2 - this.articlesWrapHeight / 2
-    // this.scroll()
+    this.refs.articlesWrap.scrollTop = articleHeight
+    // // this.scroll()
   }
 
   scroll() {
     const center = this.articleSpinnerHeight / 2
-    const scrollTop = this.refs.articlesWrap.scrollTop - center
+    const scrollTop = this.refs.articlesWrap.scrollTop
+    console.log(this.refs.articlesWrap.scrollTop)
 
     if (scrollTop >= articleHeight) {
       const items = JSON.parse(JSON.stringify(this.items))
@@ -69,15 +73,15 @@ export default class ScrollItems extends Vue {
       items.shift()
       items.push(startItem)
       this.items = items
-      this.refs.articlesWrap.scrollTop = center + articleHeight
+      // this.refs.articlesWrap.scrollTop = center + articleHeight
       this.articleElms = this.refs.article
-    } else if (scrollTop <= -articleHeight) {
+    } else if (scrollTop <= articleHeight) {
       const items = JSON.parse(JSON.stringify(this.items))
       const endItem = items[items.length - 1]
       items.pop()
       items.unshift(endItem)
       this.items = items
-      this.refs.articlesWrap.scrollTop = center - articleHeight
+      // this.refs.articlesWrap.scrollTop = center - articleHeight
       this.articleElms = this.refs.article
     }
   }
@@ -90,11 +94,13 @@ export default class ScrollItems extends Vue {
     // const center = this.articleSpinnerHeight / 2
     // const scrollTop = this.refs.articlesWrap.scrollTop - center
     // const articlesWrapTop = this.refs.articlesWrap.getBoundingClientRect().top
-    return (n: number) => {
-      console.log(this.articleElemPos[n])
+    return (elm: any) => {
+      if (elm) {
+        // console.log(elm[0].getBoundingClientRect().top)
+      }
 
       return {
-        transform: `scale(${this.articleElemPos[n]}, (${this.articleElemPos[n]})`,
+        transform: `scale(1, 1)`,
       }
     }
   }

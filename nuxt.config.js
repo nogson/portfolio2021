@@ -40,8 +40,13 @@ export default {
     '@nuxt/content',
     '@nuxtjs/style-resources',
     ['@nuxtjs/moment', ['ja']],
+    'nuxt-webfontloader',
   ],
-
+  webfontloader: {
+    google: {
+      families: ['Noto+Serif+JP'],
+    },
+  },
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {},
 
