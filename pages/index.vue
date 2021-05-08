@@ -1,13 +1,13 @@
 <template>
   <div class="articles">
-    <div style="position: relative">
-      <scroll-items :items="portfolio" />
+    <div class="articles-wrap">
+      <scroll-items :items="portfolio" type="portfolio" />
       <span class="side-text-1"
         >PORTFOLIO<span class="side-text-line"></span
       ></span>
     </div>
-    <div style="position: relative">
-      <scroll-items :items="note" />
+    <div class="articles-wrap">
+      <scroll-items :items="note" type="note" />
       <span class="side-text-2">NOTE<span class="side-text-line"></span></span>
     </div>
   </div>
@@ -38,7 +38,8 @@ export default class Index extends Vue {
   display: flex;
   height: 100%;
 
-  > * {
+  .articles-wrap {
+    position: relative;
     margin-right: 24px;
   }
 }

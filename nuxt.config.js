@@ -44,7 +44,7 @@ export default {
   ],
   webfontloader: {
     google: {
-      families: ['Noto+Serif+JP'],
+      families: ['Noto+Serif+JP','Kiwi+Maru'],
     },
   },
   // Axios module configuration: https://go.nuxtjs.dev/config-axios

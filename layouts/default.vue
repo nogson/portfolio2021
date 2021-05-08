@@ -24,7 +24,7 @@
   max-width: 1152px;
   margin: 0 auto;
   padding: 48px 0;
-  height: 100vh;
+  min-height: 100vh;
 }
 .side-nav {
   flex: 1;

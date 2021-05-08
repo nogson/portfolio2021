@@ -1,14 +1,14 @@
 <template>
-  <div ref="articlesWrap" class="articles-wrap" @scroll="scroll">
+  <div ref="itemsWrap" :class="`items-wrap ${type}`" @scroll="scroll">
     <span class="center"></span>
-    <ul ref="articleSpinner" class="article-spinner">
-      <li v-for="(item, index) in items" :key="item.title">
+    <ul ref="itemSpinner" class="item-spinner">
+      <li v-for="(item, index) in items" :key="index">
         <router-link :to="item.path">
-          <dl :ref="`article${index}`" class="article">
+          <dl :ref="`item${index}`" class="item">
             <dt></dt>
             <dd>
-              <h3>タイトルが入ります{{ item.title }}</h3>
-              <p>
+              <h3 class="title">{{ item.title }}</h3>
+              <p class="description">
                 なんか説明がはいります。なんか説明がはいります。なんか説明がはいります。
               </p>
             </dd>
@@ -22,37 +22,40 @@
 <script lang="ts">
 import { Component, Vue, Prop } from 'nuxt-property-decorator'
 
-const articleHeight = 255
+const itemHeight = 255
 
 @Component({
   async asyncData({ $content, params }) {},
 })
 export default class ScrollItems extends Vue {
-  articlesWrapHeight: number = 0
-  articleSpinnerHeight: number = 0
+  itemsWrapHeight: number = 0
+  itemSpinnerHeight: number = 0
 
-  articleElms: Element[] = []
-  articleElemPos: any[] = []
+  itemElms: Element[] = []
+  itemElemPos: any[] = []
 
   @Prop({ type: Array })
   items!: any[]
 
+  @Prop({ type: String })
+  type!: string
+
   mounted() {
-    this.articlesWrapHeight = this.refs.articlesWrap.clientHeight
-    this.articleSpinnerHeight = this.refs.articleSpinner.clientHeight
-    this.articleElms = this.refs.article
+    this.itemsWrapHeight = this.refs.itemsWrap.clientHeight
+    this.itemSpinnerHeight = this.refs.itemSpinner.clientHeight
+    this.itemElms = this.refs.item
     // 中央にスクロール
-    // this.refs.articlesWrap.scrollTop = articleHeight
+    // this.refs.itemsWrap.scrollTop = itemHeight
     // // this.scroll()
   }
 
   scroll() {
-    // 最大のスクロール量　this.articleSpinnerHeight - this.articlesWrapHeight
-    const center = this.articleSpinnerHeight / 2
-    const scrollTop = this.refs.articlesWrap.scrollTop
+    // 最大のスクロール量　this.itemSpinnerHeight - this.itemsWrapHeight
+    const center = this.itemSpinnerHeight / 2
+    const scrollTop = this.refs.itemsWrap.scrollTop
     if (
-      this.refs.articlesWrap.scrollTop >=
-      this.articleSpinnerHeight - this.articlesWrapHeight
+      this.refs.itemsWrap.scrollTop >=
+      this.itemSpinnerHeight - this.itemsWrapHeight
     ) {
       // const items = JSON.parse(JSON.stringify(this.items))
       // const startItem = items[0]
@@ -62,22 +65,22 @@ export default class ScrollItems extends Vue {
       console.log('ok')
     }
 
-    // if (scrollTop >= articleHeight) {
+    // if (scrollTop >= itemHeight) {
     //   const items = JSON.parse(JSON.stringify(this.items))
     //   const startItem = items[0]
     //   items.shift()
     //   items.push(startItem)
     //   this.items = items
-    //   // this.refs.articlesWrap.scrollTop = center + articleHeight
-    //   this.articleElms = this.refs.article
-    // } else if (scrollTop <= articleHeight) {
+    //   // this.refs.itemsWrap.scrollTop = center + itemHeight
+    //   this.itemElms = this.refs.item
+    // } else if (scrollTop <= itemHeight) {
     //   const items = JSON.parse(JSON.stringify(this.items))
     //   const endItem = items[items.length - 1]
     //   items.pop()
     //   items.unshift(endItem)
     //   this.items = items
-    //   // this.refs.articlesWrap.scrollTop = center - articleHeight
-    //   this.articleElms = this.refs.article
+    //   // this.refs.itemsWrap.scrollTop = center - itemHeight
+    //   this.itemElms = this.refs.item
     // }
   }
 
@@ -85,10 +88,10 @@ export default class ScrollItems extends Vue {
     return this.$refs
   }
 
-  get articleStyle() {
-    // const center = this.articleSpinnerHeight / 2
-    // const scrollTop = this.refs.articlesWrap.scrollTop - center
-    // const articlesWrapTop = this.refs.articlesWrap.getBoundingClientRect().top
+  get itemStyle() {
+    // const center = this.itemSpinnerHeight / 2
+    // const scrollTop = this.refs.itemsWrap.scrollTop - center
+    // const itemsWrapTop = this.refs.itemsWrap.getBoundingClientRect().top
     return (elm: any) => {
       if (elm) {
         return elm[0].getBoundingClientRect().top
@@ -104,7 +107,7 @@ export default class ScrollItems extends Vue {
 </script>
 
 <style scoped lang="scss">
-.articles-wrap {
+.items-wrap {
   overflow-y: scroll;
   height: 100%;
   -ms-overflow-style: none; /* IE, Edge 対応 */
@@ -115,8 +118,9 @@ export default class ScrollItems extends Vue {
   }
 }
 
-.article {
-  height: 223px + 32px;
+.item {
+  //height: 223px + 32px;
+  margin-bottom: 32px;
   dt {
     border: 1px solid $color-gray-light1;
     width: 100%;
@@ -124,11 +128,11 @@ export default class ScrollItems extends Vue {
     margin-bottom: 8px;
   }
   dd {
-    h3 {
+    .title {
       font-size: 14px;
       margin-bottom: 8px;
     }
-    p {
+    .description {
       font-size: 12px;
     }
   }
