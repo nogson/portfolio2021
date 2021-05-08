@@ -1,14 +1,13 @@
 <template>
   <div class="articles">
     <div style="position: relative">
-      <span class="center"></span>
-      <scroll-items />
+      <scroll-items :items="portfolio" />
       <span class="side-text-1"
         >PORTFOLIO<span class="side-text-line"></span
       ></span>
     </div>
     <div style="position: relative">
-      <scroll-items />
+      <scroll-items :items="note" />
       <span class="side-text-2">NOTE<span class="side-text-line"></span></span>
     </div>
   </div>
@@ -20,11 +19,16 @@ import ScrollItems from '~/components/ScrollItems.vue'
 
 @Component({
   components: { ScrollItems },
-  async asyncData({ $content, params }) {},
+  async asyncData({ $content, params }) {
+    return {
+      note: await $content('note').fetch(),
+      portfolio: await $content('portfolio').fetch(),
+    }
+  },
 })
 export default class Index extends Vue {
   created() {
-    console.log(this.$content('note').fetch())
+    // console.log(this.$content('note').fetch())
   }
 }
 </script>
@@ -66,13 +70,5 @@ export default class Index extends Vue {
   top: 80px;
   right: -130px;
   transform: rotate(90deg);
-}
-.center {
-  position: absolute;
-  top: 435.5px;
-  left: 0;
-  width: 100px;
-  height: 1px;
-  background: red;
 }
 </style>
