@@ -44,14 +44,21 @@ export default {
   ],
   webfontloader: {
     google: {
-      families: ['Noto+Serif+JP','Kiwi+Maru'],
+      families: ['Noto+Serif+JP', 'Kiwi+Maru'],
     },
   },
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {},
 
   // Content module configuration: https://go.nuxtjs.dev/config-content
-  content: {},
+  content: {
+    markdown: {
+      remarkExternalLinks: {
+        target: '_self',
+        rel: 'nofollow',
+      },
+    },
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {

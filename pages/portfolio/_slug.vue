@@ -1,7 +1,7 @@
 <template>
   <section class="content">
     <div class="content-head">
-      <div class="top-image">
+      <div v-if="portfolio.top_image" class="top-image">
         <img
           width="100%"
           :src="require(`~/content/portfolio/images/${portfolio.top_image}`)"
@@ -39,10 +39,6 @@ export default class Slug extends Vue {
     }
   }
 
-  get helloWorld(): string {
-    return 'Hello world!'
-  }
-
   formatDateToString(date: string): string {
     return moment(date).format('YYYY/MM/DD')
   }
@@ -62,5 +58,14 @@ export default class Slug extends Vue {
 .create-at {
   color: $color-gray-dark2;
   font-size: 12px;
+}
+
+::v-deep .nuxt-content {
+  p{
+    margin-bottom: 24px;
+  }
+  h3 {
+    margin-bottom: 8px;
+  }
 }
 </style>

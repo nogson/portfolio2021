@@ -130,7 +130,7 @@ h3 {
   }
 }
 .profile {
-  border: solid 2px $color-black;
+  border: solid 2px $color-gray-dark2;
   border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
   padding: 24px;
   p:not(:last-child) {
@@ -148,7 +148,7 @@ h3 {
     dd {
       flex: 1;
       font-size: 14px;
-      border: solid 2px $color-black;
+      border: solid 2px $color-gray-dark2;
       border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
       padding: 24px;
       p:not(:last-child) {
