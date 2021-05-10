@@ -16,7 +16,7 @@ export default {
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: ['@/assets/scss/normal.scss', '@/assets/scss/common.scss'],
+  css: ['@/assets/scss/normal.scss', '@/assets/scss/common.scss','@/assets/scss/nuxt_content.scss'],
   styleResources: {
     scss: ['@/assets/scss/variables.scss'],
   },
@@ -52,12 +52,7 @@ export default {
 
   // Content module configuration: https://go.nuxtjs.dev/config-content
   content: {
-    markdown: {
-      remarkExternalLinks: {
-        target: '_self',
-        rel: 'nofollow',
-      },
-    },
+    markdown: {},
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

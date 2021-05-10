@@ -10,12 +10,21 @@ three.jsを少しさわるくらいならなんとかなるのですが、Shader
 WebGLは絵がでるまでが果てしなく遠いです。  
 
 
-### 習作01
+## 01
 
 WebGLを学んだら必ずやりたくなるのがglitchです。  
-デバイスのマイクの音を取得してglitchさせています。
+デバイスのマイクの音を取得してglitchさせています。  
+ライブラリが古いせいなのか、久しぶりに見たらマイクでのglitchができなくなっていました。
 
-<dynamic-image path="portfolio/images/webgl01.gif" alt="webglイメージ"><dynamic-image>
+<dynamic-image path="portfolio/images/webgl01.gif" alt="webglイメージ" ></dynamic-image>
 
-[link](https://nogson.github.io/glsl_01/)
-<a href="/articles">Html Link to Blog</a>
+<a href="https://nogson.github.io/glsl_01/" class="link-text-right">view</a>
+
+## 02
+
+パーティクルにテクスチャをはって、ランタンの打ち上げを作りました。
+カリングの制御が上手くできていません。
+
+<dynamic-image path="portfolio/images/webgl02.gif" alt="webglイメージ" ></dynamic-image>
+
+<a href="https://nogson.github.io/threejs_sample5/app/" class="link-text-right">view</a>

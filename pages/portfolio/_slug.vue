@@ -60,12 +60,4 @@ export default class Slug extends Vue {
   font-size: 12px;
 }
 
-::v-deep .nuxt-content {
-  p{
-    margin-bottom: 24px;
-  }
-  h3 {
-    margin-bottom: 8px;
-  }
-}
 </style>
