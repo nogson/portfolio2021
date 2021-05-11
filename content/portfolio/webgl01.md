@@ -28,3 +28,32 @@ WebGLを学んだら必ずやりたくなるのがglitchです。
 <dynamic-image path="portfolio/images/webgl02.gif" alt="webglイメージ" ></dynamic-image>
 
 <a href="https://nogson.github.io/threejs_sample5/app/" class="link-text-right">view</a>
+
+
+## 03
+
+メタボールをやってみたくてチャレンジしましたが、ここで諦めました。
+
+<dynamic-image path="portfolio/images/webgl03.gif" alt="webglイメージ" ></dynamic-image>
+
+<a href="https://nogson.github.io/glsl_03/" class="link-text-right">view</a>
+
+
+## 04
+
+正規ベクトルを使って向きを制御する練習のために作りました。  
+ブリーフ履いて歩いているのは私のキャラクターです。
+
+<dynamic-image path="portfolio/images/webgl04.gif" alt="webglイメージ" ></dynamic-image>
+
+<a href="https://nogson.github.io/threejs_sample2/app/" class="link-text-right">view</a>
+
+
+## 05
+
+一応時計になっています。見えませんが。。。
+
+
+<dynamic-image path="portfolio/images/webgl05.gif" alt="webglイメージ" ></dynamic-image>
+
+<a href="https://nogson.github.io/webgl_clock/app/" class="link-text-right">view</a>
