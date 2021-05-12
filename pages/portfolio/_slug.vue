@@ -9,7 +9,7 @@
         />
       </div>
       <h1 class="title-main">{{ portfolio.title }}</h1>
-      <p class="create-at">{{ formatDateToString(portfolio.created_at) }}</p>
+      <p class="create-at" v-if="portfolio.created_at">{{ formatDateToString(portfolio.created_at) }}</p>
     </div>
 
     <nuxt-content :document="portfolio" />
@@ -59,5 +59,4 @@ export default class Slug extends Vue {
   color: $color-gray-dark2;
   font-size: 12px;
 }
-
 </style>

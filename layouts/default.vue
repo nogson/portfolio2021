@@ -1,15 +1,17 @@
 <template>
   <section class="container">
     <div class="side-nav">
-      <h1><nuxt-link to="/">Satofaction.net</nuxt-link></h1>
-      <h2>Designer /<br />Frontend Developer</h2>
-      <nav class="side-nav-li">
-        <ul>
-          <li><nuxt-link to="/">Top</nuxt-link></li>
-          <li><nuxt-link to="/about">About</nuxt-link></li>
-          <li><nuxt-link to="/">Contact</nuxt-link></li>
-        </ul>
-      </nav>
+      <div class="side-nav-fix">
+        <h1><nuxt-link to="/">Satofaction.net</nuxt-link></h1>
+        <h2>Designer /<br />Frontend Developer</h2>
+        <nav class="side-nav-li">
+          <ul>
+            <li><nuxt-link to="/">Top</nuxt-link></li>
+            <li><nuxt-link to="/about">About</nuxt-link></li>
+            <li><nuxt-link to="/">Contact</nuxt-link></li>
+          </ul>
+        </nav>
+      </div>
     </div>
     <div class="main">
       <Nuxt />
@@ -30,6 +32,10 @@
   flex: 1;
   max-width: 164px;
   padding-left: 16px;
+
+  .side-nav-fix {
+    position: fixed;
+  }
 
   h1 {
     font-size: 16px;

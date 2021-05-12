@@ -2,7 +2,7 @@
 id: webgl01
 title: WebGLの習作
 description: WebGLの習作です。
-created_at: 2021-05-04
+thumbnail: portfolio/images/webgl_01_thumb.png
 ---
 
 私のプログラムスキルだとWebGLはとにかく難しいです。  

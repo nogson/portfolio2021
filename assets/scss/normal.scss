@@ -49,10 +49,11 @@ input, button, textarea, select {
 }
 
 /* add */
+body.top {
+  .container {
+    height: 100vh;
 
-body {
-  font-family: "Arial", "Noto Sans JP","メイリオ";
-  line-height: 1.8;
+  }
 }
 
 ul,ol{

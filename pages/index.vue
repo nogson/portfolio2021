@@ -27,7 +27,18 @@ import ScrollItems from '~/components/ScrollItems.vue'
   },
 })
 export default class Index extends Vue {
+  portfolio!: any[]
+
+  head() {
+    return {
+      bodyAttrs: {
+        class: 'top',
+      },
+    }
+  }
+
   created() {
+    console.log(this.portfolio)
     // console.log(this.$content('note').fetch())
   }
 }
@@ -41,6 +52,7 @@ export default class Index extends Vue {
   .articles-wrap {
     position: relative;
     margin-right: 24px;
+    flex: 1;
   }
 }
 
