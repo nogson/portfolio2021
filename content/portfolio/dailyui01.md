@@ -2,18 +2,19 @@
 id: DailyUI01
 title: Daily UI
 description: まだ道半ばですが、DailyUIの成果です。
-thumbnail: portfolio/images/webgl_01_thumb.png
+thumbnail: portfolio/images/dailyui/dailyui_thumb.png
 ---
 
-Daily UIをご存知でしょうか。
-Daily UIとは、週末を除く100日間の間メールでデザインのお題を送ってくれるというサービスです。  
+Daily UIをご存知でしょうか。  
+Daily UIとは、週末を除く100日間の間メールでデザインのお題を送ってくれるというサービスです。 
+
 人によるとは思うのですが、あまり時間をかけず数をこなしていく感じです。  
 インプットとアウトプットを繰り返し行うことで、UI作成の力をつけていきます。
 
 Daily UIに取り組む上で、以下のことを意識してやりました。
 
-- なるべくアニメーションをつける
-- あまり操作性を気にしない
+- モーションのスキルも上げる為なるべくアニメーションをつける
+- 仕事じゃないので、あまり操作性を気にしないで自由に作る
 - 普段使わないような色を使う  
 
 
