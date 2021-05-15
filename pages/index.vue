@@ -28,7 +28,7 @@ import ScrollItems from '~/components/ScrollItems.vue'
 })
 export default class Index extends Vue {
   portfolio!: any[]
-
+  note!: any[]
   head() {
     return {
       bodyAttrs: {
@@ -38,7 +38,7 @@ export default class Index extends Vue {
   }
 
   created() {
-    console.log(this.portfolio)
+    console.log(this.note)
     // console.log(this.$content('note').fetch())
   }
 }

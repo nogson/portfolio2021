@@ -6,7 +6,13 @@
         <router-link :to="item.path">
           <dl :ref="`item${index}`" class="item">
             <dt>
-              <dynamic-image v-if="item.thumbnail" :path="item.thumbnail" :alt="item.title" margin="0 0 0 0"></dynamic-image></dt>
+              <dynamic-image
+                v-if="item.thumbnail"
+                :path="item.thumbnail"
+                :alt="item.title"
+                margin="0 0 0 0"
+              ></dynamic-image>
+            </dt>
             <dd>
               <h3 class="title">{{ item.title }}</h3>
               <p class="description">{{ item.description }}</p>
@@ -20,12 +26,12 @@
 
 <script lang="ts">
 import { Component, Vue, Prop } from 'nuxt-property-decorator'
-import DynamicImage from "~/components/DynamicImage.vue";
+import DynamicImage from '~/components/DynamicImage.vue'
 
 const itemHeight = 255
 
 @Component({
-  components: {DynamicImage},
+  components: { DynamicImage },
   async asyncData({ $content, params }) {},
 })
 export default class ScrollItems extends Vue {

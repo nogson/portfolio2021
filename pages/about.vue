@@ -47,7 +47,8 @@
             <dt>デザイン</dt>
             <dd class="font-kiwi-maru">
               <p>
-                グラフィックデザイン、Web、UIデザインができます。
+                グラフィックデザイン、Web、UIデザインができます。<br>
+                ツールは、Figma、Sketch、XD、illustrator,Photoshop
                 <br />UXリサーチの経験もありますが豊富ではありません。
                 <br />イラストも頼まれれば描きますがあまり得意ではありません。
               </p>
@@ -86,7 +87,7 @@
           <dl>
             <dt>その他</dt>
             <dd class="font-kiwi-maru">
-              <p>TouchDesignerとBlenderが好きです。</p>
+              <p>TouchDesignerとBlenderが好きです(得意ではないです)。</p>
             </dd>
           </dl>
         </div>
