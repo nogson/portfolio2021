@@ -2,7 +2,7 @@
 id: adobe-max-challenge
 title: AdobeMaxChallenge
 description: AdobeMaxChallengeに応募した作品です。あえなく落選。
-thumbnail: portfolio/images/3d/3d_thumb.png
+thumbnail: portfolio/images/adobe-max-challenge/adobe-max-challenge_thumb.png
 ---
 
 AdobeMaxChallengeに応募した作品です。  
