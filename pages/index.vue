@@ -21,7 +21,7 @@ import ScrollItems from '~/components/ScrollItems.vue'
   components: { ScrollItems },
   async asyncData({ $content, params }) {
     return {
-      note: await $content('note').fetch(),
+      note: await $content('note').sortBy('create_at', 'desc').fetch(),
       portfolio: await $content('portfolio').sortBy('order', 'desc').fetch(),
     }
   },
@@ -38,7 +38,7 @@ export default class Index extends Vue {
   }
 
   created() {
-    console.log(this.note)
+    this.$nuxt.$emit('updateContent', this.note)
     // console.log(this.$content('note').fetch())
   }
 }

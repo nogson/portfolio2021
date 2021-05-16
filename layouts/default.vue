@@ -16,9 +16,31 @@
     <div class="main">
       <Nuxt />
     </div>
-    <div class="sub-nav"></div>
+    <div class="sub-nav">
+      <h3>Category</h3>
+      <category :items="note" />
+    </div>
   </section>
 </template>
+
+<script lang="ts">
+import { Component, Vue } from 'nuxt-property-decorator'
+import Category from '~/components/Category.vue'
+
+@Component({
+  components: { Category },
+})
+export default class extends Vue {
+  note: any[] = []
+  created() {
+    this.$nuxt.$on('updateContent', this.updateContent)
+  }
+
+  updateContent(data: any[]) {
+    this.note = data
+  }
+}
+</script>
 
 <style scoped lang="scss">
 .container {
@@ -67,5 +89,6 @@
 .sub-nav {
   flex: 1;
   max-width: 164px;
+  padding-left: 32px;
 }
 </style>
