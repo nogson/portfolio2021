@@ -3,6 +3,7 @@ id: processing
 title: Processing
 description: Processingの習作です。
 thumbnail: portfolio/images/processing/processing_01_thumb.png
+order: 1
 ---
 
 大したものでは無いですが、Processingの習作です。  

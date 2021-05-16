@@ -22,7 +22,7 @@ import ScrollItems from '~/components/ScrollItems.vue'
   async asyncData({ $content, params }) {
     return {
       note: await $content('note').fetch(),
-      portfolio: await $content('portfolio').fetch(),
+      portfolio: await $content('portfolio').sortBy('order', 'desc').fetch(),
     }
   },
 })

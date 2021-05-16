@@ -3,6 +3,7 @@ id: webgl02
 title: 簡単自動おしゃべりサービス Oシャベリ
 description: 入力した文字をおしゃべりしてくれるサービス。
 thumbnail: portfolio/images/web_service/oshavery_thumb.png
+order: 7
 ---
 
 個人で開発しているサービスです。

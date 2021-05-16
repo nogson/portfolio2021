@@ -3,6 +3,7 @@ id: webgl
 title: WebGLの習作
 description: WebGLの習作です。
 thumbnail: portfolio/images/webgl/webgl_01_thumb.png
+order: 5
 ---
 
 私のプログラムスキルだとWebGLはとにかく難しいです。  
