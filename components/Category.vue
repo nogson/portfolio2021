@@ -1,7 +1,10 @@
 <template>
   <div>
-    <ul>
-      <li v-for="(item, index) in items" :key="index">{{ item.title }}</li>
+    <h3 class="title">Category</h3>
+    <ul class="category">
+      <li v-for="(item, index) in category" :key="index">
+        <nuxt-link :to="`/category/${item}`">{{ item }}</nuxt-link>
+      </li>
     </ul>
   </div>
 </template>
@@ -17,21 +20,26 @@ export default class Category extends Vue {
   items!: any[]
 
   get category(): String[] {
-    const category = []
+    const category: string[] = []
     this.items.forEach((d) => {
-      category.push(d.split(','))
+      console.log(d.category)
+      category.push(d.category.split(','))
     })
 
-    console.log(category)
-
-    return ['a']
+    return [...new Set(category.flat())]
   }
 }
 </script>
 
 <style scoped lang="scss">
-ul {
+.title {
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+.category {
   li {
+    font-size: 12px;
+    margin-bottom: 8px;
   }
 }
 </style>

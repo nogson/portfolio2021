@@ -3,7 +3,6 @@
     <div class="side-nav">
       <div class="side-nav-fix">
         <h1><nuxt-link to="/">Satofaction.net</nuxt-link></h1>
-        <h2>Designer /<br />Frontend Developer</h2>
         <nav class="side-nav-li">
           <ul>
             <li><nuxt-link to="/">Top</nuxt-link></li>
@@ -17,7 +16,6 @@
       <Nuxt />
     </div>
     <div class="sub-nav">
-      <h3>Category</h3>
       <category :items="note" />
     </div>
   </section>
@@ -89,6 +87,7 @@ export default class extends Vue {
 .sub-nav {
   flex: 1;
   max-width: 164px;
-  padding-left: 32px;
+  padding-left: 40px;
+  box-sizing: content-box;
 }
 </style>
