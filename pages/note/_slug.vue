@@ -1,13 +1,13 @@
 <template>
   <section class="content">
     <div class="content-head">
-      <div class="top-image">
-        <img
-          width="100%"
-          :src="require(`~/content/note/images/${note.top_image}`)"
-          :alt="note.title"
-        />
-      </div>
+<!--      <div class="top-image">-->
+<!--        <img-->
+<!--          width="100%"-->
+<!--          :src="require(`~/content/note/images/${note.top_image}`)"-->
+<!--          :alt="note.title"-->
+<!--        />-->
+<!--      </div>-->
       <h1 class="title-main">{{ note.title }}</h1>
       <p class="create-at">{{ formatDateToString(note.created_at) }}</p>
     </div>

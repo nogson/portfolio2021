@@ -13,6 +13,7 @@
       </div>
     </div>
     <div class="main">
+      <!--      <artwork />-->
       <Nuxt />
     </div>
     <div class="sub-nav">
@@ -24,6 +25,7 @@
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
 import Category from '~/components/Category.vue'
+// import Artwork from '~/components/Artwork'
 
 @Component({
   components: { Category },
@@ -82,12 +84,11 @@ export default class extends Vue {
 }
 .main {
   flex: 4;
-  padding: 0 24px;
+  padding: 0 40px;
 }
 .sub-nav {
   flex: 1;
   max-width: 164px;
-  padding-left: 40px;
   box-sizing: content-box;
 }
 </style>
