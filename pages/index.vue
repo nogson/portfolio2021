@@ -1,24 +1,34 @@
 <template>
-  <div class="articles">
-    <div class="articles-wrap">
-      <scroll-items :items="portfolio" type="portfolio" />
-      <span class="side-text-1"
-        >PORTFOLIO<span class="side-text-line"></span
-      ></span>
-    </div>
-    <div class="articles-wrap">
-      <scroll-items :items="note" type="note" />
-      <span class="side-text-2">NOTE<span class="side-text-line"></span></span>
-    </div>
+  <div>
+    <card
+      v-for="(item, index) in portfolio"
+      :key="index"
+      :item="item"
+      :card-style="cardStyle(index)"
+    />
   </div>
+  <!--  <div class="articles">-->
+  <!--    <div class="articles-wrap">-->
+  <!--      <scroll-items :items="portfolio" type="portfolio" />-->
+  <!--      <span class="side-text-1"-->
+  <!--        >PORTFOLIO<span class="side-text-line"></span-->
+  <!--      ></span>-->
+  <!--    </div>-->
+  <!--    <div class="articles-wrap">-->
+  <!--      <scroll-items :items="note" type="note" />-->
+  <!--      <span class="side-text-2">NOTE<span class="side-text-line"></span></span>-->
+  <!--    </div>-->
+  <!--  </div>-->
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
 import ScrollItems from '~/components/ScrollItems.vue'
+import Card from '~/components/Card.vue'
 
 @Component({
-  components: { ScrollItems },
+  layout: 'top',
+  components: { Card, ScrollItems },
   async asyncData({ $content, params }) {
     return {
       note: await $content('note').sortBy('create_at', 'desc').fetch(),
@@ -40,6 +50,15 @@ export default class Index extends Vue {
   created() {
     this.$nuxt.$emit('updateContent', this.note)
     // console.log(this.$content('note').fetch())
+  }
+
+  get cardStyle() {
+    return (i: number) => {
+      return {
+        top: 300 * Math.floor(i / 5) + 100 + 'px',
+        left: 300 * (i % 5) + 'px',
+      }
+    }
   }
 }
 </script>

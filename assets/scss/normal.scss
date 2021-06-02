@@ -49,7 +49,9 @@ input, button, textarea, select {
 }
 
 /* add */
-
+body{
+  background: url("assets/images/bg.png");
+}
 body.top {
   .container {
     height: 100vh;
