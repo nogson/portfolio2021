@@ -1,11 +1,13 @@
 <template>
-  <div>
-    <card
-      v-for="(item, index) in portfolio"
-      :key="index"
-      :item="item"
-      :card-style="cardStyle(index)"
-    />
+  <div class="card-wrap" :style="cardWrapStyle" @mousemove="mouseenter">
+    <div class="card-wrap-scroll-box" :style="cardWrapScrollBoxStyle">
+      <card
+        v-for="(item, index) in portfolio"
+        :key="index"
+        :item="item"
+        :card-style="cardStyle(index)"
+      />
+    </div>
   </div>
   <!--  <div class="articles">-->
   <!--    <div class="articles-wrap">-->
@@ -39,6 +41,12 @@ import Card from '~/components/Card.vue'
 export default class Index extends Vue {
   portfolio!: any[]
   note!: any[]
+  cardWrapStyle: any = null
+  cursorX!: number
+  cursorY!: number
+  translateX: number = 0
+  translateY: number = 0
+
   head() {
     return {
       bodyAttrs: {
@@ -52,10 +60,46 @@ export default class Index extends Vue {
     // console.log(this.$content('note').fetch())
   }
 
+  mounted() {
+    this.cardWrapStyle = {
+      width: document.body.offsetWidth + 'px',
+      height: document.body.offsetHeight + 'px',
+    }
+
+    requestAnimationFrame(this.loop)
+  }
+
+  mouseenter(e: any) {
+    this.cursorX = e.clientX
+    this.cursorY = e.clientY
+  }
+
+  loop() {
+    if (document.body.offsetWidth - 100 < this.cursorX) {
+      this.translateX -= (300 + this.translateX) / 30
+    } else if (this.cursorX < 100) {
+      this.translateX += (300 - this.translateX) / 30
+    }
+
+    if (document.body.offsetHeight - 100 < this.cursorY) {
+      this.translateY -= (100 + this.translateY) / 30
+    } else if (this.cursorY < 100) {
+      this.translateY += (100 - this.translateY) / 30
+    }
+
+    requestAnimationFrame(this.loop)
+  }
+
+  get cardWrapScrollBoxStyle() {
+    return {
+      transform: `translate(${this.translateX}px,${this.translateY}px)`,
+    }
+  }
+
   get cardStyle() {
     return (i: number) => {
       return {
-        top: 300 * Math.floor(i / 5) + 100 + 'px',
+        top: 300 * Math.floor(i / 5) + 'px',
         left: 300 * (i % 5) + 'px',
       }
     }
@@ -64,43 +108,13 @@ export default class Index extends Vue {
 </script>
 
 <style scoped lang="scss">
-.articles {
-  display: flex;
-  height: 100%;
+.card-wrap {
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow: hidden;
 
-  .articles-wrap {
-    position: relative;
-    margin-right: 24px;
-    flex: 1;
+  .card-wrap-scroll-box {
   }
-}
-
-.side-text-1,
-.side-text-2 {
-  position: absolute;
-  font-weight: bold;
-  color: $color-gray-light1;
-  font-size: 30px;
-  display: flex;
-  align-items: center;
-  .side-text-line {
-    margin-left: 8px;
-    width: 100px;
-    height: 1px;
-    display: block;
-    background: $color-gray-light1;
-  }
-}
-
-.side-text-1 {
-  bottom: 130px;
-  left: -190px;
-  transform: rotate(-90deg);
-}
-
-.side-text-2 {
-  top: 80px;
-  right: -130px;
-  transform: rotate(90deg);
 }
 </style>
