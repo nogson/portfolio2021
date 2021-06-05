@@ -1,5 +1,12 @@
 <template>
-  <div class="card-wrap" :style="cardWrapStyle" @mousemove="mouseenter">
+  <div
+    @mousedown="scrollContent"
+    @mouseup="scrollContent"
+    @mousemove="scrollContent"
+    @mouseleave="scrollContent"
+    class="card-wrap"
+    :style="cardWrapStyle"
+  >
     <div class="card-wrap-scroll-box" :style="cardWrapScrollBoxStyle">
       <card
         v-for="(item, index) in portfolio"
@@ -24,14 +31,14 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'nuxt-property-decorator'
+import {Component, Vue} from 'nuxt-property-decorator'
 import ScrollItems from '~/components/ScrollItems.vue'
 import Card from '~/components/Card.vue'
 
 @Component({
   layout: 'top',
-  components: { Card, ScrollItems },
-  async asyncData({ $content, params }) {
+  components: {Card, ScrollItems},
+  async asyncData({$content, params}) {
     return {
       note: await $content('note').sortBy('create_at', 'desc').fetch(),
       portfolio: await $content('portfolio').sortBy('order', 'desc').fetch(),
@@ -44,8 +51,11 @@ export default class Index extends Vue {
   cardWrapStyle: any = null
   cursorX!: number
   cursorY!: number
+  startX!: number
+  startY!: number
   translateX: number = 0
   translateY: number = 0
+  isDrag: boolean = false
 
   head() {
     return {
@@ -66,12 +76,20 @@ export default class Index extends Vue {
       height: document.body.offsetHeight + 'px',
     }
 
-    requestAnimationFrame(this.loop)
+    //requestAnimationFrame(this.loop)
   }
 
-  mouseenter(e: any) {
-    this.cursorX = e.clientX
-    this.cursorY = e.clientY
+  scrollContent(e: MouseEvent) {
+    if (e.type === 'mousedown') {
+      this.isDrag = true
+      this.startX = e.clientX
+      this.startY = e.clientY
+    } else if (e.type === 'mouseup' || e.type === 'mouseleave') {
+      this.isDrag = false
+    } else if (e.type === 'mousemove' && this.isDrag) {
+      this.translateX += (e.clientX - this.startX) / 30
+      this.translateY += (e.clientY - this.startY) /30
+    }
   }
 
   loop() {
@@ -92,7 +110,8 @@ export default class Index extends Vue {
 
   get cardWrapScrollBoxStyle() {
     return {
-      transform: `translate(${this.translateX}px,${this.translateY}px)`,
+      transform: `translate(${this.translateX}px,${this.translateY}px)`
+      //pointerEvents: this.isDrag ? 'none' : 'auto'
     }
   }
 

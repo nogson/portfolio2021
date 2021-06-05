@@ -44,6 +44,7 @@ export default class Card extends Vue {
   transform: scale(1);
 }
 .card {
+  user-select:none;
   transform-style: preserve-3d;
   transform: rotateX(-60deg) rotateZ(45deg) scale(1) skew(45deg);
   width: 300px;
