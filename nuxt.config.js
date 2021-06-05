@@ -16,13 +16,16 @@ export default {
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: ['@/assets/scss/normal.scss', '@/assets/scss/common.scss','@/assets/scss/nuxt_content.scss'],
+  css: [
+    '@/assets/scss/normal.scss',
+    '@/assets/scss/common.scss',
+    '@/assets/scss/nuxt_content.scss',
+  ],
   styleResources: {
     scss: ['@/assets/scss/variables.scss'],
   },
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [],
-
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
 
@@ -30,6 +33,7 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/typescript
     '@nuxt/typescript-build',
+    'nuxt-gsap-module',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -66,6 +70,12 @@ export default {
           },
         ],
       ],
+    },
+    extend(config) {
+      config.module.rules.push({
+        test: /\.md$/,
+        loader: 'frontmatter-markdown-loader',
+      })
     },
   },
 }
