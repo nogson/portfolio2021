@@ -11,12 +11,12 @@
       ref="cardWrapScrollBox"
       class="card-wrap-scroll-box"
       :style="cardWrapScrollBoxStyle"
+      :class="{drag:isDrag}"
     >
       <card
         v-for="(item, index) in portfolio"
         :key="index"
         :item="item"
-        :card-style="cardStyle(index)"
       />
     </div>
   </div>
@@ -35,15 +35,15 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'nuxt-property-decorator'
-import { Debounce } from 'vue-debounce-decorator'
+import {Component, Vue} from 'nuxt-property-decorator'
+// import {Debounce} from 'vue-debounce-decorator'
 import ScrollItems from '~/components/ScrollItems.vue'
 import Card from '~/components/Card.vue'
 
 @Component({
   layout: 'top',
-  components: { Card, ScrollItems },
-  async asyncData({ $content, params }) {
+  components: {Card, ScrollItems},
+  async asyncData({$content, params}) {
     return {
       note: await $content('note').sortBy('create_at', 'desc').fetch(),
       portfolio: await $content('portfolio').sortBy('order', 'desc').fetch(),
@@ -80,6 +80,18 @@ export default class Index extends Vue {
       width: document.body.offsetWidth + 'px',
       height: document.body.offsetHeight + 'px',
     }
+    this.$gsap
+      .fromTo(this.$refs.cardWrapScrollBox,{
+        x: this.cardWrapScrollBoxWidth * -0.25,
+        y: this.cardWrapScrollBoxHeight * -0.25,
+        scale:0.4,
+        delay:2
+      }, {
+        x: this.cardWrapScrollBoxWidth * -0.25,
+        y: this.cardWrapScrollBoxHeight * -0.25,
+        scale:1,
+        duration: 1.5,
+      })
 
     // requestAnimationFrame(this.loop)
   }
@@ -98,42 +110,52 @@ export default class Index extends Vue {
     }
   }
 
-  @Debounce(10)
+  //@Debounce(10)
   move(e) {
     const transformValue = this.$refs.cardWrapScrollBox.style.transform.split(
       /[(),]/
     )
-    const xValue = Number(transformValue[1].replace('px', ''))
-    const yValue = Number(transformValue[2].replace('px', ''))
+    let xValue = Number(transformValue[1].replace('px', ''))
+    let yValue = Number(transformValue[2].replace('px', ''))
+
+    if(xValue > 0) {
+      xValue = 0
+    }else if(xValue < document.body.offsetWidth - this.cardWrapScrollBoxWidth){
+      xValue = document.body.offsetWidth - this.cardWrapScrollBoxWidth
+    }
+    else {
+      xValue += (e.clientX - this.startX) / 2
+    }
+
+    if(yValue > 0) {
+      yValue = 0
+    }else if(yValue < document.body.offsetHeight - this.cardWrapScrollBoxHeight){
+      yValue = document.body.offsetHeight - this.cardWrapScrollBoxHeight
+    }
+    else {
+      yValue += (e.clientY - this.startY) / 2
+    }
+
     this.$gsap.to(this.$refs.cardWrapScrollBox, {
-      x: xValue + e.clientX - this.startX,
-      y: yValue + e.clientY - this.startY,
+      x: xValue,
+      y: yValue,
       duration: 1.5,
     })
   }
 
-  loop() {
-    if (document.body.offsetWidth - 100 < this.cursorX) {
-      this.translateX -= (300 + this.translateX) / 30
-    } else if (this.cursorX < 100) {
-      this.translateX += (300 - this.translateX) / 30
-    }
+  get cardWrapScrollBoxHeight() {
+    return (Math.floor(this.portfolio.length / 4) + 1) * 400 * 1.5
+  }
 
-    if (document.body.offsetHeight - 100 < this.cursorY) {
-      this.translateY -= (100 + this.translateY) / 30
-    } else if (this.cursorY < 100) {
-      this.translateY += (100 - this.translateY) / 30
-    }
-
-    requestAnimationFrame(this.loop)
+  get cardWrapScrollBoxWidth() {
+    return ((this.portfolio.length % 4) + 1) * 400 * 1.5
   }
 
   get cardWrapScrollBoxStyle() {
     return {
-      transform: `translate3D(${this.translateX}px,${this.translateY}px,0)`,
-      height: (Math.floor(this.portfolio.length / 4) + 1) * 400 * 1.5 + 'px',
-      width: ((this.portfolio.length % 4) + 1) * 400 * 1.5 + 'px',
-      // pointerEvents: this.isDrag ? 'none' : 'auto'
+      transform: `translate3D(0px,0px,0)`,
+      height: this.cardWrapScrollBoxHeight + 'px',
+      width: this.cardWrapScrollBoxWidth + 'px',
     }
   }
 
@@ -156,7 +178,15 @@ export default class Index extends Vue {
   overflow: hidden;
 
   .card-wrap-scroll-box {
+    position: relative;
     background-image: url('~@/assets/images/bg.png');
+    display: flex;
+    flex-wrap: wrap;
+    padding: 25%;
+    cursor: grab;
+    &.drag{
+      cursor:grabbing;
+    }
   }
 }
 </style>

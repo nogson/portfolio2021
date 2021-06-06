@@ -1,7 +1,7 @@
 <template>
-  <div class="item" :style="cardStyle">
+  <div class="item" :style="cardStyle" @mouseenter="hover">
     <span class="shadow" />
-    <dl class="card">
+    <dl class="card" ref="card">
       <dt>
         <router-link :to="item.path">
           <dynamic-image
@@ -35,13 +35,25 @@ export default class Card extends Vue {
 
   @Prop({ type: Object })
   cardStyle!: { top: string; left: string }
+
+  hover() {
+    this.$gsap.to(this.$refs.card, {
+      x: xValue,
+      y: yValue,
+      duration: 1.5,
+    })
+  }
 }
 </script>
 
 <style scoped lang="scss">
 .item {
-  position: absolute;
+  //position: absolute;
+  position: relative;
   transform: scale(1);
+  width: 300px;
+  height: 300px;
+  margin: 50px;
 }
 .card {
   user-select:none;
