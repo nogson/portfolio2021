@@ -1,22 +1,20 @@
 <template>
-  <div
-    class="card-wrap"
-    :style="cardWrapStyle"
-    @mousedown="scrollContent"
-    @mouseup="scrollContent"
-    @mousemove="scrollContent"
-    @mouseleave="scrollContent"
-  >
+  <div class="card-wrap" :style="cardWrapStyle">
     <div
       ref="cardWrapScrollBox"
       class="card-wrap-scroll-box"
       :style="cardWrapScrollBoxStyle"
-      :class="{drag:isDrag}"
+      :class="{ drag: isDrag }"
+      @mousedown="scrollContent"
+      @mouseup="scrollContent"
+      @mousemove="scrollContent"
+      @mouseleave="scrollContent"
     >
       <card
         v-for="(item, index) in portfolio"
         :key="index"
         :item="item"
+        :is-drag="isDrag"
       />
     </div>
   </div>
@@ -35,15 +33,15 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue} from 'nuxt-property-decorator'
-// import {Debounce} from 'vue-debounce-decorator'
+import { Component, Vue } from 'nuxt-property-decorator'
+import { Debounce } from 'vue-debounce-decorator'
 import ScrollItems from '~/components/ScrollItems.vue'
 import Card from '~/components/Card.vue'
 
 @Component({
   layout: 'top',
-  components: {Card, ScrollItems},
-  async asyncData({$content, params}) {
+  components: { Card, ScrollItems },
+  async asyncData({ $content, params }) {
     return {
       note: await $content('note').sortBy('create_at', 'desc').fetch(),
       portfolio: await $content('portfolio').sortBy('order', 'desc').fetch(),
@@ -80,37 +78,42 @@ export default class Index extends Vue {
       width: document.body.offsetWidth + 'px',
       height: document.body.offsetHeight + 'px',
     }
-    this.$gsap
-      .fromTo(this.$refs.cardWrapScrollBox,{
+    this.$gsap.fromTo(
+      this.$refs.cardWrapScrollBox,
+      {
         x: this.cardWrapScrollBoxWidth * -0.25,
         y: this.cardWrapScrollBoxHeight * -0.25,
-        scale:0.4,
-        delay:2
-      }, {
+        scale: 0.4,
+        delay: 2,
+      },
+      {
         x: this.cardWrapScrollBoxWidth * -0.25,
         y: this.cardWrapScrollBoxHeight * -0.25,
-        scale:1,
+        scale: 1,
         duration: 1.5,
-      })
+      }
+    )
 
     // requestAnimationFrame(this.loop)
   }
 
   scrollContent(e: MouseEvent) {
     if (e.type === 'mousedown') {
-      this.isDrag = true
-      this.startX = e.clientX
-      this.startY = e.clientY
+      if (e.target.className === 'card-wrap-scroll-box') {
+        this.isDrag = true
+        this.startX = e.offsetX
+        this.startY = e.offsetY
+      }
     } else if (e.type === 'mouseup' || e.type === 'mouseleave') {
       this.isDrag = false
-      this.startX = e.clientX
-      this.startY = e.clientY
+      this.startX = e.offsetX
+      this.startY = e.offsetY
     } else if (e.type === 'mousemove' && this.isDrag) {
       this.move(e)
     }
   }
 
-  //@Debounce(10)
+  // @Debounce(33)
   move(e) {
     const transformValue = this.$refs.cardWrapScrollBox.style.transform.split(
       /[(),]/
@@ -118,28 +121,34 @@ export default class Index extends Vue {
     let xValue = Number(transformValue[1].replace('px', ''))
     let yValue = Number(transformValue[2].replace('px', ''))
 
-    if(xValue > 0) {
+    xValue += e.offsetX - this.startX
+    yValue += e.offsetY - this.startY
+
+    if (xValue >= 0) {
       xValue = 0
-    }else if(xValue < document.body.offsetWidth - this.cardWrapScrollBoxWidth){
+    } else if (
+      xValue <=
+      document.body.offsetWidth - this.cardWrapScrollBoxWidth
+    ) {
       xValue = document.body.offsetWidth - this.cardWrapScrollBoxWidth
     }
-    else {
-      xValue += (e.clientX - this.startX) / 2
-    }
 
-    if(yValue > 0) {
+    if (yValue >= 0) {
       yValue = 0
-    }else if(yValue < document.body.offsetHeight - this.cardWrapScrollBoxHeight){
+    } else if (
+      yValue <=
+      document.body.offsetHeight - this.cardWrapScrollBoxHeight
+    ) {
       yValue = document.body.offsetHeight - this.cardWrapScrollBoxHeight
     }
-    else {
-      yValue += (e.clientY - this.startY) / 2
-    }
 
+    // this.translateX = xValue
+    // this.translateY = yValue
     this.$gsap.to(this.$refs.cardWrapScrollBox, {
       x: xValue,
       y: yValue,
-      duration: 1.5,
+      duration: 0.75,
+      ease: 'Power1.easeOut',
     })
   }
 
@@ -153,7 +162,7 @@ export default class Index extends Vue {
 
   get cardWrapScrollBoxStyle() {
     return {
-      transform: `translate3D(0px,0px,0)`,
+      transform: `translate3D(${this.translateX}px,${this.translateY}px,0)`,
       height: this.cardWrapScrollBoxHeight + 'px',
       width: this.cardWrapScrollBoxWidth + 'px',
     }
@@ -184,8 +193,8 @@ export default class Index extends Vue {
     flex-wrap: wrap;
     padding: 25%;
     cursor: grab;
-    &.drag{
-      cursor:grabbing;
+    &.drag {
+      cursor: grabbing;
     }
   }
 }

@@ -1,7 +1,13 @@
 <template>
-  <div class="item" :style="cardStyle" @mouseenter="hover">
-    <span class="shadow" />
-    <dl class="card" ref="card">
+  <div
+    class="item"
+    :style="cardStyle"
+    :class="{ drag: isDrag }"
+    @mouseover="mouseover"
+    @mouseout="mouseout"
+  >
+    <span class="shadow" :class="{ hover: isHover }" />
+    <dl ref="card" class="card" :class="{ hover: isHover }">
       <dt>
         <router-link :to="item.path">
           <dynamic-image
@@ -30,18 +36,23 @@ import DynamicImage from '~/components/DynamicImage.vue'
   components: { DynamicImage },
 })
 export default class Card extends Vue {
+  isHover: Boolean = false
+
   @Prop({ type: Object })
   item!: any
 
   @Prop({ type: Object })
   cardStyle!: { top: string; left: string }
 
-  hover() {
-    this.$gsap.to(this.$refs.card, {
-      x: xValue,
-      y: yValue,
-      duration: 1.5,
-    })
+  @Prop({ type: Boolean })
+  isDrag: Boolean = false
+
+  mouseover() {
+    this.isHover = true
+  }
+
+  mouseout() {
+    this.isHover = false
   }
 }
 </script>
@@ -54,16 +65,28 @@ export default class Card extends Vue {
   width: 300px;
   height: 300px;
   margin: 50px;
+
+  &.drag {
+    pointer-events: none;
+  }
 }
 .card {
-  user-select:none;
+  user-select: none;
   transform-style: preserve-3d;
-  transform: rotateX(-60deg) rotateZ(45deg) scale(1) skew(45deg);
+  transform: rotateX(60deg) rotateZ(45deg) skew(45deg);
   width: 300px;
   height: 300px;
   padding: 8px;
   border: 2px solid $color-gray-light1;
   background: #fff;
+
+  &.hover {
+    animation-name: hover;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-out;
+  }
+
   dt {
     border: 1px solid $color-gray-light1;
     width: 100%;
@@ -90,5 +113,36 @@ export default class Card extends Vue {
   height: 100px;
   transform: rotateX(-60deg) rotateZ(45deg);
   filter: blur(3px);
+
+  &.hover {
+    animation-name: shadowAnimation;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-out;
+  }
+}
+
+@keyframes hover {
+  0% {
+    transform: rotateX(60deg) rotateZ(45deg) skew(45deg);
+  }
+  100% {
+    transform: rotateX(0deg) rotateZ(0deg) skew(0deg) scale(0.85);
+  }
+}
+
+@keyframes shadowAnimation {
+  0% {
+    transform: rotateX(-60deg) rotateZ(45deg);
+    left: 40px;
+    bottom: 15px;
+    background: rgba(#000, 0.7);
+  }
+  100% {
+    transform: rotateX(0deg) rotateZ(0deg) scale(0.85);
+    left: 0px;
+    bottom: 15px;
+    background: rgba(#000, 0.1);
+  }
 }
 </style>
