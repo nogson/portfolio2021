@@ -1,5 +1,6 @@
 <template>
   <div
+    v-show="isDisplay"
     ref="card"
     class="item"
     :style="cardStyle"
@@ -29,7 +30,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from 'nuxt-property-decorator'
+import { Component, Vue, Prop, Watch } from 'nuxt-property-decorator'
 import DynamicImage from '~/components/DynamicImage.vue'
 
 @Component({
@@ -37,6 +38,8 @@ import DynamicImage from '~/components/DynamicImage.vue'
 })
 export default class Card extends Vue {
   isHover: Boolean = false
+
+  isDisplay: Boolean = false
 
   @Prop({ type: Object })
   item!: any
@@ -52,6 +55,57 @@ export default class Card extends Vue {
 
   @Prop({ type: Number })
   translateY!: Number
+
+  @Prop({ type: Boolean })
+  isShow!: Boolean
+
+  @Watch('isShow')
+  onIsShow() {
+    this.show()
+  }
+
+  created() {
+    this.show()
+  }
+
+  show() {
+    if (this.isShow) {
+      this.isDisplay = this.isShow
+      this.$gsap.fromTo(
+        this.$refs.cardInner,
+        {
+          x: 20,
+          y: 20,
+          opacity: 0,
+        },
+        {
+          y: 0,
+          x: 0,
+          opacity: 1,
+          duration: 0.5,
+          delay: 0.25,
+        }
+      )
+    } else {
+      this.$gsap.fromTo(
+        this.$refs.cardInner,
+        {
+          x: 0,
+          y: 0,
+          opacity: 1,
+        },
+        {
+          opacity: 0,
+          x: -20,
+          y: -20,
+          duration: 0.5,
+          onComplete: () => {
+            this.isDisplay = this.isShow
+          },
+        }
+      )
+    }
+  }
 
   mouseover() {
     this.isHover = true
@@ -93,9 +147,9 @@ export default class Card extends Vue {
 <style scoped lang="scss">
 .item {
   cursor: pointer;
-  //position: absolute;
-  position: relative;
-  transform: scale(1);
+  position: absolute;
+  //position: relative;
+  opacity: 1;
   width: 300px;
   height: 300px;
   margin: 50px;

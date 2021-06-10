@@ -10,28 +10,29 @@
       @mousemove="scrollContent"
       @mouseleave="scrollContent"
     >
-      <template v-if="isNote">
-        <card
-          v-for="(item, index) in note"
-          :key="index"
-          :ref="item.slug"
-          :item="item"
-          :is-drag="isDrag"
-          :translate-x="translateX"
-          :translate-y="translateY"
-        />
-      </template>
-      <template v-else>
-        <card
-          v-for="(item, index) in portfolio"
-          :key="index"
-          :ref="item.slug"
-          :item="item"
-          :is-drag="isDrag"
-          :translate-x="translateX"
-          :translate-y="translateY"
-        />
-      </template>
+      <card
+        v-for="(item, index) in note"
+        :key="item.slug"
+        :ref="item.slug"
+        :item="item"
+        :is-drag="isDrag"
+        :translate-x="translateX"
+        :translate-y="translateY"
+        :is-show="isNote"
+        :card-style="cardStyle(index)"
+      />
+
+      <card
+        v-for="(item, index) in portfolio"
+        :key="item.slug"
+        :ref="item.slug"
+        :item="item"
+        :is-drag="isDrag"
+        :translate-x="translateX"
+        :translate-y="translateY"
+        :is-show="!isNote"
+        :card-style="cardStyle(index)"
+      />
 
       <top-parts />
     </div>
@@ -116,14 +117,14 @@ export default class Index extends Vue {
         {
           x,
           y,
-          scale: 0.4,
-          delay: 2,
+          scale: 0.5,
         },
         {
           x,
           y,
           scale: 1,
           duration: 1.5,
+          delay: 1,
         }
       )
     }
@@ -203,6 +204,17 @@ export default class Index extends Vue {
       transform: `translate3D(0px,0px,0)`,
       height: this.cardWrapScrollBoxHeight + 'px',
       width: this.cardWrapScrollBoxWidth + 'px',
+    }
+  }
+
+  get cardStyle() {
+    const itemLength = this.isNote ? this.note.length : this.portfolio.length
+
+    return (index) => {
+      return {
+        top: Math.floor(index / 4) * 400 + 200 + 'px',
+        left: (index % 4) * 400 + 400 + 'px',
+      }
     }
   }
 
