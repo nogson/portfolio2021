@@ -4,6 +4,8 @@
       <h1><nuxt-link to="/">Satofaction.net</nuxt-link></h1>
       <nav class="header-nav-li">
         <ul>
+          <li @click="changeType('portfolio')">Portfolio</li>
+          <li @click="changeType('note')">Note</li>
           <li><nuxt-link to="/about">About</nuxt-link></li>
           <li><nuxt-link to="/">Contact</nuxt-link></li>
         </ul>
@@ -34,6 +36,10 @@ export default class extends Vue {
 
   updateContent(data: any[]) {
     this.note = data
+  }
+
+  changeType(type) {
+    this.$nuxt.$emit('changeType', type)
   }
 }
 </script>
@@ -70,13 +76,13 @@ export default class extends Vue {
     ul {
       display: flex;
       align-items: center;
-
     }
     li {
       color: $color-black;
       font-size: 14px;
       font-weight: bold;
       margin-left: 24px;
+      cursor: pointer;
     }
   }
 }

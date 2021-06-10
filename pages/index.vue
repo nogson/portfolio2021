@@ -10,12 +10,30 @@
       @mousemove="scrollContent"
       @mouseleave="scrollContent"
     >
-      <card
-        v-for="(item, index) in portfolio"
-        :key="index"
-        :item="item"
-        :is-drag="isDrag"
-      />
+      <template v-if="isNote">
+        <card
+          v-for="(item, index) in note"
+          :key="index"
+          :ref="item.slug"
+          :item="item"
+          :is-drag="isDrag"
+          :translate-x="translateX"
+          :translate-y="translateY"
+        />
+      </template>
+      <template v-else>
+        <card
+          v-for="(item, index) in portfolio"
+          :key="index"
+          :ref="item.slug"
+          :item="item"
+          :is-drag="isDrag"
+          :translate-x="translateX"
+          :translate-y="translateY"
+        />
+      </template>
+
+      <top-parts />
     </div>
   </div>
   <!--  <div class="articles">-->
@@ -37,10 +55,12 @@ import { Component, Vue } from 'nuxt-property-decorator'
 import { Debounce } from 'vue-debounce-decorator'
 import ScrollItems from '~/components/ScrollItems.vue'
 import Card from '~/components/Card.vue'
+import DynamicImage from '~/components/DynamicImage.vue'
+import TopParts from '~/components/TopParts.vue'
 
 @Component({
   layout: 'top',
-  components: { Card, ScrollItems },
+  components: { TopParts, DynamicImage, Card, ScrollItems },
   async asyncData({ $content, params }) {
     return {
       note: await $content('note').sortBy('create_at', 'desc').fetch(),
@@ -70,7 +90,7 @@ export default class Index extends Vue {
 
   created() {
     this.$nuxt.$emit('updateContent', this.note)
-    // console.log(this.$content('note').fetch())
+    this.$nuxt.$on('changeType', (type) => this.changeType(type))
   }
 
   mounted() {
@@ -78,23 +98,41 @@ export default class Index extends Vue {
       width: document.body.offsetWidth + 'px',
       height: document.body.offsetHeight + 'px',
     }
-    this.$gsap.fromTo(
-      this.$refs.cardWrapScrollBox,
-      {
-        x: this.cardWrapScrollBoxWidth * -0.25,
-        y: this.cardWrapScrollBoxHeight * -0.25,
-        scale: 0.4,
-        delay: 2,
-      },
-      {
-        x: this.cardWrapScrollBoxWidth * -0.25,
-        y: this.cardWrapScrollBoxHeight * -0.25,
-        scale: 1,
-        duration: 1.5,
-      }
-    )
+
+    const x = this.cardWrapScrollBoxWidth * -0.25
+    const y = this.cardWrapScrollBoxHeight * -0.25
+
+    if (this.$route.query.translateX) {
+      this.$nextTick(() => {
+        this.$gsap.to(this.$refs.cardWrapScrollBox, {
+          x: this.$route.query.translateX,
+          y: this.$route.query.translateY,
+          duration: 0,
+        })
+      })
+    } else {
+      this.$gsap.fromTo(
+        this.$refs.cardWrapScrollBox,
+        {
+          x,
+          y,
+          scale: 0.4,
+          delay: 2,
+        },
+        {
+          x,
+          y,
+          scale: 1,
+          duration: 1.5,
+        }
+      )
+    }
 
     // requestAnimationFrame(this.loop)
+  }
+
+  changeType(type) {
+    this.$router.push({ path: '/', query: { type } })
   }
 
   scrollContent(e: MouseEvent) {
@@ -120,7 +158,6 @@ export default class Index extends Vue {
     )
     let xValue = Number(transformValue[1].replace('px', ''))
     let yValue = Number(transformValue[2].replace('px', ''))
-
     xValue += e.offsetX - this.startX
     yValue += e.offsetY - this.startY
 
@@ -142,8 +179,8 @@ export default class Index extends Vue {
       yValue = document.body.offsetHeight - this.cardWrapScrollBoxHeight
     }
 
-    // this.translateX = xValue
-    // this.translateY = yValue
+    this.translateX = xValue
+    this.translateY = yValue
     this.$gsap.to(this.$refs.cardWrapScrollBox, {
       x: xValue,
       y: yValue,
@@ -153,28 +190,24 @@ export default class Index extends Vue {
   }
 
   get cardWrapScrollBoxHeight() {
-    return (Math.floor(this.portfolio.length / 4) + 1) * 400 * 1.5
+    const itemLength = this.isNote ? this.note.length : this.portfolio.length
+    return (Math.floor(itemLength / 4) + 1) * 400 * 1.5
   }
 
   get cardWrapScrollBoxWidth() {
-    return ((this.portfolio.length % 4) + 1) * 400 * 1.5
+    return 5 * 400 * 1.5
   }
 
   get cardWrapScrollBoxStyle() {
     return {
-      transform: `translate3D(${this.translateX}px,${this.translateY}px,0)`,
+      transform: `translate3D(0px,0px,0)`,
       height: this.cardWrapScrollBoxHeight + 'px',
       width: this.cardWrapScrollBoxWidth + 'px',
     }
   }
 
-  get cardStyle() {
-    return (i: number) => {
-      return {
-        top: 400 * Math.floor(i / 4) + 'px',
-        left: 400 * (i % 4) + 'px',
-      }
-    }
+  get isNote() {
+    return this.$route.query.type === 'note'
   }
 }
 </script>
