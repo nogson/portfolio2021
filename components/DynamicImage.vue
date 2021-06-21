@@ -20,6 +20,9 @@ export default {
     margin: {
       type: String,
     },
+    width: {
+      type: String,
+    },
   },
 
   computed: {
@@ -30,9 +33,12 @@ export default {
       if (this.margin) {
         return {
           margin: this.margin,
+          width: this.width,
         }
       } else {
-        return {}
+        return {
+          width: this.width,
+        }
       }
     },
   },
@@ -40,6 +46,6 @@ export default {
 </script>
 <style scoped>
 img {
-  margin: 24px 0;
+  margin: 24px auto;
 }
 </style>

@@ -1,23 +1,13 @@
 <template>
-  <section class="container">
-    <div class="side-nav">
-      <div class="side-nav-fix">
-        <h1><nuxt-link to="/">Satofaction.net</nuxt-link></h1>
-        <nav class="side-nav-li">
-          <ul>
-            <li><nuxt-link to="/">Top</nuxt-link></li>
-            <li><nuxt-link to="/about">About</nuxt-link></li>
-            <li><nuxt-link to="/">Contact</nuxt-link></li>
-          </ul>
-        </nav>
+  <section class="wrapper">
+    <common-header />
+    <div class="container">
+      <div class="main">
+        <Nuxt />
       </div>
-    </div>
-    <div class="main">
-      <!--      <artwork />-->
-      <Nuxt />
-    </div>
-    <div class="sub-nav">
-      <category :items="note" />
+      <!--      <div class="sub-nav">-->
+      <!--        <category :items="note" />-->
+      <!--      </div>-->
     </div>
   </section>
 </template>
@@ -25,13 +15,13 @@
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
 import Category from '~/components/Category.vue'
-// import Artwork from '~/components/Artwork'
 
 @Component({
   components: { Category },
 })
 export default class extends Vue {
   note: any[] = []
+
   created() {
     this.$nuxt.$on('updateContent', this.updateContent)
   }
@@ -43,52 +33,12 @@ export default class extends Vue {
 </script>
 
 <style scoped lang="scss">
+.wrapper {
+  background-image: url('~@/assets/images/bg.png');
+}
 .container {
-  display: flex;
-  max-width: 1152px;
-  margin: 0 auto;
-  padding: 48px 0;
+  max-width: 1024px;
+  margin: 32px auto;
   min-height: 100vh;
-}
-.side-nav {
-  flex: 1;
-  max-width: 164px;
-  padding-left: 16px;
-
-  .side-nav-fix {
-    position: fixed;
-  }
-
-  h1 {
-    font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 8px;
-    a {
-      text-decoration: none;
-    }
-  }
-  h2 {
-    font-size: 12px;
-    font-weight: normal;
-  }
-
-  .side-nav-li {
-    margin-top: 40px;
-    li {
-      color: $color-black;
-      font-size: 14px;
-      margin-bottom: 8px;
-      font-weight: bold;
-    }
-  }
-}
-.main {
-  flex: 4;
-  padding: 0 40px;
-}
-.sub-nav {
-  flex: 1;
-  max-width: 164px;
-  box-sizing: content-box;
 }
 </style>

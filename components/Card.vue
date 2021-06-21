@@ -12,7 +12,7 @@
     <div ref="cardInner">
       <span class="shadow" :class="{ hover: isHover }" />
       <dl ref="card" class="card" :class="{ hover: isHover }">
-        <dt @click="showDetail">
+        <dt ref="cardImg" @click="showDetail">
           <dynamic-image
             v-if="item.thumbnail"
             :path="item.thumbnail"
@@ -64,14 +64,14 @@ export default class Card extends Vue {
     this.show()
   }
 
-  created() {
+  mounted() {
     this.show()
   }
 
   show() {
     if (this.isShow) {
       this.isDisplay = this.isShow
-      this.$gsap.fromTo(
+      this. $gsap.fromTo(
         this.$refs.cardInner,
         {
           x: 20,
@@ -121,6 +121,7 @@ export default class Card extends Vue {
       query: {
         translateX: String(this.translateX),
         translateY: String(this.translateY),
+        type: this.$route.query.type,
       },
     })
     const timeline = this.$gsap.timeline({
@@ -129,7 +130,7 @@ export default class Card extends Vue {
     timeline
       .to(this.$refs.card, {
         scale: 7,
-        zIndex: 100,
+        zIndex: 200,
         duration: 0.5,
         background: '#fff',
       })
@@ -149,7 +150,7 @@ export default class Card extends Vue {
   cursor: pointer;
   position: absolute;
   //position: relative;
-  opacity: 1;
+  //opacity: 0;
   width: 300px;
   height: 300px;
   margin: 50px;

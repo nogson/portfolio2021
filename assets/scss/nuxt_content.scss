@@ -1,14 +1,15 @@
+.title-main{
+  font-style: italic;
+}
+
 .nuxt-content {
   p{
     margin-bottom: 24px;
   }
   h2 {
+    font-size: 20px;
     margin-bottom: 32px;
-    background: #FFF;
-    border: 2px solid $color-black;
-    box-shadow: 6px 6px 0 $color-black;
-    display: inline-block;
-    padding: 0 8px;
+
   }
   h3 {
     margin-bottom: 8px;
