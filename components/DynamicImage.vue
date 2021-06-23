@@ -44,8 +44,9 @@ export default {
   },
 }
 </script>
-<style scoped>
+<style scoped lang="scss">
 img {
   margin: 24px auto;
+  border: 1px solid $color-gray-light1;
 }
 </style>

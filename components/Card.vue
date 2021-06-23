@@ -21,7 +21,9 @@
           ></dynamic-image>
         </dt>
         <dd @click="showDetail">
-          <h3 class="title">{{ item.title }}</h3>
+          <h3 class="title">
+            <span>{{ item.title }}</span>
+          </h3>
           <p class="description">{{ item.description }}</p>
         </dd>
       </dl>
@@ -31,6 +33,7 @@
 
 <script lang="ts">
 import { Component, Vue, Prop, Watch } from 'nuxt-property-decorator'
+import { gsap } from 'gsap'
 import DynamicImage from '~/components/DynamicImage.vue'
 
 @Component({
@@ -71,7 +74,7 @@ export default class Card extends Vue {
   show() {
     if (this.isShow) {
       this.isDisplay = this.isShow
-      this. $gsap.fromTo(
+      gsap.fromTo(
         this.$refs.cardInner,
         {
           x: 20,
@@ -87,7 +90,7 @@ export default class Card extends Vue {
         }
       )
     } else {
-      this.$gsap.fromTo(
+      gsap.fromTo(
         this.$refs.cardInner,
         {
           x: 0,
@@ -124,7 +127,7 @@ export default class Card extends Vue {
         type: this.$route.query.type,
       },
     })
-    const timeline = this.$gsap.timeline({
+    const timeline = gsap.timeline({
       defaults: { ease: 'Power1.easeOut' },
     })
     timeline
@@ -186,6 +189,14 @@ export default class Card extends Vue {
     .title {
       font-size: 14px;
       margin-bottom: 8px;
+      width: 100%;
+      overflow: hidden;
+      span {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        display: block;
+      }
     }
     .description {
       font-size: 12px;

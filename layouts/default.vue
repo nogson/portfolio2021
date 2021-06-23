@@ -37,7 +37,7 @@ export default class extends Vue {
   background-image: url('~@/assets/images/bg.png');
 }
 .container {
-  max-width: 1024px;
+  max-width: 620px;
   margin: 32px auto;
   min-height: 100vh;
 }

@@ -9,7 +9,7 @@
       </h2>
       <article class="margin-b-xl">
         <h3 class="title_m margin-b-m">Profile</h3>
-        <div class="profile font-kiwi-maru">
+        <div class="profile">
           <p>学生時代は何もやりたいことがなく怠惰に過ごす。</p>
           <p>
             とにかく横文字の仕事に就きたいと、なんとなくカッコ良さそうな「グラフィックデザイナー」を目指す。
@@ -45,9 +45,9 @@
         <div class="skills">
           <dl>
             <dt>デザイン</dt>
-            <dd class="font-kiwi-maru">
+            <dd>
               <p>
-                グラフィックデザイン、Web、UIデザインができます。<br>
+                グラフィックデザイン、Web、UIデザインができます。<br />
                 ツールは、Figma、Sketch、XD、illustrator,Photoshop
                 <br />UXリサーチの経験もありますが豊富ではありません。
                 <br />イラストも頼まれれば描きますがあまり得意ではありません。
@@ -57,7 +57,7 @@
           </dl>
           <dl>
             <dt>フロントエンド</dt>
-            <dd class="font-kiwi-maru">
+            <dd>
               <p>
                 HTML、CSS、Javascriptの経験はそこそこあります。最近はVueやNuxtを利用することが多いのでjQueryとかは忘れかけています。<br />
                 wordpressはあまり好きではないです。
@@ -66,7 +66,7 @@
           </dl>
           <dl>
             <dt>バックエンド</dt>
-            <dd class="font-kiwi-maru">
+            <dd>
               <p>実務での経験値はほとんどないです。</p>
               <p>
                 個人的にPHPを勉強中です。フレームワークはLaravelを利用しています。
@@ -75,7 +75,7 @@
           </dl>
           <dl>
             <dt>インフラ</dt>
-            <dd class="font-kiwi-maru">
+            <dd>
               <p>実務での経験値はほとんどないです。</p>
               <p>
                 AWSを勉強中です。S3とCloudFrontを利用したHTTPSでの静的サイトのホスティングくらいならなんとかできます。<br />
@@ -86,7 +86,7 @@
           </dl>
           <dl>
             <dt>その他</dt>
-            <dd class="font-kiwi-maru">
+            <dd>
               <p>TouchDesignerとBlenderが好きです(得意ではないです)。</p>
             </dd>
           </dl>
@@ -102,7 +102,7 @@ import { Component, Vue } from 'nuxt-property-decorator'
 @Component({
   components: {},
 })
-export default class Index extends Vue {}
+export default class About extends Vue {}
 </script>
 
 <style scoped lang="scss">
@@ -131,9 +131,9 @@ h3 {
   }
 }
 .profile {
-  border: solid 2px $color-gray-dark2;
-  border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
   padding: 24px;
+  backdrop-filter: blur(3px);
+  box-shadow: 0px 0px 5px rgba(#000, 0.2);
   p:not(:last-child) {
     margin-bottom: 16px;
   }
@@ -149,8 +149,8 @@ h3 {
     dd {
       flex: 1;
       font-size: 14px;
-      border: solid 2px $color-gray-dark2;
-      border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+      backdrop-filter: blur(3px);
+      box-shadow: 0px 0px 5px rgba(#000, 0.2);
       padding: 24px;
       p:not(:last-child) {
         margin-bottom: 16px;

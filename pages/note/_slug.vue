@@ -55,7 +55,7 @@ export default class Slug extends Vue {
   line-height: 1.8;
 }
 .content-head {
-  margin-bottom: 32px;
+  margin-bottom: 40px;
 }
 .top-image {
   margin-bottom: 24px;

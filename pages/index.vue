@@ -33,26 +33,13 @@
         :is-show="!isNote"
         :card-style="cardStyle(index)"
       />
-
-<!--      <top-parts />-->
     </div>
   </div>
-  <!--  <div class="articles">-->
-  <!--    <div class="articles-wrap">-->
-  <!--      <scroll-items :items="portfolio" type="portfolio" />-->
-  <!--      <span class="side-text-1"-->
-  <!--        >PORTFOLIO<span class="side-text-line"></span-->
-  <!--      ></span>-->
-  <!--    </div>-->
-  <!--    <div class="articles-wrap">-->
-  <!--      <scroll-items :items="note" type="note" />-->
-  <!--      <span class="side-text-2">NOTE<span class="side-text-line"></span></span>-->
-  <!--    </div>-->
-  <!--  </div>-->
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
+import { gsap } from 'gsap'
 import ScrollItems from '~/components/ScrollItems.vue'
 import Card from '~/components/Card.vue'
 import DynamicImage from '~/components/DynamicImage.vue'
@@ -105,15 +92,15 @@ export default class Index extends Vue {
 
     if (this.$route.query.translateX) {
       this.$nextTick(() => {
-        this.$gsap.to(this.$refs.cardWrapScrollBox, {
-          x: this.$route.query.translateX,
-          y: this.$route.query.translateY,
+        gsap.to(this.$refs.cardWrapScrollBox, {
+          x: Number(this.$route.query.translateX),
+          y: Number(this.$route.query.translateY),
           opacity: 1,
           duration: 0,
         })
       })
     } else {
-      this.$gsap.fromTo(
+      gsap.fromTo(
         this.$refs.cardWrapScrollBox,
         {
           x,
@@ -160,10 +147,9 @@ export default class Index extends Vue {
   }
 
   // @Debounce(33)
-  move(e) {
-    const transformValue = this.$refs.cardWrapScrollBox.style.transform.split(
-      /[(),]/
-    )
+  move(e: MouseEvent) {
+    const cardWrapScrollBox = this.$refs.cardWrapScrollBox as HTMLCanvasElement
+    const transformValue = cardWrapScrollBox.style.transform.split(/[(),]/)
     let xValue = Number(transformValue[1].replace('px', ''))
     let yValue = Number(transformValue[2].replace('px', ''))
     xValue += e.offsetX - this.startX
@@ -189,7 +175,7 @@ export default class Index extends Vue {
 
     this.translateX = xValue
     this.translateY = yValue
-    this.$gsap.to(this.$refs.cardWrapScrollBox, {
+    gsap.to(this.$refs.cardWrapScrollBox, {
       x: xValue,
       y: yValue,
       duration: 0.75,
