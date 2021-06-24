@@ -85,6 +85,6 @@ export default {
     },
   },
   router: {
-    base: '/portfolio2021',
+    base: '/portfolio2021/',
   },
 }
