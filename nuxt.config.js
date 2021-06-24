@@ -17,7 +17,7 @@ export default {
       {
         rel: 'icon',
         type: 'image/x-icon',
-        href: '/portfolio2021/favicon.ico',
+        href: '/favicon.ico',
       },
     ],
   },
@@ -85,6 +85,6 @@ export default {
     },
   },
   router: {
-    base: '/portfolio2021/',
+    base: '/',
   },
 }
