@@ -17,7 +17,7 @@ export default {
       {
         rel: 'icon',
         type: 'image/x-icon',
-        href: '/favicon.ico',
+        href: '/portfolio2021/favicon.ico',
       },
     ],
   },
@@ -85,6 +85,6 @@ export default {
     },
   },
   router: {
-    base: 'satofaction.net',
+    base: '/portfolio2021/',
   },
 }
