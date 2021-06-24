@@ -85,6 +85,6 @@ export default {
     },
   },
   router: {
-    base: '/',
+    base: 'satofaction.net',
   },
 }
