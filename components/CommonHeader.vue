@@ -1,7 +1,7 @@
 <template>
   <div class="header-nav" :class="{ fixed: type === 'fixed' }">
     <h1>
-      <nuxt-link to="/"><img src="@/assets/images/logo.png" width="150" /></nuxt-link>
+      <nuxt-link to="/"><img src="@/assets/images/logo.svg" width="150" /></nuxt-link>
     </h1>
     <nav class="header-nav-li">
       <ul>
@@ -70,7 +70,6 @@ export default class CommonHeader extends Vue {
       align-items: center;
     }
     li {
-      color: $color-black;
       font-size: 14px;
       font-weight: bold;
       margin-left: 24px;

@@ -9,15 +9,17 @@
       <!--        <category :items="note" />-->
       <!--      </div>-->
     </div>
+    <common-footer />
   </section>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
 import Category from '~/components/Category.vue'
+import CommonFooter from "~/components/CommonFooter.vue";
 
 @Component({
-  components: { Category },
+  components: {CommonFooter, Category },
 })
 export default class extends Vue {
   note: any[] = []
