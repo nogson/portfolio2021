@@ -1,14 +1,16 @@
 <template>
   <div class="header-nav" :class="{ fixed: type === 'fixed' }">
     <h1>
-      <nuxt-link to="/"><img src="@/assets/images/logo.svg" width="150" /></nuxt-link>
+      <nuxt-link to="/"
+        ><img src="@/assets/images/logo.svg" width="150"
+      /></nuxt-link>
     </h1>
     <nav class="header-nav-li">
       <ul>
         <li @click="changeType('portfolio')">Portfolio</li>
         <li @click="changeType('note')">Note</li>
         <li><nuxt-link to="/about">About</nuxt-link></li>
-        <li><nuxt-link to="/contact">Contact</nuxt-link></li>
+        <li><a href="https://forms.gle/6woK2MTC8s94QBid7">Contact</a></li>
       </ul>
     </nav>
     <!--      <div class="sub-nav">-->
@@ -26,7 +28,7 @@ export default class CommonHeader extends Vue {
   type!: String
 
   changeType(type: string) {
-    this.$nuxt.$emit('changeType', type)
+    this.$router.push({ path: '/', query: { type } })
   }
 }
 </script>
