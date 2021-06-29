@@ -1,17 +1,9 @@
 <template>
   <section class="content">
     <div class="content-head">
-<!--      <div class="top-image">-->
-<!--        <img-->
-<!--          width="100%"-->
-<!--          :src="require(`~/content/note/images/${note.top_image}`)"-->
-<!--          :alt="note.title"-->
-<!--        />-->
-<!--      </div>-->
       <h1 class="title-main">{{ note.title }}</h1>
       <p class="create-at">{{ formatDateToString(note.created_at) }}</p>
     </div>
-
     <nuxt-content :document="note" />
   </section>
 </template>
@@ -21,6 +13,7 @@ import { Component, Vue } from 'nuxt-property-decorator'
 import moment from 'moment'
 
 @Component({
+  layout: 'content',
   components: {},
   async asyncData({ $content, params }) {
     // URIから変数を取得 /note/{_slug}
@@ -28,6 +21,8 @@ import moment from 'moment'
     return {
       // content/note/{_slug}.mdのマークダウンを取得
       note: await $content('note/' + slug).fetch(),
+      notes: await $content('note').sortBy('create_at', 'desc').fetch(),
+      category: await $content('note').only(['category']).fetch(),
     }
   },
 })
@@ -40,8 +35,11 @@ export default class Slug extends Vue {
     }
   }
 
-  get helloWorld(): string {
-    return 'Hello world!'
+  created() {
+    this.$nuxt.$emit(
+      'updateContent',
+      this.category.map((d) => d.category)
+    )
   }
 
   formatDateToString(date: string): string {

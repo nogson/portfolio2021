@@ -1,26 +1,32 @@
 <template>
   <section>
-    <h1>{{ this.slug }}</h1>
+    <h1 class="title-main">{{ slug }}</h1>
+    <div v-for="item in content" :key="item.slug" class="item-row">
+      <item-row :item="item" />
+    </div>
   </section>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
+import ItemRow from '~/components/ItemRow.vue'
 
 @Component({
-  components: {},
+  layout: 'content',
+  components: { ItemRow },
   async asyncData({ $content, params }) {
-    // URIから変数を取得 /note/{_slug}
     const slug = params.slug
     return {
       slug,
-      note: await $content('note').sortBy('create_at', 'desc').fetch(),
+      note: await $content('note')
+        .where({ category: slug })
+        .sortBy('create_at', 'desc')
+        .fetch(),
+      category: await $content('note').only(['category']).fetch(),
     }
   },
 })
 export default class Category extends Vue {
-  slug: any = null
-  note: any = null
   head() {
     return {
       title: this.slug,
@@ -29,9 +35,21 @@ export default class Category extends Vue {
   }
 
   created() {
-    this.$nuxt.$emit('updateContent', this.note)
+    this.$nuxt.$emit(
+      'updateContent',
+      this.category.map((d) => d.category)
+    )
+  }
+
+  get content() {
+    console.log(this.note)
+    return this.note.filter((d) => d.category.includes(this.slug))
   }
 }
 </script>
 
-<style scoped></style>
+<style lang="scss" scoped>
+.item-row {
+  margin-top: 32px;
+}
+</style>
