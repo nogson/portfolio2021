@@ -27,6 +27,9 @@ import ItemRow from '~/components/ItemRow.vue'
   },
 })
 export default class Category extends Vue {
+  slug!: any
+  category!: any
+  note!: any
   head() {
     return {
       title: this.slug,
@@ -37,13 +40,12 @@ export default class Category extends Vue {
   created() {
     this.$nuxt.$emit(
       'updateContent',
-      this.category.map((d) => d.category)
+      this.category.map((d: any) => d.category)
     )
   }
 
   get content() {
-    console.log(this.note)
-    return this.note.filter((d) => d.category.includes(this.slug))
+    return this.note.filter((d: any) => d.category.includes(this.slug))
   }
 }
 </script>
