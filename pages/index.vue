@@ -34,6 +34,10 @@
         :card-style="cardStyle(index)"
       />
     </div>
+    <div class="move-icon">
+      <img class="move-icon-hand" src="~/assets/images/icon_move_hand.svg" />
+      <img class="move-icon-arrow" src="~/assets/images/icon_move_arrow.svg" />
+    </div>
   </div>
 </template>
 
@@ -233,6 +237,28 @@ export default class Index extends Vue {
     &.drag {
       cursor: grabbing;
     }
+  }
+}
+
+.move-icon {
+  position: absolute;
+  left: calc(50% - 50px);
+  top: calc(50% - 50px);
+  width: 100px;
+  height: 100px;
+  background: rgba(#000, 0.6);
+  border-radius: 10px;
+  .move-icon-hand {
+    position: absolute;
+    left: 45px;
+    top: 25px;
+    width: 40px;
+  }
+  .move-icon-arrow {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    width: 35px;
   }
 }
 </style>
