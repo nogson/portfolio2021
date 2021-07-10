@@ -34,8 +34,8 @@
         :card-style="cardStyle(index)"
       />
     </div>
-    <div class="move-icon">
-      <img class="move-icon-hand" src="~/assets/images/icon_move_hand.svg" />
+    <div ref="touchGesture" class="move-icon">
+      <img class="move-icon-hand" src="~/assets/images/icon_move_hand_1.svg" />
       <img class="move-icon-arrow" src="~/assets/images/icon_move_arrow.svg" />
     </div>
   </div>
@@ -94,6 +94,8 @@ export default class Index extends Vue {
     const x = (document.body.offsetWidth - this.cardWrapScrollBoxWidth) / 2
     const y = (document.body.offsetHeight - this.cardWrapScrollBoxHeight) / 2
 
+    this.showTouchGesture()
+
     if (this.$route.query.translateX) {
       this.$nextTick(() => {
         gsap.to(this.$refs.cardWrapScrollBox, {
@@ -119,11 +121,25 @@ export default class Index extends Vue {
           duration: 1.5,
           delay: 1,
           opacity: 1,
-        }
+        },
       )
     }
 
     // requestAnimationFrame(this.loop)
+  }
+
+  showTouchGesture() {
+    gsap.fromTo(
+      this.$refs.touchGesture,
+      {
+        opacity: 0,
+      },
+      {
+        delay: 2,
+        duration: 1,
+        opacity: 1,
+      }
+    )
   }
 
   changeType(type: string) {
@@ -241,6 +257,7 @@ export default class Index extends Vue {
 }
 
 .move-icon {
+  opacity: 0;
   position: absolute;
   left: calc(50% - 50px);
   top: calc(50% - 50px);
@@ -250,9 +267,9 @@ export default class Index extends Vue {
   border-radius: 10px;
   .move-icon-hand {
     position: absolute;
-    left: 45px;
-    top: 25px;
-    width: 40px;
+    left: 35px;
+    top: 35px;
+    width: 55px;
   }
   .move-icon-arrow {
     position: absolute;
