@@ -34,6 +34,7 @@
         :card-style="cardStyle(index)"
       />
     </div>
+    <content-list-menu :note="note" :portfolio="portfolio" />
     <div ref="touchGesture" class="move-icon">
       <img class="move-icon-hand" src="~/assets/images/icon_move_hand_1.svg" />
       <img class="move-icon-arrow" src="~/assets/images/icon_move_arrow.svg" />
@@ -48,12 +49,13 @@ import ScrollItems from '~/components/ScrollItems.vue'
 import Card from '~/components/Card.vue'
 import DynamicImage from '~/components/DynamicImage.vue'
 import TopParts from '~/components/TopParts.vue'
+import ContentListMenu from '~/components/ContentListMenu.vue'
 
 const rowLength = 4
 
 @Component({
   layout: 'top',
-  components: { TopParts, DynamicImage, Card, ScrollItems },
+  components: { ContentListMenu, TopParts, DynamicImage, Card, ScrollItems },
   async asyncData({ $content }) {
     return {
       note: await $content('note').sortBy('create_at', 'desc').fetch(),
@@ -65,8 +67,6 @@ export default class Index extends Vue {
   portfolio!: any[]
   note!: any[]
   cardWrapStyle: any = null
-  cursorX!: number
-  cursorY!: number
   startX!: number
   startY!: number
   translateX: number = 0
@@ -91,10 +91,14 @@ export default class Index extends Vue {
       width: document.body.offsetWidth + 'px',
       height: document.body.offsetHeight + 'px',
     }
+
+    this.moveCardWrapScrollBox()
+    this.showTouchGesture()
+  }
+
+  moveCardWrapScrollBox() {
     const x = (document.body.offsetWidth - this.cardWrapScrollBoxWidth) / 2
     const y = (document.body.offsetHeight - this.cardWrapScrollBoxHeight) / 2
-
-    this.showTouchGesture()
 
     if (this.$route.query.translateX) {
       this.$nextTick(() => {
@@ -103,6 +107,13 @@ export default class Index extends Vue {
           y: Number(this.$route.query.translateY),
           opacity: 1,
           duration: 0,
+        })
+
+        this.$router.replace({
+          path: '/',
+          query: {
+            type: this.$route.query.type,
+          },
         })
       })
     } else {
@@ -124,8 +135,6 @@ export default class Index extends Vue {
         }
       )
     }
-
-    // requestAnimationFrame(this.loop)
   }
 
   showTouchGesture() {
@@ -134,31 +143,19 @@ export default class Index extends Vue {
     })
 
     // アニメーションを実行
-    tl.from('.box', {
-        opacity: 0,
+    tl.from(this.$refs.touchGesture, {
+      opacity: 0,
     })
       .to(this.$refs.touchGesture, {
-          delay: 2,
-          duration: 1,
-          opacity: 1,
-      })
-      .to('.box', {
-          delay: 2,
-          duration: 1,
-          opacity: 0
-      })
-
-    gsap.fromTo(
-      this.$refs.touchGesture,
-      {
-        opacity: 0,
-      },
-      {
         delay: 2,
         duration: 1,
         opacity: 1,
-      }
-    )
+      })
+      .to(this.$refs.touchGesture, {
+        delay: 2,
+        duration: 1,
+        opacity: 0,
+      })
   }
 
   changeType(type: string) {

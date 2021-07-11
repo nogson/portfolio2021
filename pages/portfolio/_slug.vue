@@ -9,7 +9,9 @@
         />
       </div>
       <h1 class="title-main">{{ portfolio.title }}</h1>
-      <p class="create-at" v-if="portfolio.created_at">{{ formatDateToString(portfolio.created_at) }}</p>
+      <p v-if="portfolio.created_at" class="create-at">
+        {{ formatDateToString(portfolio.created_at) }}
+      </p>
     </div>
 
     <nuxt-content :document="portfolio" />
