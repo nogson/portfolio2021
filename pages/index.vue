@@ -121,7 +121,7 @@ export default class Index extends Vue {
           duration: 1.5,
           delay: 1,
           opacity: 1,
-        },
+        }
       )
     }
 
@@ -129,6 +129,25 @@ export default class Index extends Vue {
   }
 
   showTouchGesture() {
+    const tl = gsap.timeline({
+      defaults: { duration: 0.5, ease: 'power4.out' },
+    })
+
+    // アニメーションを実行
+    tl.from('.box', {
+        opacity: 0,
+    })
+      .to(this.$refs.touchGesture, {
+          delay: 2,
+          duration: 1,
+          opacity: 1,
+      })
+      .to('.box', {
+          delay: 2,
+          duration: 1,
+          opacity: 0
+      })
+
     gsap.fromTo(
       this.$refs.touchGesture,
       {
