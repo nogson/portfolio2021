@@ -4,6 +4,7 @@
     <div class="main">
       <Nuxt />
     </div>
+    <content-list-menu :contents="contents" />
   </section>
 </template>
 
@@ -16,13 +17,13 @@ import CommonHeader from '~/components/CommonHeader.vue'
   components: { CommonHeader, Category },
 })
 export default class extends Vue {
-  note: any[] = []
+  contents: any = null
   created() {
     this.$nuxt.$on('updateContent', this.updateContent)
   }
 
-  updateContent(data: any[]) {
-    this.note = data
+  updateContent(contents: any) {
+    this.contents = contents
   }
 }
 </script>

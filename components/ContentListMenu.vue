@@ -15,14 +15,32 @@
         ref="contentListWrap"
         class="content-list-wrap"
       >
-        <ul>
-          <li v-for="item in portfolio" :key="item.id">
-            <dl>
-              <dt>{{ item.title }}</dt>
-              <dd>{{ item.description }}</dd>
-            </dl>
-          </li>
-        </ul>
+        <nav class="nav">
+          <ul>
+            <li
+              :class="{ act: displayContentType === 'portfolio' }"
+              @click="changeContent('portfolio')"
+            >
+              Portfolio
+            </li>
+            <li
+              :class="{ act: displayContentType === 'note' }"
+              @click="changeContent('note')"
+            >
+              Note
+            </li>
+            <li class="close-button">バル</li>
+          </ul>
+        </nav>
+        <dl
+          v-for="item in contents[displayContentType]"
+          :key="item.slug"
+          class="content-row"
+          @click="showContent(item.path)"
+        >
+          <dt>{{ item.title }}</dt>
+          <dd>{{ item.description }}</dd>
+        </dl>
       </div>
     </transition>
   </div>
@@ -30,30 +48,25 @@
 
 <script lang="ts">
 import { Component, Vue, Prop } from 'nuxt-property-decorator'
-import { gsap } from 'gsap'
 
 @Component({})
 export default class ContentListMenu extends Vue {
   isShowContentListWrap: boolean = false
+  displayContentType: string = 'portfolio'
 
-  @Prop({ type: Array })
-  note!: any[]
-
-  @Prop({ type: Array })
-  portfolio!: any[]
+  @Prop({ type: Object })
+  contents!: any
 
   toggleContentList() {
     this.isShowContentListWrap = !this.isShowContentListWrap
-    // gsap.fromTo(
-    //   this.$refs.contentListWrap,
-    //   {
-    //     opacity: 0,
-    //   },
-    //   {
-    //     duration: 1,
-    //     opacity: 1,
-    //   }
-    // )
+  }
+
+  showContent(path: string) {
+    this.$router.push(path)
+  }
+
+  changeContent(type: string) {
+    this.displayContentType = type
   }
 }
 </script>
@@ -80,8 +93,28 @@ export default class ContentListMenu extends Vue {
   cursor: pointer;
 }
 
+.nav {
+  padding: 24px;
+  ul {
+    display: flex;
+    li {
+      margin-right: 24px;
+      font-weight: bold;
+      cursor: pointer;
+      &.act {
+        padding-bottom: 4px;
+        border-bottom: 2px solid #fff;
+      }
+    }
+    .close-button {
+      margin-left: auto;
+    }
+  }
+}
+
 .content-list-wrap {
   position: absolute;
+  z-index: 300;
   top: 0;
   left: 0;
   bottom: 0;
@@ -89,14 +122,33 @@ export default class ContentListMenu extends Vue {
   background: rgba(#000, 0.9);
   overflow: scroll;
   padding: 32px;
-  color: #FFF;
+  color: #fff;
 }
 
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.5s;
 }
+
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
   opacity: 0;
+}
+
+.content-row {
+  margin-bottom: 24px;
+  border-bottom: 1px solid rgba(#fff, 0.1);
+  padding: 24px;
+  cursor: pointer;
+
+  dt {
+    font-size: 20px;
+    font-weight: bold;
+    color: #fff;
+  }
+
+  dd {
+    font-size: 14px;
+    color: rgba(#fff, 0.5);
+  }
 }
 </style>

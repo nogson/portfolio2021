@@ -34,7 +34,6 @@
         :card-style="cardStyle(index)"
       />
     </div>
-    <content-list-menu :note="note" :portfolio="portfolio" />
     <div ref="touchGesture" class="move-icon">
       <img class="move-icon-hand" src="~/assets/images/icon_move_hand_1.svg" />
       <img class="move-icon-arrow" src="~/assets/images/icon_move_arrow.svg" />
@@ -82,7 +81,10 @@ export default class Index extends Vue {
   }
 
   created() {
-    this.$nuxt.$emit('updateContent', this.note)
+    this.$nuxt.$emit('updateContent', {
+      portfolio: this.portfolio,
+      note: this.note,
+    })
     this.$nuxt.$on('changeType', (type: string) => this.changeType(type))
   }
 
