@@ -16,8 +16,11 @@
         class="content-list-wrap"
       >
         <ul>
-          <li v-for="item in portfolio">
-            {{ item.title }}
+          <li v-for="item in portfolio" :key="item.id">
+            <dl>
+              <dt>{{ item.title }}</dt>
+              <dd>{{ item.description }}</dd>
+            </dl>
           </li>
         </ul>
       </div>
@@ -62,7 +65,7 @@ export default class ContentListMenu extends Vue {
   left: 0;
   bottom: 0;
   right: 0;
-  z-index: 10;
+  z-index: 200;
 }
 
 .menu-button {
@@ -86,6 +89,7 @@ export default class ContentListMenu extends Vue {
   background: rgba(#000, 0.9);
   overflow: scroll;
   padding: 32px;
+  color: #FFF;
 }
 
 .fade-enter-active,
