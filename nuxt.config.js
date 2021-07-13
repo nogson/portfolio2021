@@ -26,6 +26,7 @@ export default {
     '@/assets/scss/normal.scss',
     '@/assets/scss/common.scss',
     '@/assets/scss/nuxt_content.scss',
+    '@mdi/font/css/materialdesignicons.css'
   ],
   styleResources: {
     scss: ['@/assets/scss/variables.scss'],

@@ -29,7 +29,7 @@
             >
               Note
             </li>
-            <li class="close-button">バル</li>
+            <li class="close-button" @click="toggleContentList"><i class="mdi mdi-close" /></li>
           </ul>
         </nav>
         <dl
@@ -108,6 +108,12 @@ export default class ContentListMenu extends Vue {
     }
     .close-button {
       margin-left: auto;
+      font-size: 24px;
+      width: 44px;
+      height: 44px;
+      line-height: 44px;
+      text-align: center;
+      cursor: pointer;
     }
   }
 }
