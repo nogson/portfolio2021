@@ -4,7 +4,7 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'Fumihiko Sato Portfolio',
+    title: 'Satofactoin.net | Fumihiko Sato Portfolio',
     htmlAttrs: {
       lang: 'ja',
     },
