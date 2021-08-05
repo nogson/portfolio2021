@@ -70,12 +70,21 @@ export default class extends Vue {
   width: 620px;
   margin: 0 48px;
   min-height: 100vh;
+  @include md() {
+    width: 100%;
+    padding: 0 32px;
+    margin: 0;
+    box-sizing: border-box;
+  }
 }
 
 .side-nav {
   h2 {
     font-size: 16px;
     margin-top: 16px;
+  }
+  @include md() {
+    display: none;
   }
 }
 .category {

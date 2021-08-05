@@ -43,4 +43,11 @@ export default class extends Vue {
   margin: 32px auto;
   min-height: 100vh;
 }
+.main {
+  @include sm() {
+    width: 100%;
+    padding: 0 32px;
+    box-sizing: border-box;
+  }
+}
 </style>

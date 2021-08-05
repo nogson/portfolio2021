@@ -8,7 +8,7 @@
     <nav class="header-nav-li">
       <ul>
         <li @click="changeType('portfolio')">Portfolio</li>
-        <li @click="changeType('note')">Note</li>
+        <li @click="changeType('note')">Blog</li>
         <li><nuxt-link to="/about">About</nuxt-link></li>
         <li><a href="https://forms.gle/6woK2MTC8s94QBid7">Contact</a></li>
       </ul>

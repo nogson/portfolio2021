@@ -26,10 +26,10 @@ export default {
     '@/assets/scss/normal.scss',
     '@/assets/scss/common.scss',
     '@/assets/scss/nuxt_content.scss',
-    '@mdi/font/css/materialdesignicons.css'
+    '@mdi/font/css/materialdesignicons.css',
   ],
   styleResources: {
-    scss: ['@/assets/scss/variables.scss'],
+    scss: ['@/assets/scss/variables.scss', '@/assets/scss/mixin.scss'],
   },
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [],

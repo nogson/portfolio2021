@@ -27,7 +27,7 @@
               :class="{ act: displayContentType === 'note' }"
               @click="changeContent('note')"
             >
-              Note
+              Blog
             </li>
             <li class="close-button" @click="toggleContentList"><i class="mdi mdi-close" /></li>
           </ul>
