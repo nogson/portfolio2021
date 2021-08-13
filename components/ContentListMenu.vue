@@ -29,7 +29,9 @@
             >
               Blog
             </li>
-            <li class="close-button" @click="toggleContentList"><i class="mdi mdi-close" /></li>
+            <li class="close-button" @click="toggleContentList">
+              <i class="mdi mdi-close" />
+            </li>
           </ul>
         </nav>
         <dl

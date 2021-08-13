@@ -5,6 +5,9 @@
         ><img src="@/assets/images/logo.svg" width="150"
       /></nuxt-link>
     </h1>
+    <button class="header-nav-button">
+      <i class="mdi mdi-menu" />
+    </button>
     <nav class="header-nav-li">
       <ul>
         <li @click="changeType('portfolio')">Portfolio</li>
@@ -76,6 +79,27 @@ export default class CommonHeader extends Vue {
       font-weight: bold;
       margin-left: 24px;
       cursor: pointer;
+    }
+    @include sm() {
+      display: none;
+    }
+  }
+
+  .header-nav-button {
+    display: none;
+    @include sm() {
+      display: block;
+      margin-left: auto;
+      border: none;
+      background: none;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      i {
+        font-size: 24px;
+        line-height: 1;
+      }
     }
   }
 }
