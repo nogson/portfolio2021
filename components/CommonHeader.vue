@@ -5,10 +5,11 @@
         ><img src="@/assets/images/logo.svg" width="150"
       /></nuxt-link>
     </h1>
-    <button class="header-nav-button">
-      <i class="mdi mdi-menu" />
-    </button>
-    <nav class="header-nav-li">
+    <div class="header-nav-button" @click="toggleNav">
+      <hamburger-menu :active="isOpen" />
+    </div>
+
+    <nav ref="headerNavList" class="header-nav-li" :class="{ open: isOpen }">
       <ul>
         <li @click="changeType('portfolio')">Portfolio</li>
         <li @click="changeType('note')">Blog</li>
@@ -24,14 +25,39 @@
 
 <script lang="ts">
 import { Component, Vue, Prop } from 'nuxt-property-decorator'
+import { gsap } from 'gsap'
+import HamburgerMenu from '~/components/HamburgerMenu.vue'
 
-@Component({})
+@Component({
+  components: { HamburgerMenu },
+})
 export default class CommonHeader extends Vue {
+  isOpen: Boolean = false
+
   @Prop({ type: String })
   type!: String
 
   changeType(type: string) {
     this.$router.push({ path: '/', query: { type } })
+    this.isOpen = false
+  }
+
+  toggleNav() {
+    if (!this.isOpen) {
+      this.isOpen = true
+      gsap.to(this.$refs.headerNavList, {
+        opacity: 1,
+        duration: 0.25,
+      })
+    } else {
+      gsap.to(this.$refs.headerNavList, {
+        opacity: 0,
+        duration: 0.25,
+        onComplete: () => {
+          this.isOpen = false
+        },
+      })
+    }
   }
 }
 </script>
@@ -82,14 +108,40 @@ export default class CommonHeader extends Vue {
     }
     @include sm() {
       display: none;
+      opacity: 0;
+      &.open {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        background: rgba(#fff, 0.9);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        ul {
+          display: block;
+        }
+
+        li {
+          margin-left: 0;
+          font-size: 18px;
+          &:not(:last-child) {
+            margin-bottom: 16px;
+          }
+        }
+      }
     }
   }
 
   .header-nav-button {
     display: none;
     @include sm() {
+      position: absolute;
+      z-index: 10;
+      top: 16px;
+      right: 24px;
       display: block;
-      margin-left: auto;
       border: none;
       background: none;
       padding: 0;
