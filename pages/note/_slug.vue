@@ -29,6 +29,7 @@ import moment from 'moment'
 export default class Slug extends Vue {
   note: any = null
   category: any = null
+  //
   head() {
     return {
       title: this.note.title,
