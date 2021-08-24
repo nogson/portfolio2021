@@ -68,3 +68,24 @@ a:visited{
   color : $color-black;
   text-decoration: none;
 }
+
+.content {
+  a:link,
+  a:visited {
+    text-decoration: underline;
+    color: $color-portfolio;
+  }
+}
+
+blockquote,
+.embed a{
+  display: block;
+  margin: 24px 0;
+  padding: 1em;
+  border-left: 6px solid $color-gray-dark3;
+  color: $color-gray-dark3;
+}
+
+blockquote > *{
+  color: $color-gray-dark3;
+}

@@ -28,6 +28,7 @@ import moment from 'moment'
 })
 export default class Slug extends Vue {
   note: any = null
+  notes: any = null
   category: any = null
   //
   head() {
@@ -39,7 +40,8 @@ export default class Slug extends Vue {
 
   created() {
     const category = this.category.map((d: any) => d.category)
-    this.$nuxt.$emit('updateContent', category)
+    const notes = this.notes
+    this.$nuxt.$emit('updateContent', { notes, category })
   }
 
   formatDateToString(date: string): string {

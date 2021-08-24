@@ -18,6 +18,18 @@
             </li>
           </ul>
         </nav>
+        <h2>新規記事</h2>
+        <nav>
+          <ul class="category">
+            <li
+              v-for="item in notesData"
+              :key="item.slug"
+              @click="showDetailPage(item)"
+            >
+              {{ item.title }}
+            </li>
+          </ul>
+        </nav>
       </div>
     </div>
     <common-footer />
@@ -34,19 +46,26 @@ import CommonFooter from '~/components/CommonFooter.vue'
 })
 export default class extends Vue {
   categoryData: string[] = []
+  notesData: any[] = []
 
   created() {
     this.$nuxt.$on('updateContent', this.updateContent)
   }
 
-  updateContent(data: string[]) {
-    this.categoryData = data
+  updateContent(data: any) {
+    console.log(data)
+    this.categoryData = data.category
+    this.notesData = data.notes
   }
 
   showCategoryPage(category: string) {
     this.$router.push({
       path: `/category/${category}`,
     })
+  }
+
+  showDetailPage(item: any) {
+    this.$router.push(item.path)
   }
 
   get category() {
@@ -79,9 +98,13 @@ export default class extends Vue {
 }
 
 .side-nav {
+  width: 200px;
   h2 {
     font-size: 16px;
     margin-top: 16px;
+  }
+  nav {
+    margin-bottom: 40px;
   }
   @include md() {
     display: none;
@@ -90,7 +113,7 @@ export default class extends Vue {
 .category {
   li {
     margin-top: 16px;
-    font-size: 14px;
+    font-size: 12px;
     cursor: pointer;
   }
 }
