@@ -1,10 +1,6 @@
 <template>
-  <div class="header-nav" :class="{ fixed: type === 'fixed' }">
-    <h1>
-      <nuxt-link to="/"
-        ><img src="@/assets/images/logo.svg" width="150"
-      /></nuxt-link>
-    </h1>
+  <div :class="`header-nav ${type}`">
+    <logo :type="type" />
     <div class="header-nav-button" @click="toggleNav">
       <hamburger-menu :active="isOpen" />
     </div>
@@ -27,9 +23,10 @@
 import { Component, Vue, Prop } from 'nuxt-property-decorator'
 import { gsap } from 'gsap'
 import HamburgerMenu from '~/components/HamburgerMenu.vue'
+import Logo from '~/components/Logo.vue'
 
 @Component({
-  components: { HamburgerMenu },
+  components: { Logo, HamburgerMenu },
 })
 export default class CommonHeader extends Vue {
   isOpen: Boolean = false
@@ -63,6 +60,19 @@ export default class CommonHeader extends Vue {
 </script>
 
 <style scoped lang="scss">
+.top {
+  .header-nav {
+    position: fixed;
+    background: none;
+    box-shadow: none;
+
+    a,
+    a:link,
+    li {
+      color: $color-gray-dark4;
+    }
+  }
+}
 .header-nav {
   position: sticky;
   top: 0px;
@@ -82,13 +92,6 @@ export default class CommonHeader extends Vue {
     box-shadow: none;
   }
 
-  h1 {
-    font-size: 16px;
-    font-weight: bold;
-    a {
-      text-decoration: none;
-    }
-  }
   h2 {
     font-size: 12px;
     font-weight: normal;

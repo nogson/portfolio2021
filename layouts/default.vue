@@ -36,7 +36,7 @@ export default class extends Vue {
 
 <style scoped lang="scss">
 .wrapper {
-  background-image: url('~@/assets/images/bg.png');
+  //background-image: url('~@/assets/images/bg.png');
 }
 .container {
   max-width: 620px;

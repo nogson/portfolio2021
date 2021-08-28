@@ -23,6 +23,10 @@ export default {
     width: {
       type: String,
     },
+    useBorder: {
+      type: Boolean,
+      default: true,
+    }
   },
 
   computed: {
@@ -30,16 +34,17 @@ export default {
       return require(`~/content/${this.path}`)
     },
     imgStyle() {
-      if (this.margin) {
-        return {
-          margin: this.margin,
-          width: this.width,
-        }
-      } else {
-        return {
-          width: this.width,
-        }
+      const style = {
+        width: this.width,
       }
+      if (this.margin) {
+        style.margin = this.margin
+      }
+      if (!this.useBorder) {
+        style.border = 'none'
+      }
+
+      return style
     },
   },
 }

@@ -1,44 +1,17 @@
 <template>
-  <div class="card-wrap" :style="cardWrapStyle">
+  <section class="wrapper">
     <div
-      ref="cardWrapScrollBox"
-      class="card-wrap-scroll-box"
-      :style="cardWrapScrollBoxStyle"
-      :class="{ drag: isDrag }"
-      @mousedown="scrollContent"
-      @mouseup="scrollContent"
-      @mousemove="scrollContent"
-      @mouseleave="scrollContent"
+      v-masonry
+      class="container"
+      transition-duration="0.3s"
+      item-selector=".card"
     >
-      <card
-        v-for="(item, index) in note"
-        :key="item.slug"
-        :ref="item.slug"
-        :item="item"
-        :is-drag="isDrag"
-        :translate-x="translateX"
-        :translate-y="translateY"
-        :is-show="isNote"
-        :card-style="cardStyle(index)"
-      />
-
-      <card
-        v-for="(item, index) in portfolio"
-        :key="item.slug"
-        :ref="item.slug"
-        :item="item"
-        :is-drag="isDrag"
-        :translate-x="translateX"
-        :translate-y="translateY"
-        :is-show="!isNote"
-        :card-style="cardStyle(index)"
-      />
+      <div v-for="item in items" :key="item.slug" v-masonry-tile class="card">
+        <p class="created-at">{{ item.created_at }}</p>
+        <p class="title">{{ item.title }}</p>
+      </div>
     </div>
-    <div ref="touchGesture" class="move-icon">
-      <img class="move-icon-hand" src="~/assets/images/icon_move_hand_1.svg" />
-      <img class="move-icon-arrow" src="~/assets/images/icon_move_arrow.svg" />
-    </div>
-  </div>
+  </section>
 </template>
 
 <script lang="ts">
@@ -49,8 +22,6 @@ import Card from '~/components/Card.vue'
 import DynamicImage from '~/components/DynamicImage.vue'
 import TopParts from '~/components/TopParts.vue'
 import ContentListMenu from '~/components/ContentListMenu.vue'
-
-const rowLength = 4
 
 @Component({
   layout: 'top',
@@ -86,214 +57,59 @@ export default class Index extends Vue {
       note: this.note,
     })
     this.$nuxt.$on('changeType', (type: string) => this.changeType(type))
+
+    setInterval(() => {})
   }
 
-  mounted() {
-    this.cardWrapStyle = {
-      width: document.body.offsetWidth + 'px',
-      height: document.body.offsetHeight + 'px',
-    }
-
-    this.moveCardWrapScrollBox()
-    this.showTouchGesture()
-  }
-
-  moveCardWrapScrollBox() {
-    const x = (document.body.offsetWidth - this.cardWrapScrollBoxWidth) / 2
-    const y = (document.body.offsetHeight - this.cardWrapScrollBoxHeight) / 2
-
-    if (this.$route.query.translateX) {
-      this.$nextTick(() => {
-        gsap.to(this.$refs.cardWrapScrollBox, {
-          x: Number(this.$route.query.translateX),
-          y: Number(this.$route.query.translateY),
-          opacity: 1,
-          duration: 0,
-        })
-
-        this.$router.replace({
-          path: '/',
-          query: {
-            type: this.$route.query.type,
-          },
-        })
-      })
-    } else {
-      gsap.fromTo(
-        this.$refs.cardWrapScrollBox,
-        {
-          x,
-          y,
-          scale: 0.5,
-          opacity: 0,
-        },
-        {
-          x,
-          y,
-          scale: 1,
-          duration: 1.5,
-          delay: 1,
-          opacity: 1,
-        }
-      )
-    }
-  }
-
-  showTouchGesture() {
-    const tl = gsap.timeline({
-      defaults: { duration: 0.5, ease: 'power4.out' },
-    })
-
-    // アニメーションを実行
-    tl.from(this.$refs.touchGesture, {
-      opacity: 0,
-    })
-      .to(this.$refs.touchGesture, {
-        delay: 2,
-        duration: 1,
-        opacity: 1,
-      })
-      .to(this.$refs.touchGesture, {
-        delay: 2,
-        duration: 1,
-        opacity: 0,
-      })
-  }
-
-  changeType(type: string) {
-    this.$router.push({ path: '/', query: { type } })
-  }
-
-  scrollContent(e: MouseEvent) {
-    if (!(e.target instanceof HTMLElement)) {
-      return
-    }
-
-    if (e.type === 'mousedown') {
-      if (e.target.className === 'card-wrap-scroll-box') {
-        this.isDrag = true
-        this.startX = e.offsetX
-        this.startY = e.offsetY
-      }
-    } else if (e.type === 'mouseup' || e.type === 'mouseleave') {
-      this.isDrag = false
-      this.startX = e.offsetX
-      this.startY = e.offsetY
-    } else if (e.type === 'mousemove' && this.isDrag) {
-      this.move(e)
-    }
-  }
-
-  // @Debounce(33)
-  move(e: MouseEvent) {
-    const cardWrapScrollBox = this.$refs.cardWrapScrollBox as HTMLCanvasElement
-    const transformValue = cardWrapScrollBox.style.transform.split(/[(),]/)
-    let xValue = Number(transformValue[1].replace('px', ''))
-    let yValue = Number(transformValue[2].replace('px', ''))
-    xValue += e.offsetX - this.startX
-    yValue += e.offsetY - this.startY
-
-    if (xValue >= 0) {
-      xValue = 0
-    } else if (
-      xValue <=
-      document.body.offsetWidth - this.cardWrapScrollBoxWidth
-    ) {
-      xValue = document.body.offsetWidth - this.cardWrapScrollBoxWidth
-    }
-
-    if (yValue >= 0) {
-      yValue = 0
-    } else if (
-      yValue <=
-      document.body.offsetHeight - this.cardWrapScrollBoxHeight
-    ) {
-      yValue = document.body.offsetHeight - this.cardWrapScrollBoxHeight
-    }
-
-    this.translateX = xValue
-    this.translateY = yValue
-    gsap.to(this.$refs.cardWrapScrollBox, {
-      x: xValue,
-      y: yValue,
-      duration: 0.75,
-      ease: 'Power1.easeOut',
-    })
-  }
-
-  get cardWrapScrollBoxHeight() {
-    const itemLength = this.isNote ? this.note.length : this.portfolio.length
-    return (Math.floor(itemLength / rowLength) + 1) * 400 * 1.5
-  }
-
-  get cardWrapScrollBoxWidth() {
-    return rowLength * 400 * 1.5
-  }
-
-  get cardWrapScrollBoxStyle() {
-    return {
-      transform: `translate3D(0px,0px,0)`,
-      height: this.cardWrapScrollBoxHeight + 'px',
-      width: this.cardWrapScrollBoxWidth + 'px',
-    }
-  }
-
-  get cardStyle() {
-    return (index: number) => {
-      return {
-        top: Math.floor(index / rowLength) * 400 + 200 + 'px',
-        left: (index % rowLength) * 400 + 400 + 'px',
-      }
-    }
-  }
-
-  get isNote() {
-    return this.$route.query.type === 'note'
+  get items() {
+    return [this.note, this.portfolio].flat()
   }
 }
 </script>
 
 <style scoped lang="scss">
-.card-wrap {
-  position: fixed;
-  top: 0;
-  left: 0;
-  overflow: hidden;
+.wrapper {
+  background: $color-black;
+  padding: 80px 0 24px;
+}
+.card {
+  font-weight: bold;
 
-  .card-wrap-scroll-box {
-    position: relative;
-    background-image: url('~@/assets/images/bg.png');
-    display: flex;
-    flex-wrap: wrap;
-    padding: 25%;
-    cursor: grab;
-    opacity: 0;
-    &.drag {
-      cursor: grabbing;
-    }
+  margin: 0.75em;
+  padding: 0.5em 0;
+  box-sizing: border-box;
+  writing-mode: vertical-rl;
+  background: linear-gradient(to left, transparent 80%, #e6a7ff 80%);
+  > * {
+    color: $color-gray-dark3;
+  }
+
+  .title {
+    font-size: 36px;
+    letter-spacing: 0.75em;
+  }
+
+  .created-at {
+    font-size: 20px;
   }
 }
-
-.move-icon {
-  opacity: 0;
-  position: absolute;
-  left: calc(50% - 50px);
-  top: calc(50% - 50px);
-  width: 100px;
-  height: 100px;
-  background: rgba(#000, 0.6);
-  border-radius: 10px;
-  .move-icon-hand {
-    position: absolute;
-    left: 35px;
-    top: 35px;
-    width: 55px;
-  }
-  .move-icon-arrow {
-    position: absolute;
-    left: 10px;
-    top: 10px;
-    width: 35px;
-  }
-}
+//.container {
+//  .card {
+//    position: relative;
+//    background: #fff;
+//    /* 正方形を作る */
+//    width: 250px;
+//    height: 220px;
+//    //background: #e61b8c;
+//
+//    overflow: hidden;
+//
+//    .card-inner {
+//      position: absolute;
+//      top: 50%;
+//      left: 50%;
+//      transform: translate(-50%, -50%);
+//    }
+//  }
+//}
 </style>

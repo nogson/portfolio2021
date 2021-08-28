@@ -1,6 +1,6 @@
 <template>
   <section class="container">
-    <common-header type="fixed" />
+    <common-header type="top" />
     <div class="main">
       <Nuxt />
     </div>
@@ -29,10 +29,6 @@ export default class extends Vue {
 </script>
 
 <style scoped lang="scss">
-.container {
-  padding: 48px 0;
-}
-
 .sub-nav {
   position: fixed;
   right: 24px;

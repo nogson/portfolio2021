@@ -3,6 +3,7 @@ id: DailyUI01
 title: Daily UI
 description: まだ道半ばですが、DailyUIの成果です。
 thumbnail: portfolio/images/dailyui/dailyui_thumb.png
+created_at: 2021-05-04
 order: 4
 ---
 

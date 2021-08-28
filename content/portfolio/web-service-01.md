@@ -3,6 +3,7 @@ id: web-service-01
 title: スキル交換サービス KOOKAN-KO
 description: 得意なことを教え合い、スキルアップを目指すマッチングサービスです。
 thumbnail: portfolio/images/web_service/kookan_ko_thumb.png
+created_at: 2021-05-04
 order: 6
 ---
 

@@ -31,3 +31,17 @@
     @content;
   }
 }
+
+//横中央に配置
+@mixin x_center {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+
+//縦中央に配置
+@mixin y_center {
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+}

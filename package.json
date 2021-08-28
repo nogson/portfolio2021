@@ -25,7 +25,8 @@
     "nuxt-webfontloader": "^1.1.0",
     "push-dir": "^0.4.1",
     "sass-loader": "10.1.0",
-    "three": "^0.128.0"
+    "three": "^0.128.0",
+    "vue-masonry": "^0.13.0"
   },
   "devDependencies": {
     "@nuxt/types": "^2.15.3",
