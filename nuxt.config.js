@@ -32,9 +32,7 @@ export default {
     scss: ['@/assets/scss/variables.scss', '@/assets/scss/mixin.scss'],
   },
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [
-    { src: '~/plugins/vue-masonry', ssr: false }
-  ],
+  plugins: [{ src: '~/plugins/vue-masonry', ssr: false }],
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
 
@@ -56,8 +54,11 @@ export default {
     'nuxt-webfontloader',
   ],
   webfontloader: {
-    google: {
-      families: ['Noto+Serif+JP', 'Kiwi+Maru'],
+    custom: {
+      families: ['Noto Sans JP'],
+      urls: [
+        'https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap',
+      ],
     },
   },
   // Axios module configuration: https://go.nuxtjs.dev/config-axios

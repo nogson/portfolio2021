@@ -22,6 +22,7 @@ export default class extends Vue {
     this.$nuxt.$on('updateContent', this.updateContent)
   }
 
+
   updateContent(contents: any) {
     this.contents = contents
   }

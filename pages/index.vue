@@ -6,8 +6,16 @@
       transition-duration="0.3s"
       item-selector=".card"
     >
-      <div v-for="item in items" :key="item.slug" v-masonry-tile class="card">
-        <p class="created-at">{{ item.created_at }}</p>
+      <div
+        v-for="item in items"
+        :key="item.slug"
+        v-masonry-tile
+        class="card"
+        :style="cardStyle()"
+      >
+        <p class="created-at">
+          {{ formatDateToString(item.created_at) }}
+        </p>
         <p class="title">{{ item.title }}</p>
       </div>
     </div>
@@ -17,6 +25,7 @@
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
 import { gsap } from 'gsap'
+import moment from 'moment'
 import ScrollItems from '~/components/ScrollItems.vue'
 import Card from '~/components/Card.vue'
 import DynamicImage from '~/components/DynamicImage.vue'
@@ -61,6 +70,23 @@ export default class Index extends Vue {
     setInterval(() => {})
   }
 
+  mounted() {
+    if (typeof this.$redrawVueMasonry === 'function') {
+      console.log('ok')
+      this.$redrawVueMasonry()
+    }
+  }
+
+  formatDateToString(date: string): string {
+    return moment(date).format('YYYY / MM / DD')
+  }
+
+  cardStyle() {
+    return {
+      fontSize: Math.floor(Math.random() * 50) +18 + 'px',
+    }
+  }
+
   get items() {
     return [this.note, this.portfolio].flat()
   }
@@ -74,23 +100,22 @@ export default class Index extends Vue {
 }
 .card {
   font-weight: bold;
-
-  margin: 0.75em;
+  margin: 24px;
   padding: 0.5em 0;
   box-sizing: border-box;
   writing-mode: vertical-rl;
-  background: linear-gradient(to left, transparent 80%, #e6a7ff 80%);
+  //background: linear-gradient(to left, transparent 80%, #e6a7ff 80%);
   > * {
     color: $color-gray-dark3;
   }
 
   .title {
-    font-size: 36px;
+    font-size: 1em;
     letter-spacing: 0.75em;
   }
 
   .created-at {
-    font-size: 20px;
+    font-size: 0.7em;
   }
 }
 //.container {

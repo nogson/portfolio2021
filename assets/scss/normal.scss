@@ -49,6 +49,10 @@ input, button, textarea, select {
 }
 
 /* add */
+body {
+  font-family: 'Noto Sans JP', sans-serif;
+}
+
 body.top {
   .container {
     height: 100vh;
