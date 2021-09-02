@@ -32,7 +32,10 @@ export default {
     scss: ['@/assets/scss/variables.scss', '@/assets/scss/mixin.scss'],
   },
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [{ src: '~/plugins/vue-masonry', ssr: false }],
+  plugins: [
+    { src: '~/plugins/vue-masonry', ssr: false },
+    // { src: '~/plugins/pixi', ssr: false },
+  ],
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
 

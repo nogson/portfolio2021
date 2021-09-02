@@ -61,7 +61,6 @@ export default class Slug extends Vue {
   margin-bottom: 24px;
 }
 .create-at {
-  color: $color-gray-dark2;
   font-size: 12px;
 }
 </style>

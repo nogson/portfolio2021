@@ -6,17 +6,21 @@
       transition-duration="0.3s"
       item-selector=".card"
     >
-      <div
-        v-for="item in items"
-        :key="item.slug"
-        v-masonry-tile
-        class="card"
-        :style="cardStyle()"
-      >
-        <p class="created-at">
-          {{ formatDateToString(item.created_at) }}
-        </p>
-        <p class="title">{{ item.title }}</p>
+      <div v-for="item in items" :key="item.slug" v-masonry-tile class="card">
+        <nuxt-link :to="item.path">
+          <dynamic-image
+            class="img"
+            :path="item.thumbnail"
+            :alt="item.title"
+            :use-filter="true"
+            margin="0 0 16px 0"
+          />
+          <p class="created-at">
+            {{ formatDateToString(item.created_at) }}
+          </p>
+          <p class="title">{{ item.title }}</p>
+          <p class="description">{{ item.description }}</p>
+        </nuxt-link>
       </div>
     </div>
   </section>
@@ -24,7 +28,8 @@
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
-import { gsap } from 'gsap'
+
+// import { gsap } from 'gsap'
 import moment from 'moment'
 import ScrollItems from '~/components/ScrollItems.vue'
 import Card from '~/components/Card.vue'
@@ -61,20 +66,21 @@ export default class Index extends Vue {
   }
 
   created() {
+    console.log('kk')
     this.$nuxt.$emit('updateContent', {
       portfolio: this.portfolio,
       note: this.note,
     })
-    this.$nuxt.$on('changeType', (type: string) => this.changeType(type))
+    // this.$nuxt.$on('changeType', (type: string) => this.changeType(type))
 
     setInterval(() => {})
   }
 
   mounted() {
-    if (typeof this.$redrawVueMasonry === 'function') {
-      console.log('ok')
-      this.$redrawVueMasonry()
-    }
+    // if (typeof this.$redrawVueMasonry === 'function') {
+    //   console.log('ok')
+    //   this.$redrawVueMasonry()
+    // }
   }
 
   formatDateToString(date: string): string {
@@ -83,7 +89,7 @@ export default class Index extends Vue {
 
   cardStyle() {
     return {
-      fontSize: Math.floor(Math.random() * 50) +18 + 'px',
+      width: Math.floor(Math.random() * 20) + 10 + '%',
     }
   }
 
@@ -95,26 +101,34 @@ export default class Index extends Vue {
 
 <style scoped lang="scss">
 .wrapper {
-  background: $color-black;
-  padding: 80px 0 24px;
+  padding: 24px 32px;
 }
 .card {
-  font-weight: bold;
-  margin: 24px;
-  padding: 0.5em 0;
+  padding: 0 24px;
   box-sizing: border-box;
-  writing-mode: vertical-rl;
+  //writing-mode: vertical-rl;
   //background: linear-gradient(to left, transparent 80%, #e6a7ff 80%);
-  > * {
-    color: $color-gray-dark3;
+  width: calc((100%) / 4);
+  margin-bottom: 32px;
+  box-sizing: border-box;
+
+  .img {
+    border: 4px solid $color-secondly;
   }
 
   .title {
+    font-weight: bold;
     font-size: 1em;
-    letter-spacing: 0.75em;
+    color: $color-link;
+  }
+
+  .description {
+    color: $color-gray-dark3;
+    font-size: 0.7em;
   }
 
   .created-at {
+    color: $color-gray-dark3;
     font-size: 0.7em;
   }
 }

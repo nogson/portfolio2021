@@ -7,8 +7,6 @@
 
     <nav ref="headerNavList" class="header-nav-li" :class="{ open: isOpen }">
       <ul>
-        <li @click="changeType('portfolio')">Portfolio</li>
-        <li @click="changeType('note')">Blog</li>
         <li><nuxt-link to="/about">About</nuxt-link></li>
         <li><a href="https://forms.gle/6woK2MTC8s94QBid7">Contact</a></li>
       </ul>
@@ -20,7 +18,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from 'nuxt-property-decorator'
+import { Component, Vue } from 'nuxt-property-decorator'
 import { gsap } from 'gsap'
 import HamburgerMenu from '~/components/HamburgerMenu.vue'
 import Logo from '~/components/Logo.vue'
@@ -30,14 +28,6 @@ import Logo from '~/components/Logo.vue'
 })
 export default class CommonHeader extends Vue {
   isOpen: Boolean = false
-
-  @Prop({ type: String })
-  type!: String
-
-  changeType(type: string) {
-    this.$router.push({ path: '/', query: { type } })
-    this.isOpen = false
-  }
 
   toggleNav() {
     if (!this.isOpen) {
@@ -60,19 +50,6 @@ export default class CommonHeader extends Vue {
 </script>
 
 <style scoped lang="scss">
-.top {
-  .header-nav {
-    position: fixed;
-    background: none;
-    box-shadow: none;
-
-    a,
-    a:link,
-    li {
-      color: $color-gray-dark4;
-    }
-  }
-}
 .header-nav {
   position: sticky;
   top: 0px;
@@ -82,8 +59,7 @@ export default class CommonHeader extends Vue {
   align-items: center;
   width: 100%;
   box-sizing: border-box;
-  background: rgba(#fff, 0.7);
-  box-shadow: 0px 2px 3px rgba(#000, 0.1);
+
   &.fixed {
     position: fixed;
     left: 0;

@@ -1,10 +1,9 @@
 <template>
   <section class="container">
-    <common-header type="top" />
+    <common-header />
     <div class="main">
       <Nuxt />
     </div>
-    <content-list-menu :contents="contents" />
   </section>
 </template>
 

@@ -2,7 +2,7 @@
   <h1 class="logo-wrap">
     <nuxt-link to="/">
       <svg
-        :class="`logo ${type}`"
+        class="logo"
         viewBox="0 0 359 36"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -19,10 +19,7 @@
 import { Component, Vue, Prop } from 'nuxt-property-decorator'
 
 @Component({})
-export default class Logo extends Vue {
-  @Prop({ type: String })
-  type!: string
-}
+export default class Logo extends Vue {}
 </script>
 
 <style scoped lang="scss">
@@ -37,9 +34,6 @@ export default class Logo extends Vue {
 }
 .logo {
   height: 15px;
-  fill: $color-black;
-  &.top {
-    fill: $color-gray-dark4;
-  }
+  fill: $color-link;
 }
 </style>

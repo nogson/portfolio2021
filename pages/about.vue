@@ -115,7 +115,7 @@ h3 {
 .profile {
   padding: 24px;
   backdrop-filter: blur(3px);
-  box-shadow: 0px 0px 5px rgba(#000, 0.2);
+  border: 1px solid $color-gray-dark3;
   p:not(:last-child) {
     margin-bottom: 16px;
   }
@@ -132,7 +132,7 @@ h3 {
       flex: 1;
       font-size: 14px;
       backdrop-filter: blur(3px);
-      box-shadow: 0px 0px 5px rgba(#000, 0.2);
+      border: 1px solid $color-gray-dark3;
       padding: 24px;
       p:not(:last-child) {
         margin-bottom: 16px;
