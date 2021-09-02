@@ -1,6 +1,6 @@
 <template>
-  <div :class="`header-nav ${type}`">
-    <logo :type="type" />
+  <div class="header-nav">
+    <logo />
     <div class="header-nav-button" @click="toggleNav">
       <hamburger-menu :active="isOpen" />
     </div>
