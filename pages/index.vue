@@ -2,9 +2,24 @@
   <section class="wrapper">
     <nav class="nav">
       <ul>
-        <li class="act">All</li>
-        <li>Blog</li>
-        <li>Portfolio</li>
+        <li
+          :class="{ act: selectDisplayCardType === 'all' }"
+          @click="changeDisplayCardType('all')"
+        >
+          All
+        </li>
+        <li
+          :class="{ act: selectDisplayCardType === 'blog' }"
+          @click="changeDisplayCardType('blog')"
+        >
+          Blog
+        </li>
+        <li
+          :class="{ act: selectDisplayCardType === 'portfolio' }"
+          @click="changeDisplayCardType('portfolio')"
+        >
+          Portfolio
+        </li>
       </ul>
     </nav>
     <div class="card_container">
@@ -59,12 +74,7 @@ import ContentListMenu from '~/components/ContentListMenu.vue'
 export default class Index extends Vue {
   portfolio!: any[]
   note!: any[]
-  cardWrapStyle: any = null
-  startX!: number
-  startY!: number
-  translateX: number = 0
-  translateY: number = 0
-  isDrag: boolean = false
+  selectDisplayCardType: string = 'all'
 
   head() {
     return {
@@ -79,28 +89,38 @@ export default class Index extends Vue {
       portfolio: this.portfolio,
       note: this.note,
     })
-    // this.$nuxt.$on('changeType', (type: string) => this.changeType(type))
-  }
-
-  mounted() {
-    // if (typeof this.$redrawVueMasonry === 'function') {
-    //   console.log('ok')
-    //   this.$redrawVueMasonry()
-    // }
   }
 
   formatDateToString(date: string): string {
     return moment(date).format('YYYY/MM/DD')
   }
 
-  cardStyle() {
-    return {
-      width: Math.floor(Math.random() * 20) + 10 + '%',
-    }
+  changeDisplayCardType(type: string) {
+    this.selectDisplayCardType = type
   }
 
   get items() {
-    return [this.note, this.portfolio].flat()
+    let items = []
+    switch (this.selectDisplayCardType) {
+      case 'all':
+        items = [this.note, this.portfolio].flat()
+        break
+      case 'blog':
+        items = this.note
+        break
+      case 'portfolio':
+        items = this.portfolio
+    }
+
+    items.sort(function (a, b) {
+      if (a.created_at > b.created_at) {
+        return -1
+      } else {
+        return 1
+      }
+    })
+
+    return items
   }
 
   get type() {
