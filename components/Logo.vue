@@ -24,16 +24,16 @@ export default class Logo extends Vue {}
 
 <style scoped lang="scss">
 .logo-wrap {
-  height: 15px;
+  height: 20px;
   line-height: 0;
   a {
     line-height: 0;
-    height: 15px;
+    height: 20px;
     display: inline-block;
   }
 }
 .logo {
-  height: 15px;
-  fill: $color-link;
+  height: 20px;
+  fill: $color-black;
 }
 </style>

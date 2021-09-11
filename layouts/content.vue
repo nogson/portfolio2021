@@ -76,10 +76,6 @@ export default class extends Vue {
 </script>
 
 <style scoped lang="scss">
-.wrapper {
- // background-image: url('~@/assets/images/bg.png');
-}
-
 .container {
   display: flex;
   justify-content: center;

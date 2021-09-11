@@ -1,7 +1,7 @@
 .title-main {
   display: inline-block;
   font-size: 32px;
-  color:$color-secondly;
+  color:$color-primary;
 }
 
 .title_m {
@@ -37,4 +37,8 @@
 .link-text-right{
   text-align: right;
   display: block;
+}
+
+.padding-all {
+  padding: 16px 24px;
 }

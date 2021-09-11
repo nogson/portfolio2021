@@ -1,4 +1,4 @@
-$color-black: #2d2a4d;
+$color-black: #171717;
 $color-gray-light1:#E0E0E0;
 $color-gray-dark1: #464646;
 $color-gray-dark2: #717171;
@@ -6,8 +6,11 @@ $color-gray-dark3: #ababab;
 $color-gray-dark4: #c7c7c7;
 $color-portfolio: #594ddd;
 $color-note: #4ddda1;
-$color-link: #c9be8c;
-$color-secondly: #a2935b;
+$color-primary: $color-black;
+$color-background: #fff;
+$color-link: $color-primary;
+
+$common-margin:4px;
 
 // media query break point//
 $bp-lg: 1024px;

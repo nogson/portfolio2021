@@ -51,7 +51,7 @@ export default class CommonHeader extends Vue {
 
 <style scoped lang="scss">
 .header-nav {
-  position: sticky;
+  position: fixed;
   top: 0px;
   z-index: 100;
   padding: 24px 32px;

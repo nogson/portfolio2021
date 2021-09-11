@@ -1,6 +1,5 @@
 <template>
   <section class="wrapper">
-    <common-header />
     <div class="container">
       <div class="main">
         <Nuxt />
@@ -36,18 +35,12 @@ export default class extends Vue {
 
 <style scoped lang="scss">
 .wrapper {
-  //background-image: url('~@/assets/images/bg.png');
-}
-.container {
-  max-width: 620px;
-  margin: 32px auto;
-  min-height: 100vh;
-}
-.main {
-  @include sm() {
-    width: 100%;
-    padding: 0 32px;
-    box-sizing: border-box;
+  margin: 32px;
+
+  .container {
+    max-width: 1152px;
+    background: $color-black;
+    margin: 0 auto;
   }
 }
 </style>
