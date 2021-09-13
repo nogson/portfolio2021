@@ -1,137 +1,40 @@
 <template>
-  <div class="header-nav">
-    <logo />
-    <div class="header-nav-button" @click="toggleNav">
-      <hamburger-menu :active="isOpen" />
+  <header class="header">
+    <div class="padding-all"><logo /></div>
+    <div class="header-description padding-all">
+      このサイトは、中年サラリーマンデザイナー佐藤文彦のポートフォリオサイトです。
+      なにかなにかなにかなにかなにかなにかなにかなにかなにかなにかなにかなにかな
+      なにかなにかなにかなにかなにかなにかなにかなにかなにかなにか
     </div>
-
-    <nav ref="headerNavList" class="header-nav-li" :class="{ open: isOpen }">
-      <ul>
-        <li><nuxt-link to="/about">About</nuxt-link></li>
-        <li><a href="https://forms.gle/6woK2MTC8s94QBid7">Contact</a></li>
-      </ul>
-    </nav>
-    <!--      <div class="sub-nav">-->
-    <!--        <category :items="note" />-->
-    <!--      </div>-->
-  </div>
+  </header>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
-import { gsap } from 'gsap'
-import HamburgerMenu from '~/components/HamburgerMenu.vue'
 import Logo from '~/components/Logo.vue'
 
 @Component({
-  components: { Logo, HamburgerMenu },
+  components: { Logo },
 })
-export default class CommonHeader extends Vue {
-  isOpen: Boolean = false
-
-  toggleNav() {
-    if (!this.isOpen) {
-      this.isOpen = true
-      gsap.to(this.$refs.headerNavList, {
-        opacity: 1,
-        duration: 0.25,
-      })
-    } else {
-      gsap.to(this.$refs.headerNavList, {
-        opacity: 0,
-        duration: 0.25,
-        onComplete: () => {
-          this.isOpen = false
-        },
-      })
-    }
-  }
-}
+export default class CommonHeader extends Vue {}
 </script>
 
 <style scoped lang="scss">
-.header-nav {
-  position: fixed;
-  top: 0px;
-  z-index: 100;
-  padding: 24px 32px;
-  display: flex;
-  align-items: center;
-  width: 100%;
-  box-sizing: border-box;
-
-  &.fixed {
-    position: fixed;
-    left: 0;
-    top: 0;
-    background: none;
-    box-shadow: none;
+.header {
+  max-width: 1152px;
+  border: 4px solid $color-black;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: $common-margin;
+  background: $color-black;
+  margin: 0 auto;
+  > * {
+    background: $color-background;
+    display: flex;
+    align-items: center;
   }
-
-  h2 {
-    font-size: 12px;
-    font-weight: normal;
-  }
-
-  .header-nav-li {
-    margin-left: auto;
-    ul {
-      display: flex;
-      align-items: center;
-    }
-    li {
-      font-size: 14px;
-      font-weight: bold;
-      margin-left: 24px;
-      cursor: pointer;
-    }
-    @include sm() {
-      display: none;
-      opacity: 0;
-      &.open {
-        position: fixed;
-        top: 0;
-        bottom: 0;
-        right: 0;
-        left: 0;
-        background: rgba(#fff, 0.9);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        ul {
-          display: block;
-        }
-
-        li {
-          margin-left: 0;
-          font-size: 18px;
-          &:not(:last-child) {
-            margin-bottom: 16px;
-          }
-        }
-      }
-    }
-  }
-
-  .header-nav-button {
-    display: none;
-    @include sm() {
-      position: absolute;
-      z-index: 10;
-      top: 16px;
-      right: 24px;
-      display: block;
-      border: none;
-      background: none;
-      padding: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      i {
-        font-size: 24px;
-        line-height: 1;
-      }
-    }
-  }
+}
+.header-description {
+  font-size: 12px;
 }
 </style>

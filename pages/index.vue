@@ -1,31 +1,23 @@
 <template>
-  <div ref="cardContainer" class="card_container">
-    <div class="header">
-      <div class="padding-all"><logo /></div>
-      <div class="header-description padding-all">
-        このサイトは、中年サラリーマンデザイナー佐藤文彦のポートフォリオサイトです。
-        なにかなにかなにかなにかなにかなにかなにかなにかなにかなにかなにかなにかな
-        なにかなにかなにかなにかなにかなにかなにかなにかなにかなにか
+  <div class="card_container">
+    <template v-for="(itemArr, i) in items">
+      <div :key="i" class="card-list">
+        <card
+          v-for="(item, j) in itemArr"
+          :key="item.slug"
+          :class="`card-${j}`"
+          :klass="`card-${j}`"
+          :item="item"
+          :index="itemIndex(i, j)"
+        />
       </div>
-    </div>
-    <card
-      v-for="(item, index) in items"
-      :key="item.slug"
-      :item="item"
-      :index="index"
-    />
+    </template>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
-
-// import { gsap } from 'gsap'
-import moment from 'moment'
-import ScrollItems from '~/components/ScrollItems.vue'
 import Card from '~/components/Card.vue'
-import DynamicImage from '~/components/DynamicImage.vue'
-import TopParts from '~/components/TopParts.vue'
 import ContentListMenu from '~/components/ContentListMenu.vue'
 import Logo from '~/components/Logo.vue'
 
@@ -33,10 +25,7 @@ import Logo from '~/components/Logo.vue'
   components: {
     Logo,
     ContentListMenu,
-    TopParts,
-    DynamicImage,
     Card,
-    ScrollItems,
   },
   async asyncData({ $content }) {
     return {
@@ -90,7 +79,20 @@ export default class Index extends Vue {
       }
     })
 
-    return items
+    const loopLength = Math.ceil(items.length / 10)
+    const itemArr = []
+    for (let i = 0; i < loopLength; i++) {
+      itemArr[i] = items.slice(10 * i, 10 * i + 10)
+    }
+
+    return itemArr
+  }
+
+  get itemIndex() {
+    return (i, j) => {
+      const str = '00' + (i * 10 + 1 + j)
+      return str.slice(-2)
+    }
   }
 }
 </script>
@@ -99,18 +101,12 @@ export default class Index extends Vue {
 .card_container {
   overflow: hidden;
 }
-.header {
+
+.card-list {
   display: grid;
-  grid-template-columns: auto 1fr;
-  column-gap: $common-margin;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: $common-margin $common-margin;
   margin: $common-margin;
-  > * {
-    background: $color-background;
-    display: flex;
-    align-items: center;
-  }
-}
-.header-description {
-  font-size: 12px;
 }
 </style>

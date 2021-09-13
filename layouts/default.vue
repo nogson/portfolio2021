@@ -1,12 +1,10 @@
 <template>
   <section class="wrapper">
+    <common-header />
     <div class="container">
       <div class="main">
         <Nuxt />
       </div>
-      <!--      <div class="sub-nav">-->
-      <!--        <category :items="note" />-->
-      <!--      </div>-->
     </div>
     <common-footer />
   </section>
@@ -16,9 +14,10 @@
 import { Component, Vue } from 'nuxt-property-decorator'
 import Category from '~/components/Category.vue'
 import CommonFooter from '~/components/CommonFooter.vue'
+import CommonHeader from '~/components/CommonHeader.vue'
 
 @Component({
-  components: { CommonFooter, Category },
+  components: { CommonFooter, Category, CommonHeader },
 })
 export default class extends Vue {
   note: any[] = []
@@ -38,9 +37,10 @@ export default class extends Vue {
   margin: 32px;
 
   .container {
+    height: 100%;
     max-width: 1152px;
     background: $color-black;
-    margin: 0 auto;
+    margin: -4px auto 0;
   }
 }
 </style>

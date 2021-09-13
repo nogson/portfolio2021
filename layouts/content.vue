@@ -3,7 +3,9 @@
     <common-header />
     <div class="container">
       <div class="main">
-        <Nuxt />
+        <div class="main-inner">
+          <Nuxt />
+        </div>
       </div>
       <div class="side-nav">
         <h2>カテゴリ</h2>
@@ -53,7 +55,6 @@ export default class extends Vue {
   }
 
   updateContent(data: any) {
-    console.log(data)
     this.categoryData = data.category
     this.notesData = data.notes
   }
@@ -76,15 +77,31 @@ export default class extends Vue {
 </script>
 
 <style scoped lang="scss">
-.container {
-  display: flex;
-  justify-content: center;
-  margin: 32px 0;
+.wrapper {
+  margin: 32px;
+
+  .container {
+    height: 100%;
+    max-width: 1152px;
+    background: $color-black;
+    margin: -4px auto 0;
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    grid-template-rows: auto;
+    gap: $common-margin $common-margin;
+  }
 }
 .main {
-  width: 620px;
-  margin: 0 48px;
   min-height: 100vh;
+  background: $color-background;
+  margin: $common-margin 0 $common-margin $common-margin;
+  padding: 36px;
+
+  .main-inner {
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
   @include md() {
     width: 100%;
     padding: 0 32px;
@@ -94,7 +111,9 @@ export default class extends Vue {
 }
 
 .side-nav {
-  width: 200px;
+  background: $color-background;
+  margin: $common-margin $common-margin $common-margin 0;
+  padding: 24px;
   h2 {
     font-size: 16px;
     margin-top: 16px;

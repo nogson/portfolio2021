@@ -13,8 +13,11 @@
         {{ formatDateToString(portfolio.created_at) }}
       </p>
     </div>
-
-    <nuxt-content :document="portfolio" />
+    <div class="content-body">
+      <div class="content-body-inner">
+        <nuxt-content :document="portfolio" />
+      </div>
+    </div>
   </section>
 </template>
 
@@ -42,7 +45,7 @@ export default class Slug extends Vue {
   }
 
   formatDateToString(date: string): string {
-    return moment(date).format('YYYY/MM/DD')
+    return moment(date).format('YYYY年MM月DD日')
   }
 }
 </script>
@@ -52,7 +55,18 @@ export default class Slug extends Vue {
   line-height: 1.8;
 }
 .content-head {
-  margin-bottom: 40px;
+  margin: $common-margin;
+  background: $color-background;
+  padding: 16px 36px;
+}
+.content-body {
+  margin: $common-margin;
+  background: $color-background;
+  padding: 36px;
+}
+.content-body-inner {
+  max-width: 640px;
+  margin: 0 auto;
 }
 .top-image {
   margin-bottom: 24px;

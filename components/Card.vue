@@ -1,31 +1,28 @@
 <template>
   <div ref="card" class="card padding-all">
-    <!--    <div>-->
-    <!--            <nuxt-link :to="item.path">-->
-    <!--              <dynamic-image-->
-    <!--                class="img"-->
-    <!--                :path="item.thumbnail"-->
-    <!--                :alt="item.title"-->
-    <!--                :use-filter="true"-->
-    <!--                margin="0 0 0 0"-->
-    <!--              />-->
-    <!--              <p class="created-at">-->
-    <!--                <span :class="`item_type ${type(item)}`"></span>-->
-    <!--                <span>-->
-    <!--                  {{ formatDateToString(item.created_at) }}-->
-    <!--                </span>-->
-    <!--              </p>-->
-    <!--              <p class="title">-->
-    <!--                {{ item.title }}-->
-    <!--              </p>-->
-    <!--            </nuxt-link>-->
-    <!--    </div>-->
-    <div class="card-top">{{ type(item) }}</div>
-    <div class="card-bottom">
-      <p class="title">
-        {{ item.title }}
-      </p>
-    </div>
+    <nuxt-link :to="item.path">
+      <div :class="klass">
+        <div class="card-info">
+          <dl class="title">
+            <dt>{{ index }}</dt>
+            <dd>{{ item.title }}</dd>
+          </dl>
+          <p class="date">
+            <span class="type">{{ type(item) }}</span
+            >{{ formatDateToString(item.created_at) }}
+          </p>
+          <p class="description">{{ item.description }}</p>
+        </div>
+        <div class="card-img">
+          <dynamic-image
+            class="img"
+            :path="item.thumbnail"
+            :alt="item.title"
+            margin="0 0 0 0"
+          />
+        </div>
+      </div>
+    </nuxt-link>
   </div>
 </template>
 
@@ -47,15 +44,18 @@ export default class Card extends Vue {
   @Prop({ type: Number })
   index!: number
 
+  @Prop({ type: String })
+  klass!: string
+
   mounted() {}
 
   formatDateToString(date: string): string {
-    return moment(date).format('YYYY/MM/DD')
+    return moment(date).format('YYYY年MM月DD日')
   }
 
   get type() {
     return (item: any): string => {
-      return item.dir === '/note' ? 'Blog' : 'Portfolio'
+      return item.dir === '/note' ? 'BLOG' : 'PORTFOLIO'
     }
   }
 }
@@ -64,6 +64,177 @@ export default class Card extends Vue {
 <style scoped lang="scss">
 .card {
   background: $color-background;
-  margin: $common-margin;
+
+  .card-info {
+    padding-right: 16px;
+    flex: 1;
+  }
+
+  .card-img {
+    width: 150px;
+  }
+  .title {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+    line-height: 1.4;
+    dt {
+      font-size: 36px;
+      font-weight: bold;
+      font-family: Helvetica;
+      padding-right: 16px;
+      margin-right: 16px;
+      border-right: $common-margin solid $color-black;
+      line-height: 1.2;
+    }
+    dd {
+      font-size: 18px;
+      font-weight: bold;
+    }
+  }
+
+  .description {
+    font-size: 12px;
+  }
+
+  .date {
+    font-size: 12px;
+    color: $color-gray-dark3;
+    margin-bottom: 8px;
+    .type {
+      color: $color-black;
+      border: 1px solid $color-black;
+      padding: 2px 4px;
+      margin-right: 8px;
+      font-size: 10px;
+      font-weight: bold;
+    }
+  }
+}
+
+.card-0 {
+  grid-row: 1; // 縦
+  grid-column: 1 / span 3; // 横
+}
+
+.card-1 {
+  grid-row: 1; // 縦
+  grid-column: 4 / span 3; // 横
+}
+
+.card-2 {
+  grid-row: 2; // 縦
+  grid-column: 1 / span 2; // 横
+}
+
+.card-3 {
+  grid-row: 2; // 縦
+  grid-column: 3 / span 2; // 横
+}
+
+.card-4 {
+  grid-row: 2; // 縦
+  grid-column: 5 / span 2; // 横
+}
+
+.card-5 {
+  grid-row: 3 / span 3; // 縦
+  grid-column: 1; // 横
+}
+
+.card-6 {
+  grid-row: 3; // 縦
+  grid-column: 2 / span 2; // 横
+}
+
+.card-7 {
+  grid-row: 4; // 縦
+  grid-column: 2 / span 2; // 横
+}
+
+.card-8 {
+  grid-row: 5; // 縦
+  grid-column: 2 / span 2; // 横
+}
+
+.card-9 {
+  grid-row: 3 / span 3; // 縦
+  grid-column: 4 / span 3; // 横
+}
+
+.card-0,
+.card-1 {
+  display: flex;
+  align-items: center;
+}
+
+.card-2,
+.card-3,
+.card-4 {
+  .description {
+    margin-bottom: 16px;
+  }
+
+  .card-img {
+    margin: 0 auto;
+    width: 100%;
+  }
+}
+
+.card-5 {
+  .title {
+    writing-mode: vertical-rl;
+    margin-left: 16px;
+    dt {
+      padding: 0 0 16px 0;
+      margin: 0 0 16px 0;
+      border-bottom: $common-margin solid $color-black;
+      border-right: none;
+      text-combine-upright: all;
+    }
+    dd {
+      height: 200px;
+    }
+  }
+  .description,
+  .date {
+    writing-mode: vertical-rl;
+  }
+  .date {
+    margin: 0 0 0 8px;
+    .type {
+      padding: 4px 2px;
+      margin: 0 0 8px 0;
+    }
+  }
+  .card-info {
+    display: flex;
+    flex-direction: row-reverse;
+  }
+}
+
+.card-6,
+.card-7,
+.card-8 {
+  .title {
+    dt {
+      font-size: 22px;
+    }
+    dd {
+      font-size: 14px;
+    }
+  }
+  .card-img {
+    display: none;
+  }
+}
+
+.card-9 {
+  .description {
+    margin-bottom: 16px;
+  }
+  .card-img {
+    width: 100%;
+  }
 }
 </style>
