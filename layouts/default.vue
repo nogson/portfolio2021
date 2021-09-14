@@ -20,14 +20,14 @@ import CommonHeader from '~/components/CommonHeader.vue'
   components: { CommonFooter, Category, CommonHeader },
 })
 export default class extends Vue {
-  note: any[] = []
+  blog: any[] = []
 
   created() {
     this.$nuxt.$on('updateContent', this.updateContent)
   }
 
   updateContent(data: any[]) {
-    this.note = data
+    this.blog = data
   }
 }
 </script>

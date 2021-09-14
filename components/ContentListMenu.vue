@@ -24,8 +24,8 @@
               Portfolio
             </li>
             <li
-              :class="{ act: displayContentType === 'note' }"
-              @click="changeContent('note')"
+              :class="{ act: displayContentType === 'blog' }"
+              @click="changeContent('blog')"
             >
               Blog
             </li>

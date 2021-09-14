@@ -30,7 +30,7 @@ import moment from 'moment'
   async asyncData({ $content, params }) {
     const slug = params.slug
     return {
-      // content/note/{_slug}.mdのマークダウンを取得
+      // content/blog/{_slug}.mdのマークダウンを取得
       portfolio: await $content('portfolio/' + slug).fetch(),
     }
   },

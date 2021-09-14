@@ -18,18 +18,18 @@ import ItemRow from '~/components/ItemRow.vue'
     const slug = params.slug
     return {
       slug,
-      note: await $content('note')
+      blog: await $content('blog')
         .where({ category: slug })
         .sortBy('create_at', 'desc')
         .fetch(),
-      category: await $content('note').only(['category']).fetch(),
+      category: await $content('blog').only(['category']).fetch(),
     }
   },
 })
 export default class Category extends Vue {
   slug!: any
   category!: any
-  note!: any
+  blog!: any
   head() {
     return {
       title: this.slug,
@@ -45,7 +45,7 @@ export default class Category extends Vue {
   }
 
   get content() {
-    return this.note.filter((d: any) => d.category.includes(this.slug))
+    return this.blog.filter((d: any) => d.category.includes(this.slug))
   }
 }
 </script>

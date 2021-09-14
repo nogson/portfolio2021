@@ -25,7 +25,7 @@ export default class ItemRow extends Vue {
   }
 
   get link() {
-    return `/note/${this.item.slug}`
+    return `/blog/${this.item.slug}`
   }
 }
 </script>

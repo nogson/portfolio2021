@@ -24,7 +24,7 @@
         <nav>
           <ul class="category">
             <li
-              v-for="item in notesData"
+              v-for="item in blogsData"
               :key="item.slug"
               @click="showDetailPage(item)"
             >
@@ -48,7 +48,7 @@ import CommonFooter from '~/components/CommonFooter.vue'
 })
 export default class extends Vue {
   categoryData: string[] = []
-  notesData: any[] = []
+  blogsData: any[] = []
 
   created() {
     this.$nuxt.$on('updateContent', this.updateContent)
@@ -56,7 +56,7 @@ export default class extends Vue {
 
   updateContent(data: any) {
     this.categoryData = data.category
-    this.notesData = data.notes
+    this.blogsData = data.blogs
   }
 
   showCategoryPage(category: string) {

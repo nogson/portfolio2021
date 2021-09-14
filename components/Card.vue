@@ -55,7 +55,7 @@ export default class Card extends Vue {
 
   get type() {
     return (item: any): string => {
-      return item.dir === '/note' ? 'BLOG' : 'PORTFOLIO'
+      return item.dir === '/blog' ? 'BLOG' : 'PORTFOLIO'
     }
   }
 }

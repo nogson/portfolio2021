@@ -11,9 +11,9 @@ import CardList from '~/components/CardList.vue'
     CardList,
   },
   async asyncData({ $content }) {
-    const note = await $content('note').fetch()
+    const blog = await $content('blog').fetch()
     const portfolio = await $content('portfolio').fetch()
-    const contents = [note, portfolio].flat()
+    const contents = [blog, portfolio].flat()
     return { contents }
   },
 })

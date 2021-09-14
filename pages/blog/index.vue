@@ -11,17 +11,17 @@ import CardList from '~/components/CardList.vue'
     CardList,
   },
   async asyncData({ $content }) {
-    const contents = await $content('note').fetch()
+    const contents = await $content('blog').fetch()
     return { contents }
   },
 })
-export default class Note extends Vue {
+export default class Blog extends Vue {
   contents!: any[]
 
   head() {
     return {
       bodyAttrs: {
-        class: 'portfolio',
+        class: 'blog',
       },
     }
   }

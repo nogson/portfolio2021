@@ -1,10 +1,10 @@
 <template>
   <section class="content">
     <div class="content-head">
-      <h1 class="title-main">{{ note.title }}</h1>
-      <p class="create-at">{{ formatDateToString(note.created_at) }}</p>
+      <h1 class="title-main">{{ blog.title }}</h1>
+      <p class="create-at">{{ formatDateToString(blog.created_at) }}</p>
     </div>
-    <nuxt-content :document="note" />
+    <nuxt-content :document="blog" />
   </section>
 </template>
 
@@ -16,32 +16,32 @@ import moment from 'moment'
   layout: 'content',
   components: {},
   async asyncData({ $content, params }) {
-    // URIから変数を取得 /note/{_slug}
+    // URIから変数を取得 /blog/{_slug}
     const slug = params.slug
     return {
-      // content/note/{_slug}.mdのマークダウンを取得
-      note: await $content('note/' + slug).fetch(),
-      notes: await $content('note').sortBy('create_at', 'desc').fetch(),
-      category: await $content('note').only(['category']).fetch(),
+      // content/blog/{_slug}.mdのマークダウンを取得
+      blog: await $content('blog/' + slug).fetch(),
+      blogs: await $content('blog').sortBy('create_at', 'desc').fetch(),
+      category: await $content('blog').only(['category']).fetch(),
     }
   },
 })
 export default class Slug extends Vue {
-  note: any = null
-  notes: any = null
+  blog: any = null
+  blogs: any = null
   category: any = null
   //
   head() {
     return {
-      title: this.note.title,
+      title: this.blog.title,
       titleTemplate: '%s | Satofaction.net',
     }
   }
 
   created() {
     const category = this.category.map((d: any) => d.category)
-    const notes = this.notes
-    this.$nuxt.$emit('updateContent', { notes, category })
+    const blogs = this.blogs
+    this.$nuxt.$emit('updateContent', { blogs, category })
   }
 
   formatDateToString(date: string): string {
