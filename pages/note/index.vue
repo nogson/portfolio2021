@@ -11,19 +11,17 @@ import CardList from '~/components/CardList.vue'
     CardList,
   },
   async asyncData({ $content }) {
-    const note = await $content('note').fetch()
-    const portfolio = await $content('portfolio').fetch()
-    const contents = [note, portfolio].flat()
+    const contents = await $content('note').fetch()
     return { contents }
   },
 })
-export default class Index extends Vue {
+export default class Note extends Vue {
   contents!: any[]
 
   head() {
     return {
       bodyAttrs: {
-        class: 'top',
+        class: 'portfolio',
       },
     }
   }

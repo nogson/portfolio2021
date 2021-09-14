@@ -41,8 +41,8 @@ export default class Card extends Vue {
   @Prop({ type: Object })
   item!: any
 
-  @Prop({ type: Number })
-  index!: number
+  @Prop({ type: String })
+  index!: string
 
   @Prop({ type: String })
   klass!: string
