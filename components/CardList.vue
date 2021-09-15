@@ -52,7 +52,7 @@ export default class CardList extends Vue {
   }
 
   get itemIndex() {
-    return (i, j) => {
+    return (i: any, j: any) => {
       const str = '00' + (i * 10 + 1 + j)
       return str.slice(-2)
     }
@@ -71,7 +71,7 @@ export default class CardList extends Vue {
   grid-template-rows: auto auto;
   gap: $common-margin $common-margin;
   margin: $common-margin;
-  @include sm(){
+  @include sm() {
     display: block;
   }
 }
