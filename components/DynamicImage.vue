@@ -47,7 +47,6 @@ export default {
 <style scoped lang="scss">
 .img-wrapper {
   margin: 24px auto;
-  border: 1px solid $color-gray-light1;
 }
 .filter {
   background-color: $color-gray-dark3;

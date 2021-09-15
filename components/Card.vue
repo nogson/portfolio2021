@@ -1,28 +1,28 @@
 <template>
-  <div ref="card" class="card padding-all">
-    <nuxt-link :to="item.path">
-      <div :class="klass">
-        <div class="card-info">
-          <dl class="title">
-            <dt>{{ index }}</dt>
-            <dd>{{ item.title }}</dd>
-          </dl>
-          <p class="date">
-            <span class="type">{{ type(item) }}</span
-            >{{ formatDateToString(item.created_at) }}
-          </p>
-          <p class="description">{{ item.description }}</p>
-        </div>
-        <div class="card-img">
-          <dynamic-image
-            class="img"
-            :path="item.thumbnail"
-            :alt="item.title"
-            margin="0 0 0 0"
-          />
-        </div>
-      </div>
-    </nuxt-link>
+  <div ref="card" class="card padding-all" :class="klass">
+    <div class="card-info">
+      <dl class="title">
+        <dt>{{ index }}</dt>
+        <dd>
+          <nuxt-link :to="item.path">{{ item.title }}</nuxt-link>
+        </dd>
+      </dl>
+      <p class="date">
+        <span class="type">{{ type(item) }}</span
+        >{{ formatDateToString(item.created_at) }}
+      </p>
+      <p class="description">{{ item.description }}</p>
+    </div>
+    <div class="card-img">
+      <nuxt-link :to="item.path">
+        <dynamic-image
+          class="img"
+          :path="item.thumbnail"
+          :alt="item.title"
+          margin="0 0 0 0"
+        />
+      </nuxt-link>
+    </div>
   </div>
 </template>
 
@@ -47,8 +47,6 @@ export default class Card extends Vue {
   @Prop({ type: String })
   klass!: string
 
-  mounted() {}
-
   formatDateToString(date: string): string {
     return moment(date).format('YYYY年MM月DD日')
   }
@@ -64,6 +62,12 @@ export default class Card extends Vue {
 <style scoped lang="scss">
 .card {
   background: $color-background;
+
+  @include sm() {
+    &:not(:last-child) {
+      border-bottom: 4px solid $color-black;
+    }
+  }
 
   .card-info {
     padding-right: 16px;
@@ -164,68 +168,94 @@ export default class Card extends Vue {
 
 .card-0,
 .card-1 {
-  display: flex;
-  align-items: center;
+  @include more_md() {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    .card-img {
+      margin-left: auto;
+    }
+  }
 }
 
 .card-2,
 .card-3,
 .card-4 {
-  .description {
-    margin-bottom: 16px;
-  }
+  @include more_md() {
+    display: flex;
+    flex-direction: column;
+    .description {
+      margin-bottom: 16px;
+    }
 
-  .card-img {
-    margin: 0 auto;
-    width: 100%;
+    .card-info {
+      padding-right: 0;
+    }
+
+    .card-img {
+      height: 100%;
+      margin: 0 auto;
+      width: 100%;
+      display: flex;
+      align-items: center;
+    }
   }
 }
 
 .card-5 {
-  .title {
-    writing-mode: vertical-rl;
-    margin-left: 16px;
-    dt {
-      padding: 0 0 16px 0;
-      margin: 0 0 16px 0;
-      border-bottom: $common-margin solid $color-black;
-      border-right: none;
-      text-combine-upright: all;
+  @include more_md() {
+    .title {
+      writing-mode: vertical-rl;
+      margin-left: 16px;
+      dt {
+        padding: 0 0 16px 0;
+        margin: 0 0 16px 0;
+        border-bottom: $common-margin solid $color-black;
+        border-right: none;
+        text-combine-upright: all;
+      }
+      dd {
+        height: 200px;
+      }
     }
-    dd {
-      height: 200px;
+
+    .description,
+    .date {
+      writing-mode: vertical-rl;
+    }
+    .date {
+      margin: 0 0 0 8px;
+      .type {
+        padding: 4px 2px;
+        margin: 0 0 8px 0;
+      }
+    }
+    .card-info {
+      display: flex;
+      flex-direction: row-reverse;
     }
   }
-  .description,
-  .date {
-    writing-mode: vertical-rl;
-  }
-  .date {
-    margin: 0 0 0 8px;
-    .type {
-      padding: 4px 2px;
-      margin: 0 0 8px 0;
-    }
-  }
-  .card-info {
-    display: flex;
-    flex-direction: row-reverse;
+  .card-img {
+    margin-top: 24px;
   }
 }
 
 .card-6,
 .card-7,
 .card-8 {
-  .title {
-    dt {
-      font-size: 22px;
+  @include more_md() {
+    .title {
+      dt {
+        font-size: 22px;
+      }
+
+      dd {
+        font-size: 14px;
+      }
     }
-    dd {
-      font-size: 14px;
+    .card-img {
+      display: none;
     }
-  }
-  .card-img {
-    display: none;
   }
 }
 
@@ -235,6 +265,19 @@ export default class Card extends Vue {
   }
   .card-img {
     width: 100%;
+  }
+}
+
+@include sm() {
+  [class^='card-'] {
+    display: block;
+    .description {
+      margin-bottom: 16px;
+    }
+    .card-img {
+      display: block;
+      width: 100%;
+    }
   }
 }
 </style>

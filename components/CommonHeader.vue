@@ -33,6 +33,12 @@ export default class CommonHeader extends Vue {}
     display: flex;
     align-items: center;
   }
+
+  @include sm() {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    row-gap: $common-margin ;
+  }
 }
 .header-description {
   font-size: 12px;

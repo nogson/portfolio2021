@@ -29,14 +29,19 @@ footer {
   background: #fff;
   margin: -4px auto 0;
   padding: 24px;
+  @include sm() {
+    font-size: 14px;
+    padding: 16px;
+  }
   ul {
     display: flex;
     justify-content: center;
     font-family: Helvetica;
     font-weight: bold;
     li {
-      padding: 0 16px;
+      padding: 0 12px;
     }
   }
+
 }
 </style>

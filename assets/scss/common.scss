@@ -1,7 +1,6 @@
 .title-main {
   display: inline-block;
   font-size: 32px;
-  color:$color-primary;
 }
 
 .title_m {
@@ -41,4 +40,7 @@
 
 .padding-all {
   padding: 16px 24px;
+  @include sm() {
+    padding: 24px;
+  }
 }

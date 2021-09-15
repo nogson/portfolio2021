@@ -89,24 +89,26 @@ export default class extends Vue {
     grid-template-columns: 1fr 300px;
     grid-template-rows: auto;
     gap: $common-margin $common-margin;
+
+    @include sm() {
+      display: block;
+    }
   }
 }
 .main {
   min-height: 100vh;
   background: $color-background;
   margin: $common-margin 0 $common-margin $common-margin;
-  padding: 36px;
+  padding: 32px;
 
   .main-inner {
     max-width: 640px;
     margin: 0 auto;
   }
 
-  @include md() {
-    width: 100%;
-    padding: 0 32px;
-    margin: 0;
-    box-sizing: border-box;
+  @include sm() {
+    padding: 32px;
+    border: $common-margin solid $color-black;
   }
 }
 
@@ -121,7 +123,7 @@ export default class extends Vue {
   nav {
     margin-bottom: 40px;
   }
-  @include md() {
+  @include sm() {
     display: none;
   }
 }

@@ -5,7 +5,6 @@
         <card
           v-for="(item, j) in itemArr"
           :key="item.slug"
-          :class="`card-${j}`"
           :klass="`card-${j}`"
           :item="item"
           :index="itemIndex(i, j)"
@@ -72,5 +71,8 @@ export default class CardList extends Vue {
   grid-template-rows: auto auto;
   gap: $common-margin $common-margin;
   margin: $common-margin;
+  @include sm(){
+    display: block;
+  }
 }
 </style>

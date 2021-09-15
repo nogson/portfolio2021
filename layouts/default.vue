@@ -36,6 +36,10 @@ export default class extends Vue {
 .wrapper {
   margin: 32px;
 
+  @include sm() {
+    margin: 16px;
+  }
+
   .container {
     height: 100%;
     max-width: 1152px;
