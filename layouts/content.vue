@@ -81,7 +81,7 @@ export default class extends Vue {
   margin: 32px;
 
   @include sm() {
-    margin: 24px;
+    margin: 16px;
   }
 
   .container {
