@@ -33,7 +33,6 @@ export default {
   },
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    { src: '~/plugins/vue-masonry', ssr: false },
     // { src: '~/plugins/pixi', ssr: false },
   ],
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -55,6 +54,7 @@ export default {
     '@nuxtjs/style-resources',
     ['@nuxtjs/moment', ['ja']],
     'nuxt-webfontloader',
+    '@nuxtjs/google-gtag',
   ],
   webfontloader: {
     custom: {
@@ -71,6 +71,7 @@ export default {
   content: {
     markdown: {},
   },
+  'google-gtag': { id: 'G-L23H14FV4P' },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
