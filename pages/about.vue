@@ -133,18 +133,28 @@ h3 {
 }
 .skills {
   dl {
-    display: flex;
+    @include more_md {
+      display: flex;
+    }
+    @include sm {
+      padding: 24px;
+      border: 4px solid $color-black;
+    }
     margin-bottom: 32px;
     dt {
       font-weight: bold;
       width: 150px;
+      @include sm {
+        margin-bottom: 16px;
+      }
     }
     dd {
       flex: 1;
       font-size: 14px;
-      backdrop-filter: blur(3px);
-      border: 4px solid $color-black;
-      padding: 24px;
+      @include more_md {
+        padding: 24px;
+        border: 4px solid $color-black;
+      }
       p:not(:last-child) {
         margin-bottom: 16px;
       }
