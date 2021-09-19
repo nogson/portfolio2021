@@ -80,6 +80,10 @@ export default class extends Vue {
 .wrapper {
   margin: 32px;
 
+  @include sm() {
+    margin: 24px;
+  }
+
   .container {
     height: 100%;
     max-width: 1152px;
@@ -98,8 +102,11 @@ export default class extends Vue {
 .main {
   min-height: 100vh;
   background: $color-background;
-  margin: $common-margin 0 $common-margin $common-margin;
   padding: 32px;
+
+  @include more_md {
+    margin: $common-margin 0 $common-margin $common-margin;
+  }
 
   .main-inner {
     max-width: 640px;
