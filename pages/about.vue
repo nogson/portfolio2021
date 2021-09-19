@@ -94,6 +94,9 @@ export default class About extends Vue {}
   background: $color-background;
   border: 4px solid $color-black;
   padding: 32px;
+  @include sm {
+    padding: 16px;
+  }
 }
 .about-inner {
   max-width: 640px;
