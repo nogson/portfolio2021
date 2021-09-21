@@ -75,6 +75,13 @@ export default {
   'google-gtag': { id: 'G-L23H14FV4P' },
   sitemap: {
     hostname: 'https://satofaction.net',
+    routes: async () => {
+      const { $content } = require('@nuxt/content')
+
+      const blog = await $content('blog').only(['path']).fetch()
+
+      return blog.map((p) => p.path)
+    },
   },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
