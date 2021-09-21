@@ -73,6 +73,9 @@ export default {
     markdown: {},
   },
   'google-gtag': { id: 'G-L23H14FV4P' },
+  sitemap: {
+    hostname: 'https://satofaction.net',
+  },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     babel: {
