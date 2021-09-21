@@ -55,6 +55,7 @@ export default {
     ['@nuxtjs/moment', ['ja']],
     'nuxt-webfontloader',
     '@nuxtjs/google-gtag',
+    '@nuxtjs/sitemap',
   ],
   webfontloader: {
     custom: {
@@ -72,7 +73,6 @@ export default {
     markdown: {},
   },
   'google-gtag': { id: 'G-L23H14FV4P' },
-
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     babel: {
