@@ -1,3 +1,5 @@
+import { $content } from '@nuxt/content'
+
 export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
@@ -77,10 +79,15 @@ export default {
     hostname: 'https://satofaction.net',
     routes: async () => {
       const { $content } = require('@nuxt/content')
-
       const blog = await $content('blog').only(['path']).fetch()
+      const portfolio = await $content('portfolio').only(['path']).fetch()
 
-      return blog.map((p) => p.path)
+      const content = [
+        blog.map((p) => p.path),
+        portfolio.map((p) => p.path),
+      ].flat()
+
+      return content
     },
   },
   // Build Configuration: https://go.nuxtjs.dev/config-build
