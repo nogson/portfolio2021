@@ -86,7 +86,16 @@ import { Component, Vue } from 'nuxt-property-decorator'
 @Component({
   components: {},
 })
-export default class About extends Vue {}
+export default class About extends Vue {
+  head() {
+    return {
+      title: 'About | Satofactoin.net',
+      bodyAttrs: {
+        class: 'about',
+      },
+    }
+  }
+}
 </script>
 
 <style scoped lang="scss">

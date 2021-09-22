@@ -24,18 +24,18 @@
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
 import moment from 'moment'
+import { IItem } from '@/interface/IPortfolio'
 
 @Component({
   components: {},
   async asyncData({ $content, params }) {
     const slug = params.slug
-    return {
-      portfolio: await $content('portfolio/' + slug).fetch(),
-    }
+    const portfolio = await $content('portfolio/' + slug).fetch()
+    return { portfolio }
   },
 })
 export default class Slug extends Vue {
-  portfolio: any = null
+  portfolio: IItem = null
   head() {
     return {
       title: this.portfolio.title,
@@ -43,7 +43,7 @@ export default class Slug extends Vue {
     }
   }
 
-  formatDateToString(date: string): string {
+  private formatDateToString(date: string): string {
     return moment(date).format('YYYY年MM月DD日')
   }
 }

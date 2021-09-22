@@ -16,10 +16,10 @@ import CardList from '~/components/CardList.vue'
   },
 })
 export default class Portfolio extends Vue {
-  contents!: any[]
 
   head() {
     return {
+      title: 'Portfolio | Satofactoin.net',
       bodyAttrs: {
         class: 'portfolio',
       },

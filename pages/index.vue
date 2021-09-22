@@ -18,8 +18,6 @@ import CardList from '~/components/CardList.vue'
   },
 })
 export default class Index extends Vue {
-  contents!: any[]
-
   head() {
     return {
       bodyAttrs: {

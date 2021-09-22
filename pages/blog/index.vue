@@ -16,10 +16,9 @@ import CardList from '~/components/CardList.vue'
   },
 })
 export default class Blog extends Vue {
-  contents!: any[]
-
   head() {
     return {
+      title: 'Blog | Satofactoin.net',
       bodyAttrs: {
         class: 'blog',
       },

@@ -1,5 +1,3 @@
-import { $content } from '@nuxt/content'
-
 export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
@@ -13,7 +11,12 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' },
+      {
+        hid: 'description',
+        name: 'description',
+        content:
+          'このサイトは、特にやりたいこともなく無気力に生きる汚い中年おじさんデザイナー佐藤文彦のポートフォリオサイトです。応援よろしくお願いします。',
+      },
     ],
     link: [
       {
