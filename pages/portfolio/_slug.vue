@@ -35,7 +35,7 @@ import { IItem } from '@/interface/IPortfolio'
   },
 })
 export default class Slug extends Vue {
-  portfolio: IItem = null
+  portfolio: IItem | null = null
   head() {
     return {
       title: this.portfolio.title,

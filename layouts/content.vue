@@ -90,7 +90,7 @@ export default class extends Vue {
     background: $color-black;
     margin: -4px auto 0;
     display: grid;
-    grid-template-columns: 1fr 300px;
+    grid-template-columns: 1fr auto;
     grid-template-rows: auto;
     gap: $common-margin $common-margin;
 

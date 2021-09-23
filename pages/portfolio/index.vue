@@ -4,6 +4,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
+import { IItem } from '@/interface/IPortfolio'
 import CardList from '~/components/CardList.vue'
 
 @Component({
@@ -11,12 +12,11 @@ import CardList from '~/components/CardList.vue'
     CardList,
   },
   async asyncData({ $content }) {
-    const contents = await $content('portfolio').fetch()
+    const contents: IItem | null = await $content('portfolio').fetch()
     return { contents }
   },
 })
 export default class Portfolio extends Vue {
-
   head() {
     return {
       title: 'Portfolio | Satofactoin.net',

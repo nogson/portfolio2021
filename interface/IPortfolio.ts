@@ -4,5 +4,4 @@ export interface IItem {
   description: string
   createdAt: string
   thumbnail: string
-  category: string
 }
