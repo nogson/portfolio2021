@@ -17,6 +17,7 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
 import Card from '~/components/Card.vue'
+import { IContentItem, IContentEmptyItem } from '~/interface/IContent'
 
 @Component({
   components: {
@@ -24,35 +25,52 @@ import Card from '~/components/Card.vue'
   },
 })
 export default class CardList extends Vue {
-  items!: any[]
+  items!: IContentItem[][] | IContentEmptyItem[][]
 
   @Prop({ type: Array })
-  contents!: any[]
+  contents!: IContentItem[]
 
   created() {
     this.items = this.getItems()
   }
 
-  getItems() {
+  getItems(): IContentItem[][] | IContentEmptyItem[][] {
+    const itemGroupMinLength = 10
     this.contents.sort(function (a, b) {
-      if (a.created_at > b.created_at) {
+      if (a.createdAt > b.createdAt) {
         return -1
       } else {
         return 1
       }
     })
 
-    const loopLength = Math.ceil(this.contents.length / 10)
+    const loopLength = Math.ceil(this.contents.length / itemGroupMinLength)
     const itemArr = []
     for (let i = 0; i < loopLength; i++) {
-      itemArr[i] = this.contents.slice(10 * i, 10 * i + 10)
+      itemArr[i] = this.contents.slice(
+        itemGroupMinLength * i,
+        itemGroupMinLength * i + itemGroupMinLength
+      )
     }
 
-    return itemArr
+    const arr = itemArr.map((items) => {
+      if (itemGroupMinLength > items.length) {
+        const diff = itemGroupMinLength - items.length
+        const undefinedItem = [...Array(diff)].map((d, i) => {// eslint-disable-line
+          return {
+            slug: `undefined_${i}`,
+          }
+        })
+        return [items, undefinedItem].flat()
+      }
+      return items
+    })
+
+    return arr
   }
 
   get itemIndex() {
-    return (i: any, j: any) => {
+    return (i: number, j: number) => {
       const str = '00' + (i * 10 + 1 + j)
       return str.slice(-2)
     }
