@@ -59,6 +59,10 @@ export default class CardList extends Vue {
         const undefinedItem = [...Array(diff)].map((d, i) => {// eslint-disable-line
           return {
             slug: `undefined_${i}`,
+            title: '準備中',
+            path: '/',
+            thumbnail: 'blog/images/undefined_thumb.png',
+            description: 'レイアウトの都合上空のボックスが表示されています。',
           }
         })
         return [items, undefinedItem].flat()

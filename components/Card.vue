@@ -1,5 +1,5 @@
 <template>
-  <div v-if="item.title" ref="card" class="card padding-all" :class="klass">
+  <div ref="card" class="card padding-all" :class="klass">
     <div class="card-info">
       <dl class="title">
         <dt>{{ index }}</dt>
@@ -7,7 +7,7 @@
           <nuxt-link :to="item.path">{{ item.title }}</nuxt-link>
         </dd>
       </dl>
-      <p class="date">
+      <p v-if="item.type" class="date">
         <span class="type">{{ type(item) }}</span
         >{{ formatDateToString(item.createdAt) }}
       </p>
@@ -24,7 +24,6 @@
       </nuxt-link>
     </div>
   </div>
-  <div v-else class="card padding-all" :class="klass"></div>
 </template>
 
 <script lang="ts">
