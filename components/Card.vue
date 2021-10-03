@@ -7,7 +7,7 @@
           <nuxt-link :to="item.path">{{ item.title }}</nuxt-link>
         </dd>
       </dl>
-      <p v-if="item.type" class="date">
+      <p v-if="item.createdAt" class="date">
         <span class="type">{{ type(item) }}</span
         >{{ formatDateToString(item.createdAt) }}
       </p>

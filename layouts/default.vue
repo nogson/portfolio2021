@@ -22,10 +22,6 @@ import { IContentItem } from '~/interface/IContent'
 export default class extends Vue {
   blog: IContentItem[] = []
 
-  created() {
-    this.$nuxt.$on('updateContent', this.updateContent)
-  }
-
   updateContent(data: any[]) {
     this.blog = data
   }
