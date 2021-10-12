@@ -3,7 +3,7 @@ id: webgl
 title: WebGLの習作
 description: WebGLの習作です。
 thumbnail: portfolio/images/webgl/webgl_01_thumb.png
-created_at: 2017-10-01
+createdAt: 2017-10-01
 order: 5
 ---
 

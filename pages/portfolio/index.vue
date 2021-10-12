@@ -16,7 +16,6 @@ import CardList from '~/components/CardList.vue'
   },
 })
 export default class Portfolio extends Vue {
-
   head() {
     return {
       title: 'Portfolio | Satofactoin.net',

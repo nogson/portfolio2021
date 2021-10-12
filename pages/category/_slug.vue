@@ -1,35 +1,28 @@
 <template>
   <section>
     <h1 class="title-main">{{ slug }}</h1>
-    <div v-for="item in content" :key="item.slug" class="item-row">
-      <item-row :item="item" />
-    </div>
+    <card-list :contents="content" />
   </section>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
-import ItemRow from '~/components/ItemRow.vue'
+import { IContentItem } from '~/interface/IContent'
 
 @Component({
-  layout: 'content',
-  components: { ItemRow },
   async asyncData({ $content, params }) {
     const slug = params.slug
     return {
       slug,
-      blog: await $content('blog')
-        .where({ category: slug })
-        .sortBy('create_at', 'desc')
-        .fetch(),
+      blog: await $content('blog').sortBy('create_at', 'desc').fetch(),
       category: await $content('blog').only(['category']).fetch(),
     }
   },
 })
 export default class Category extends Vue {
-  slug!: any
-  category!: any
-  blog!: any
+  slug!: string
+  category!: string[]
+  blog!: IContentItem[]
   head() {
     return {
       title: this.slug,
@@ -37,21 +30,20 @@ export default class Category extends Vue {
     }
   }
 
-  created() {
-    this.$nuxt.$emit(
-      'updateContent',
-      this.category.map((d: any) => d.category)
-    )
-  }
-
   get content() {
-    return this.blog.filter((d: any) => d.category.includes(this.slug))
+    return this.blog.filter((d: IContentItem) => d.category.includes(this.slug))
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.item-row {
-  margin-top: 32px;
+.title-main {
+  background: $color-background;
+  margin: $common-margin;
+  padding: 16px 36px;
+  display: block;
+}
+.card_container {
+  margin-top: -4px;
 }
 </style>

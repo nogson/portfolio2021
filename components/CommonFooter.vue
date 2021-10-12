@@ -2,7 +2,9 @@
   <footer>
     <nav>
       <ul>
-        <li><nuxt-link to="/">Home</nuxt-link></li>
+        <li :class="{ act: selectedNav === 'home' }">
+          <nuxt-link to="/">Home</nuxt-link>
+        </li>
         <li><nuxt-link to="/portfolio">Portfolio</nuxt-link></li>
         <li><nuxt-link to="/blog">Blog</nuxt-link></li>
         <li><nuxt-link to="/about">About</nuxt-link></li>
@@ -16,7 +18,9 @@
 import { Component, Vue } from 'nuxt-property-decorator'
 
 @Component({})
-export default class CommonFooter extends Vue {}
+export default class CommonFooter extends Vue {
+  private selectedNav: string = 'home'
+}
 </script>
 
 <style scoped lang="scss">
@@ -42,6 +46,5 @@ footer {
       padding: 0 12px;
     }
   }
-
 }
 </style>

@@ -9,8 +9,8 @@
         />
       </div>
       <h1 class="title-main">{{ portfolio.title }}</h1>
-      <p v-if="portfolio.created_at" class="create-at">
-        {{ formatDateToString(portfolio.created_at) }}
+      <p v-if="portfolio.createdAt" class="create-at">
+        {{ formatDateToString(portfolio.createdAt) }}
       </p>
     </div>
     <div class="content-body">
@@ -23,8 +23,13 @@
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
+<<<<<<< HEAD
 import * as moment from 'moment'
 import { IItem } from '@/interface/IPortfolio'
+=======
+import moment from 'moment'
+import { IContentItem } from '@/interface/IContent'
+>>>>>>> a9e18da13adfb592e3a4d95009e41ff216dd8890
 
 @Component({
   components: {},
@@ -35,10 +40,10 @@ import { IItem } from '@/interface/IPortfolio'
   },
 })
 export default class Slug extends Vue {
-  portfolio: IItem = null
+  portfolio: IContentItem | null = null
   head() {
     return {
-      title: this.portfolio.title,
+      title: this.portfolio!.title,
       titleTemplate: '%s | Satofaction.net',
     }
   }

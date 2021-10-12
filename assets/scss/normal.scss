@@ -1,7 +1,7 @@
 /* A Modern CSS Reset */
 
 *, *::before, *::after {
-  box-sizing: border-box
+  box-sizing: border-box;
 }
 
 body, h1, h2, h3, h4, p, figure, blockquote, dl, dd {
@@ -10,30 +10,30 @@ body, h1, h2, h3, h4, p, figure, blockquote, dl, dd {
 }
 
 ul[role="list"], ol[role="list"] {
-  list-style: none
+  list-style: none;
 }
 
 html:focus-within {
-  scroll-behavior: smooth
+  scroll-behavior: smooth;
 }
 
 
 body {
   text-rendering: optimizeSpeed;
-  line-height: 1.8
+  line-height: 1.8;
 }
 
 a:not([class]) {
-  text-decoration-skip-ink: auto
+  text-decoration-skip-ink: auto;
 }
 
 img, picture {
   //max-width: 100%;
-  display: block
+  display: block;
 }
 
 input, button, textarea, select {
-  font: inherit
+  font: inherit;
 }
 
 @media(prefers-reduced-motion: reduce) {
@@ -51,7 +51,8 @@ input, button, textarea, select {
 /* add */
 body {
   font-family: 'Noto Sans JP', sans-serif;
-  background: $color-background;
+  //background: $color-background;
+  //background: url("assets/images/pattern.png") repeat;
   color: $color-black;
 }
 

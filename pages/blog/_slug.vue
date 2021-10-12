@@ -2,7 +2,7 @@
   <section class="content">
     <div class="content-head">
       <h1 class="title-main">{{ blog.title }}</h1>
-      <p class="create-at">{{ formatDateToString(blog.created_at) }}</p>
+      <p class="create-at">{{ formatDateToString(blog.createdAt) }}</p>
     </div>
     <nuxt-content :document="blog" />
   </section>
@@ -11,6 +11,8 @@
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
 import moment from 'moment'
+import { IContentItem } from '~/interface/IContent'
+import { ICategory } from '~/interface/ICategory'
 
 @Component({
   layout: 'content',
@@ -27,20 +29,20 @@ import moment from 'moment'
   },
 })
 export default class Slug extends Vue {
-  blog: any = null
-  blogs: any = null
-  category: any = null
-  //
+  blog: IContentItem | null = null
+  blogs: IContentItem[] = []
+  category: ICategory[] = []
+
   head() {
     return {
-      title: this.blog.title,
+      title: this.blog!.title,
       titleTemplate: '%s | Satofaction.net',
     }
   }
 
   created() {
-    const category = this.category.map((d: any) => d.category)
-    const blogs = this.blogs
+    const category: string[] = this.category.map((d: ICategory) => d.category)
+    const blogs: IContentItem[] = this.blogs
     this.$nuxt.$emit('updateContent', { blogs, category })
   }
 

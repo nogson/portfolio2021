@@ -40,11 +40,10 @@
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
-import Category from '~/components/Category.vue'
 import CommonFooter from '~/components/CommonFooter.vue'
 
 @Component({
-  components: { CommonFooter, Category },
+  components: { CommonFooter },
 })
 export default class extends Vue {
   categoryData: string[] = []
@@ -90,7 +89,7 @@ export default class extends Vue {
     background: $color-black;
     margin: -4px auto 0;
     display: grid;
-    grid-template-columns: 1fr 300px;
+    grid-template-columns: 1fr auto;
     grid-template-rows: auto;
     gap: $common-margin $common-margin;
 

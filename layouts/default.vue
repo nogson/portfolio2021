@@ -12,19 +12,15 @@
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
-import Category from '~/components/Category.vue'
 import CommonFooter from '~/components/CommonFooter.vue'
 import CommonHeader from '~/components/CommonHeader.vue'
+import { IContentItem } from '~/interface/IContent'
 
 @Component({
-  components: { CommonFooter, Category, CommonHeader },
+  components: { CommonFooter, CommonHeader },
 })
 export default class extends Vue {
-  blog: any[] = []
-
-  created() {
-    this.$nuxt.$on('updateContent', this.updateContent)
-  }
+  blog: IContentItem[] = []
 
   updateContent(data: any[]) {
     this.blog = data

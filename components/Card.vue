@@ -7,9 +7,9 @@
           <nuxt-link :to="item.path">{{ item.title }}</nuxt-link>
         </dd>
       </dl>
-      <p class="date">
+      <p v-if="item.createdAt" class="date">
         <span class="type">{{ type(item) }}</span
-        >{{ formatDateToString(item.created_at) }}
+        >{{ formatDateToString(item.createdAt) }}
       </p>
       <p class="description">{{ item.description }}</p>
     </div>
@@ -27,10 +27,10 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop, Watch } from 'nuxt-property-decorator'
-import { gsap } from 'gsap'
+import { Component, Vue, Prop } from 'nuxt-property-decorator'
 import moment from 'moment'
 import DynamicImage from '~/components/DynamicImage.vue'
+import { IContentItem } from '~/interface/IContent'
 
 @Component({
   components: { DynamicImage },
@@ -39,7 +39,7 @@ export default class Card extends Vue {
   style: object | null = null
 
   @Prop({ type: Object })
-  item!: any
+  item!: IContentItem
 
   @Prop({ type: String })
   index!: string
@@ -52,7 +52,7 @@ export default class Card extends Vue {
   }
 
   get type() {
-    return (item: any): string => {
+    return (item: IContentItem): string => {
       return item.dir === '/blog' ? 'BLOG' : 'PORTFOLIO'
     }
   }
