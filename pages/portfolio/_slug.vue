@@ -23,7 +23,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
-import moment from 'moment'
+import * as moment from 'moment'
 import { IItem } from '@/interface/IPortfolio'
 
 @Component({
