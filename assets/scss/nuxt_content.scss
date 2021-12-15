@@ -1,5 +1,13 @@
 
 .nuxt-content {
+  img {
+    width: auto;
+    max-width: 100%;
+    margin: 0 auto;
+    @include sm() {
+      width: 100%;
+    }
+  }
   p{
     margin-bottom: $size-m;
   }

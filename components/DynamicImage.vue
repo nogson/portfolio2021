@@ -32,6 +32,7 @@ export default {
       return require(`~/content/${this.path}`)
     },
     imgStyle() {
+      console.log(this.width)
       const style = {
         width: this.width,
       }
