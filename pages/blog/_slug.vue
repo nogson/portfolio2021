@@ -52,7 +52,7 @@ export default class Slug extends Vue {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .content {
   line-height: 1.8;
 }

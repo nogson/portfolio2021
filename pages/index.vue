@@ -12,6 +12,7 @@ import CardList from '~/components/CardList.vue'
   },
   async asyncData({ $content }) {
     const blog = await $content('blog').fetch()
+    console.log(blog)
     const portfolio = await $content('portfolio').fetch()
     const contents = [blog, portfolio].flat()
     return { contents }
