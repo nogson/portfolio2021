@@ -29,10 +29,9 @@ export default {
   },
   computed: {
     dynamicImage() {
-      return require(`~/content/${this.path}`)
+      return require(`@/content/${this.path}`)
     },
     imgStyle() {
-      console.log(this.width)
       const style = {
         width: this.width,
       }
