@@ -29,7 +29,7 @@ export default {
   },
   computed: {
     dynamicImage() {
-      return require(`@/content/${this.path}`)
+      return require(`~/content/${this.path}`)
     },
     imgStyle() {
       const style = {
