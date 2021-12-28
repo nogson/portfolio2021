@@ -122,6 +122,7 @@ export default class extends Vue {
   background: $color-background;
   margin: $common-margin $common-margin $common-margin 0;
   padding: 24px;
+  max-width: 250px;
   h2 {
     font-size: 16px;
     margin-top: 16px;
