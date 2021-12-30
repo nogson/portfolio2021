@@ -23,7 +23,7 @@ import { ICategory } from '~/interface/ICategory'
     return {
       // content/blog/{_slug}.mdのマークダウンを取得
       blog: await $content('blog/' + slug).fetch(),
-      blogs: await $content('blog').sortBy('create_at', 'desc').fetch(),
+      blogs: await $content('blog').sortBy('create_at', 'desc').limit(10).fetch(),
       category: await $content('blog').only(['category']).fetch(),
     }
   },
