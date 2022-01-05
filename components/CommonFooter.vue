@@ -44,6 +44,10 @@ footer {
     font-weight: bold;
     li {
       padding: 0 12px;
+      a:link,
+      a:visited{
+        color: $color-black;
+      }
     }
   }
 }
