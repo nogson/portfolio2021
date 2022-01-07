@@ -62,10 +62,14 @@ body.top {
   }
 }
 
-ul,ol{
+ul{
   list-style: none;
   padding: 0;
   margin: 0;
+}
+
+ol{
+  padding-left: 1em;
 }
 
 
