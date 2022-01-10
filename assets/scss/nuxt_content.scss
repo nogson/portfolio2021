@@ -8,19 +8,23 @@
       width: 100%;
     }
   }
-  p{
+
+  p {
     margin-bottom: $size-m;
   }
+
   h1 {
     margin: $size-xl 0 $size-l;
-    padding-bottom:$size-s;
+    padding-bottom: $size-s;
     font-size: 24px;
     border-bottom: 2px solid $color-black;
   }
+
   h2 {
     font-size: 20px;
     margin: $size-xl 0 $size-m;
   }
+
   h3 {
     font-size: 16px;
     margin: $size-l 0 $size-s;
@@ -34,5 +38,23 @@
 
   pre {
     margin-bottom: $size-l !important;
+  }
+
+  code {
+    background: $color-gray-dark5;
+  }
+
+  table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    thead {
+      th,td {
+        padding: $size-s;
+      }
+    }
+    th,td {
+      padding: $size-m;
+      border: 1px solid $color-gray-dark4;
+    }
   }
 }
