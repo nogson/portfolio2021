@@ -14,3 +14,6 @@ order: 1
 
 <dynamic-image path="portfolio/images/package_design01/02.png" alt="パッケージデザイン" ></dynamic-image>
 
+<dynamic-image path="portfolio/images/package_design01/03.png" alt="パッケージデザイン" ></dynamic-image>
+
+
