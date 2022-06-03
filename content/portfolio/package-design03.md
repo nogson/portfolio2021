@@ -2,7 +2,7 @@
 id: package03
 title: 「三ツ星ホテルのあんきもステーキ缶詰」パッケージデザイン
 description: 淡路島冬の味覚「三ツ星ホテルのあんきもステーキ缶詰」のパッケージデザインになります。
-thumbnail: portfolio/images/package_design02/thumbnail.png
+thumbnail: portfolio/images/package_design03/thumbnail.png
 createdAt: 2022-06-23
 order: 1
 ---
