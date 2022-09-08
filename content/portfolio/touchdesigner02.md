@@ -1,9 +1,9 @@
 ---
-id: touchdesigner
+id: touchdesigner02
 title: TouchDesigner
 description: TouchDesignerの習作です。
-thumbnail: portfolio/images/touchdesigner/td_thumb.png
-createdAt: 2021-05-04
+thumbnail: portfolio/images/touchdesigner02/thumbnail.png
+createdAt: 2022-07-18
 order: 0
 ---
 
@@ -11,8 +11,7 @@ order: 0
 
 
 ## 01
-<dynamic-image path="portfolio/images/touchdesigner/td_01.png" alt="touchdesignerイメージ" ></dynamic-image>
-<dynamic-image path="portfolio/images/touchdesigner/td_02.png" alt="touchdesignerイメージ" ></dynamic-image>
+<video src="/content/portfolio/images/touchdesigner02/touchdesigner02.mov" />
 <br>
 <br>
 
