@@ -1,0 +1,1 @@
+window.__NUXT__=(function(a){return {staticAssetsBase:"\u002F_nuxt\u002Fstatic\u002F1674657828",layout:"default",error:a,serverRendered:true,routePath:"\u002Fportfolio\u002Ftouchdesigner02",config:{_app:{basePath:"\u002F",assetsPath:"\u002F_nuxt\u002F",cdnURL:a},content:{dbHash:"1dccb8f4"}}}}(null));
